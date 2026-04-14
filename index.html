@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Sabores Cumbuca</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+}
+
+/* HEADER */
+header {
+  background: #d9a441;
+  padding: 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 140px;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* CONTAINER */
+.container {
+  padding: 15px;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* INSTAGRAM */
+.instagram {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+  margin-bottom: 15px;
+}
+
+/* GALERIA NOVA */
+.galeria-container {
+  position: relative;
+}
+
+.galeria {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 20px;
+}
+
+.galeria img {
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* SETAS */
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  width: 40px;
+  height: 40px;
+
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+}
+
+.esquerda {
+  left: 5px;
+}
+
+.direita {
+  right: 5px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal img {
+  max-width: 90%;
+  border-radius: 10px;
+}
+
+.modal p {
+  color: white;
+}
+
+/* CARDAPIO */
+.item {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.item strong {
+  font-size: 18px;
+}
+
+.item small {
+  color: #777;
+}
+
+.preco {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #d62828;
+}
+
+button {
+  margin-top: 10px;
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* WHATSAPP */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  color: white;
+  padding: 15px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<a class="whatsapp-float" href="https://wa.me/5585992425223" target="_blank">
+💬
+</a>
+
+<header>
+  <img src="logo-cumbuca.png" class="logo">
+  <h1>Sabores Cumbuca</h1>
+  <p>A melhor comida caseira da cidade</p>
+</header>
+
+<div class="container">
+
+<a class="instagram" href="https://www.instagram.com/cumbuca.marco" target="_blank">
+  Ver Instagram
+</a>
+
+<section>
+  <h2>Nossa História</h2>
+  <p>
+    Desde 2022, o Sabores Cumbuca oferece comida caseira feita com amor.
+    Trabalhamos com os mais diversos tipos de pescados.
+  </p>
+</section>
+
+<!-- GALERIA ATUALIZADA -->
+<section>
+  <h2>Pratos mais pedidos</h2>
+
+  <div class="galeria-container">
+    <button class="seta esquerda" onclick="scrollGaleria(-1)">◀</button>
+
+    <div class="galeria" id="galeria">
+      <img src="prato1.png" onclick="abrirModal(this)">
+      <img src="prato2.png" onclick="abrirModal(this)">
+      <img src="prato3.png" onclick="abrirModal(this)">
+      <img src="prato4.png" onclick="abrirModal(this)">
+      <img src="prato5.png" onclick="abrirModal(this)">
+      <img src="prato6.png" onclick="abrirModal(this)">
+      <img src="prato7.png" onclick="abrirModal(this)">
+      <img src="prato9.png" onclick="abrirModal(this)">
+      <img src="prato10.png" onclick="abrirModal(this)">
+      <img src="prato11.png" onclick="abrirModal(this)">
+      <img src="prato12.png" onclick="abrirModal(this)">
+    </div>
+
+    <button class="seta direita" onclick="scrollGaleria(1)">▶</button>
+  </div>
+</section>
+
+<h2>Cardápio do Dia</h2>
+<div id="cardapio">Carregando...</div>
+
+<section>
+  <h2>Localização</h2>
+  <p>📍 Rua Parcifal Barroso, 174, Centro - Marco, CE</p>
+
+  <a href="https://www.google.com/maps/dir/?api=1&destination=-3.122895,-40.146628" target="_blank" style="
+    display:block;
+    text-align:center;
+    background:#4285F4;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+    margin-top:10px;
+    font-weight:bold;
+  ">
+    📍 Como chegar no Sabores Cumbuca
+  </a>
+</section>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="fecharModal()">
+  <img id="imgModal">
+</div>
+
+<script>
+// GALERIA
+function scrollGaleria(direcao) {
+  const galeria = document.getElementById("galeria");
+  galeria.scrollLeft += direcao * 220;
+}
+
+// AUTOPLAY
+setInterval(() => {
+  const galeria = document.getElementById("galeria");
+  galeria.scrollLeft += 220;
+
+  if (galeria.scrollLeft + galeria.clientWidth >= galeria.scrollWidth) {
+    galeria.scrollLeft = 0;
+  }
+}, 3000);
+
+// MODAL
+function abrirModal(img) {
+  document.getElementById("modal").style.display = "flex";
+  document.getElementById("imgModal").src = img.src;
+}
+
+function fecharModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+// CARDÁPIO
+function carregarCardapio() {
+  fetch('/cardapio_hoje.json')
+    .then(res => res.json())
+    .then(data => {
+      let html = "";
+
+      data.forEach(item => {
+        html += `
+          <div class="item">
+            <strong>${item.nome}</strong><br>
+            <small>${item.desc}</small><br>
+
+            <div class="preco">
+              ${item.p_p > 0 ? `P: R$ ${item.p_p}` : ""}
+              ${item.p_g > 0 ? ` | G: R$ ${item.p_g}` : ""}
+            </div>
+
+            <button onclick="pedir('${item.nome}')">
+              Pedir no WhatsApp
+            </button>
+          </div>
+        `;
+      });
+
+      document.getElementById("cardapio").innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById("cardapio").innerHTML = "Erro ao carregar";
+    });
+}
+
+function pedir(nome) {
+  let msg = `Olá, quero pedir: ${nome}`;
+  window.open(`https://wa.me/5585992425223?text=${encodeURIComponent(msg)}`);
+}
+
+carregarCardapio();
+</script>
+
+</body>
+</html>
