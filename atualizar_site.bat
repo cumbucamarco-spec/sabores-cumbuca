@@ -10,13 +10,13 @@ echo =========================
 echo ENVIANDO PARA O GITHUB...
 echo =========================
 
-git add cardapio_html.json
+git add .
 
 git diff --cached --quiet
 IF %ERRORLEVEL%==0 (
-    echo Nenhuma alteracao no cardapio.
+    echo Nenhuma alteracao.
 ) ELSE (
-    git commit -m "Atualizacao diaria do cardapio"
+    git commit -m "Atualizacao do site"
     git push
     echo SITE ATUALIZADO!
 )
