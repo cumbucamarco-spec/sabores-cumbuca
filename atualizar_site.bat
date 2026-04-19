@@ -22,4 +22,6 @@ IF %ERRORLEVEL%==0 (
 )
 
 echo =========================
-pause
+
+:: Só pausa se NÃO foi chamado por outro .bat
+if "%1"=="" pause
