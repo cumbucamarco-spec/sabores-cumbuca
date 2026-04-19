@@ -172,11 +172,41 @@ button {
   position: fixed;
   bottom: 20px;
   right: 20px;
+
   background: #25d366;
   color: white;
-  padding: 15px 18px;
+
+  padding: 12px 18px;
   border-radius: 50px;
+
   text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* HOVER */
+.whatsapp-float:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ANIMAÇÃO PULSANDO */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-float {
+  animation: pulse 2s infinite;
 }
 </style>
 </head>
@@ -201,10 +231,43 @@ button {
 
 <section>
   <h2>Nossa História</h2>
-  <p>
-    Desde 2022, o Sabores Cumbuca oferece comida caseira feita com amor.
-    Trabalhamos com os mais diversos tipos de pescados.
-  </p>
+
+  <div style="
+    background:#fff;
+    padding:12px;
+    border-radius:10px;
+    max-height:180px;
+    overflow-y:auto;
+    font-size:13px;
+    line-height:1.5;
+    color:#333;
+  ">
+
+    <p>
+      O Sabores Cumbuca começou sua trajetória em 2022, de forma simples e humilde,
+      como um pequeno negócio de rua nas praias de Caucaia, no Ceará.
+      No início, trabalhávamos com vendas ambulantes, eu e minha esposa,
+      oferecendo refeições preparadas com muito esforço e dedicação.
+    </p>
+
+    <p>
+      Com o tempo, percebemos o potencial do nosso trabalho e a aceitação dos clientes,
+      o que nos motivou a evoluir e transformar esse sonho em algo maior.
+      A habilidade e o talento gastronômico da minha esposa Fabiana foram fundamentais
+      nesse crescimento, atraindo cada vez mais pessoas.
+    </p>
+
+    <p>
+      Ao longo da nossa jornada, enfrentamos momentos difíceis, mas com persistência e união,
+      conseguimos superar cada desafio.
+    </p>
+
+    <p>
+      Em 2024, mudamos para a cidade de Marco - CE, onde hoje o Sabores Cumbuca funciona oficialmente,
+      mantendo a mesma essência de quando começamos: comida caseira feita com amor, dedicação e qualidade.
+    </p>
+
+  </div>
 </section>
 
 <!-- GALERIA ATUALIZADA -->
@@ -307,7 +370,7 @@ function carregarCardapio() {
             </div>
 
             <button onclick="pedir('${item.nome}')">
-              Pedir no WhatsApp
+              Fazer Pedido
             </button>
           </div>
         `;
