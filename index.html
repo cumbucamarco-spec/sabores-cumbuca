@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sabores Cumbuca</title>
 
 <!-- Google tag (gtag.js) -->
@@ -19,6 +20,11 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #f2f2f2;
   margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* HEADER */
@@ -43,7 +49,9 @@ header h1 {
 .container {
   padding: 15px;
   max-width: 700px;
+  width: 100%; /* Adicione isso */
   margin: auto;
+  box-sizing: border-box; /* Garante que o padding não "estoure" a tela */
 }
 
 /* INSTAGRAM */
@@ -167,55 +175,10 @@ button {
   width: 100%;
 }
 
-/* WHATSAPP */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  background: #25d366;
-  color: white;
-
-  padding: 12px 18px;
-  border-radius: 50px;
-
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* HOVER */
-.whatsapp-float:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
-/* ANIMAÇÃO PULSANDO */
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
-  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-
-.whatsapp-float {
-  animation: pulse 2s infinite;
-}
 </style>
 </head>
 
 <body>
-
-<a class="whatsapp-float" href="https://wa.me/5585992425223" target="_blank">
-💬
-</a>
 
 <header>
   <img src="logo-cumbuca.png" class="logo">
@@ -272,23 +235,26 @@ button {
 
 <!-- GALERIA ATUALIZADA -->
 <section>
-  <h2>Pratos mais pedidos</h2>
+  <h2 style="text-align: center;">Sugestões da Nossa Cozinha</h2>
+  <p style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 15px; text-align: center;">
+    Consulte a disponibilidade do dia e faça seu pedido pelo nosso atendimento.
+  </p>
 
   <div class="galeria-container">
     <button class="seta esquerda" onclick="scrollGaleria(-1)">◀</button>
 
     <div class="galeria" id="galeria">
-      <img src="prato1.png" onclick="abrirModal(this)">
-      <img src="prato2.png" onclick="abrirModal(this)">
-      <img src="prato3.png" onclick="abrirModal(this)">
-      <img src="prato4.png" onclick="abrirModal(this)">
-      <img src="prato5.png" onclick="abrirModal(this)">
-      <img src="prato6.png" onclick="abrirModal(this)">
-      <img src="prato7.png" onclick="abrirModal(this)">
-      <img src="prato9.png" onclick="abrirModal(this)">
-      <img src="prato10.png" onclick="abrirModal(this)">
-      <img src="prato11.png" onclick="abrirModal(this)">
-      <img src="prato12.png" onclick="abrirModal(this)">
+      <img src="prato1.png" alt="Sugestão 1" onclick="abrirModal(this)">
+      <img src="prato2.png" alt="Sugestão 2" onclick="abrirModal(this)">
+      <img src="prato3.png" alt="Sugestão 3" onclick="abrirModal(this)">
+      <img src="prato4.png" alt="Sugestão 4" onclick="abrirModal(this)">
+      <img src="prato5.png" alt="Sugestão 5" onclick="abrirModal(this)">
+      <img src="prato6.png" alt="Sugestão 6" onclick="abrirModal(this)">
+      <img src="prato7.png" alt="Sugestão 7" onclick="abrirModal(this)">
+      <img src="prato9.png" alt="Sugestão 8" onclick="abrirModal(this)">
+      <img src="prato10.png" alt="Sugestão 9" onclick="abrirModal(this)">
+      <img src="prato11.png" alt="Sugestão 10" onclick="abrirModal(this)">
+      <img src="prato12.png" alt="Sugestão 11" onclick="abrirModal(this)">
     </div>
 
     <button class="seta direita" onclick="scrollGaleria(1)">▶</button>
@@ -302,7 +268,7 @@ button {
   <h2>Localização</h2>
   <p>📍 Rua Parcifal Barroso, 174, Centro - Marco, CE</p>
 
-  <a href="https://www.google.com/maps/dir/?api=1&destination=-3.122895,-40.146628" target="_blank" style="
+  <a href="https://www.google.com/maps/search/?api=1&query=Sabores+Cumbuca+Marco+CE" target="_blank" style="
     display:block;
     text-align:center;
     background:#4285F4;
@@ -313,7 +279,7 @@ button {
     margin-top:10px;
     font-weight:bold;
   ">
-    📍 Como chegar no Sabores Cumbuca
+    🗺️ Ver localização no Google Maps
   </a>
 </section>
 
@@ -409,7 +375,7 @@ carregarCardapio();
   <p><strong>Nome:</strong> 62.662.899 RAFAEL SILVA GUIMARÃES</p>
   <p><strong>CNPJ:</strong> 62.662.899/0001-65</p>
 
-  <p><strong>Endereço:</strong> Rua Governador Raul Barbosa, 393 - Centro</p>
+  <p><strong>Endereço:</strong> Parcifal Barroso 174 - Centro</p>
   <p><strong>CEP:</strong> 62560-000</p>
   <p><strong>Cidade:</strong> Marco - CE</p>
 

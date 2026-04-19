@@ -1,20 +1,29 @@
 [
     {
-        "nome": "Mucunzá",
-        "desc": "",
-        "cat": "Porções",
-        "p_p": 10.0,
+        "nome": "Bisteca Suína",
+        "desc": "Arroz, Feijão maduro c maxixe, Macarrão e Salada ",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Escondidinho de Carne do Sol",
+        "desc": "Arroz, Salada e Batata palha",
+        "cat": "Carne",
+        "p_p": 15.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "P1770150999 - MUCUNZA",
+        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
         "codigo_estoque_g": ""
     },
     {
-        "nome": "Caldo de Peixe",
-        "desc": "",
-        "cat": "Peixe",
-        "p_p": 12.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1771619020 - CALDO DE PEIXE",
-        "codigo_estoque_g": ""
+        "nome": "Strogonoff de Carne",
+        "desc": "Arroz, Batata palha, Salada",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     }
 ]
