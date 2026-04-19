@@ -1,0 +1,29 @@
+[
+    {
+        "nome": "Vatapá",
+        "desc": "Arroz, Calabresa, Salada e Farofa",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1774959709 - ALMOCO P",
+        "codigo_estoque_g": "P1774959693 - ALMOCO M"
+    },
+    {
+        "nome": "Almondegas ao Molho",
+        "desc": "Arroz, Feijão maduro c maxixe, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Bisteca Suína",
+        "desc": "Arroz, Feijão maduro c maxixe, Macarrão e Salada ",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    }
+]

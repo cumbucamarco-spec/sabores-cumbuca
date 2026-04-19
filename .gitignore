@@ -1,0 +1,5 @@
+*.py
+*.exe
+*.db
+node_modules/
+__pycache__/
