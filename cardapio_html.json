@@ -1,7 +1,7 @@
 [
     {
-        "nome": "Bisteca Suína",
-        "desc": "Arroz, Feijão maduro c maxixe, Macarrão e Salada ",
+        "nome": "Porco ao Molho Barbecue",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
         "cat": "Carne",
         "p_p": 13.0,
         "p_g": 16.0,
@@ -9,17 +9,17 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Escondidinho de Carne do Sol",
-        "desc": "Arroz, Salada e Batata palha",
+        "nome": "Frango Assado",
+        "desc": "Baião, Farofa e Salada",
         "cat": "Carne",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
-        "codigo_estoque_g": ""
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Strogonoff de Carne",
-        "desc": "Arroz, Batata palha, Salada",
+        "nome": "Fígado Acebolado",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
         "cat": "Carne",
         "p_p": 13.0,
         "p_g": 16.0,
