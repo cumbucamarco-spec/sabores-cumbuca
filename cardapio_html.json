@@ -1,6 +1,6 @@
 [
     {
-        "nome": "Porco ao Molho Barbecue",
+        "nome": "Galinha ao molho",
         "desc": "Arroz, Feijão, Macarrão e Salada",
         "cat": "Carne",
         "p_p": 13.0,
@@ -9,8 +9,8 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Frango Assado",
-        "desc": "Baião, Farofa e Salada",
+        "nome": "Porco na Farofa",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
         "cat": "Carne",
         "p_p": 13.0,
         "p_g": 16.0,
@@ -18,12 +18,12 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Fígado Acebolado",
-        "desc": "Arroz, Feijão, Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+        "nome": "Camarão Alho e Oleo",
+        "desc": "Arroz, Farofa, Limão e Salada",
+        "cat": "Peixe",
+        "p_p": 15.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_g": ""
     }
 ]
