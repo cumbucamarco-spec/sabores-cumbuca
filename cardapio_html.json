@@ -1,38 +1,20 @@
 [
     {
-        "nome": "Cozido de Gado com Macaxeira",
-        "desc": "Arroz, Feijão , Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Fígado Acebolado",
-        "desc": "Arroz, Feijão, Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
         "nome": "Vatapá de Frango",
-        "desc": "Arroz, Calabresa, Salada e Farofa",
+        "desc": "Arroz temperado, Calabresa e Farofa",
         "cat": "Carne",
         "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1774959709 - ALMOCO P",
-        "codigo_estoque_g": "P1774959693 - ALMOCO M"
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1776976895 - Vatapá de Frango",
+        "codigo_estoque_g": ""
     },
     {
-        "nome": "Strogonoff de Camarão",
-        "desc": "Arroz, Batata Palha, Salada",
-        "cat": "Peixe",
-        "p_p": 15.0,
+        "nome": "Sopa de Carne",
+        "desc": "Pote 500ml",
+        "cat": "",
+        "p_p": 10.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
+        "codigo_estoque_p": "P1770065318 - SOPA",
         "codigo_estoque_g": ""
     }
 ]
