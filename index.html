@@ -193,34 +193,102 @@ button {
   z-index: 1000;
 }
 
+/* Tela de Sucesso e Acompanhamento */
+.status-container {
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.success-icon {
+  font-size: 50px;
+  color: #25d366;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  background: #ffecb3;
+  color: #b8860b;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* BOTÃO DO CARRINHO ESTILIZADO */
 #btnCarrinho {
   position: fixed;
   bottom: 20px;
   right: 20px;
 
-  width: 60px;
-  height: 60px;
+  /* Formato de Cápsula para caber texto */
+  width: auto;
+  padding: 0 20px;
+  height: 65px;
 
-  background: #25d366;
+  /* Cor Laranja Forte */
+  background: #ff6600; 
   color: white;
   border: none;
-  border-radius: 50%;
+  border-radius: 35px;
 
-  font-size: 22px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-
   z-index: 1000;
+  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  
+  /* Pulsação Lenta por padrão */
+  animation: pulsar 2s infinite ease-in-out;
+  transition: all 0.3s ease;
 }
 
+/* Texto chamativo dentro do botão */
+#btnCarrinho::before {
+  content: "FECHAR PEDIDO";
+  font-size: 14px;
+}
+
+/* Quando houver itens, a pulsação fica mais rápida e o botão cresce */
+.carrinho-urgente {
+  animation: pulsar 0.8s infinite ease-in-out !important;
+  background: #ff4500 !important; /* Laranja ainda mais forte */
+  transform: scale(1.1);
+}
+
+@keyframes pulsar {
+  0% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); transform: scale(1); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 102, 0, 0); transform: scale(1.05); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); transform: scale(1); }
+}
+
+/* BOLINHA QUE VOA (Mantida a cor laranja para combinar) */
 .flying-item {
   position: fixed;
-  width: 40px;
-  height: 40px;
-  background: #25d366;
+  width: 45px;
+  height: 45px;
+  background: #ff4500;
   border-radius: 50%;
   z-index: 2000;
   pointer-events: none;
   transition: all 0.7s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
 }
 
 </style>
@@ -231,7 +299,7 @@ button {
 <header>
   <img src="logo-cumbuca.png" class="logo">
   <h1>Sabores Cumbuca</h1>
-  <p>Comida de verdade, sabor de casa! Almoço, lanche e jantar com marmita a partir de R$13,00.</p>
+  <p>Comida de verdade, sabor de casa! Almoço, lanche e jantar com quentinhas a partir de R$13,00.</p>
 </header>
 
 <div class="container">
@@ -509,180 +577,129 @@ function removerItem(nome) {
   atualizarCarrinho();
 }
 
-function finalizarPedido() {
+ function finalizarPedido() {
   if (carrinho.length === 0) {
     alert("Carrinho vazio!");
     return;
   }
 
-  let nome = prompt("Digite seu nome:");
-  if (!nome) return;
+  // 1. CAPTURA DE DADOS
+  let nome = document.getElementById("clienteNome").value;
+  let telefone = document.getElementById("clienteTel").value;
+  let endereco = document.getElementById("clienteEnd").value;
+  let escolha = document.getElementById("clientePag").value;
 
-  let telefone = prompt("Digite seu telefone:");
-  if (!telefone) return;
+  if (!nome || !telefone || !endereco || !escolha) {
+    alert("Por favor, preencha todos os campos e selecione o pagamento no carrinho!");
+    return;
+  }
 
-  let endereco = prompt("Digite seu endereço:");
-  if (!endereco) return;
-
-  // 🔹 CALCULAR TOTAL
+  // 2. CALCULAR TOTAL
   let total = 0;
-  
   carrinho.forEach(item => {
     total += item.preco * item.qtd;
   });
 
-  // 🔹 ESCOLHER PAGAMENTO (BOTÕES SIMPLES)
-  let escolha = prompt("Escolha:\n1 - PIX\n2 - Cartão\n3 - Dinheiro");
-
   let pagamentoTexto = "";
   let status = "Pendente";
 
-  let pixChave = "cumbuca.marco@gmail.com";
-  let pixCodigo = "";
-  let qrUrl = "";
-
-  // 🔥 FUNÇÃO SIMPLES GERAR PIX (SIMULADO PADRÃO)
-  function gerarPix(valor) {
-    return `00020126580014BR.GOV.BCB.PIX0136${pixChave}520400005303986540${valor.toFixed(2)}5802BR5920SABORES CUMBUCA6009SAO PAULO62070503***6304ABCD`;
-  }
-
+  // 3. LÓGICA DE PAGAMENTO
   if (escolha == "1") {
     pagamentoTexto = "PIX";
     status = "Aguardando comprovante";
-  
-    pixCodigo = gerarPixCopiaECola(total);
-  
-    let qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(pixCodigo)}`;
-  
+    let pixCodigo = gerarPixCopiaECola(total);
+
     let tela = document.createElement("div");
-    tela.style = `
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:#000000cc; display:flex; align-items:center; justify-content:center;
-      z-index:9999;
-    `;
-  
+    tela.id = "telaPix";
+    tela.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc; display:flex; align-items:center; justify-content:center; z-index:9999;";
+
     tela.innerHTML = `
-      <div style="background:#fff; padding:20px; border-radius:15px; text-align:center; width:90%; max-width:350px;">
-        <h3>Pagar com PIX</h3>
-        <p><strong>Valor:</strong> R$ ${total.toFixed(2)}</p>
-    
-        <div id="qrcode"></div><br>
-    
-        <textarea id="pixCopia" style="width:100%; height:60px;">${pixCodigo}</textarea>
-    
-        <button onclick="copiarPix()">Copiar Código PIX</button>
-    
-        <p style="font-size:12px; margin-top:10px;">
+      <div style="background:#fff; padding:30px 20px 20px 20px; border-radius:15px; text-align:center; width:90%; max-width:350px; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        
+        <button onclick="document.getElementById('telaPix').remove()" 
+                style="position:absolute; top:12px; right:12px; background:#f2f2f2; border:none; width:35px; height:35px; border-radius:50%; font-size:20px; cursor:pointer; color:#666; display:flex; align-items:center; justify-content:center; line-height:0;">
+          ✕
+        </button>
+
+        <h3 style="margin: 0 0 15px 0; color: #333;">Pagar com PIX</h3>
+        <p style="margin-bottom: 15px;"><strong>Valor:</strong> R$ ${total.toFixed(2)}</p>
+        
+        <div id="qrcodePix" style="display:flex; justify-content:center; margin-bottom:15px;"></div>
+        
+        <textarea id="pixCopia" style="width:100%; height:65px; font-size:12px; border:1px solid #ddd; border-radius:8px; padding:8px; resize:none; background:#f9f9f9; color:#444;" readonly>${pixCodigo}</textarea>
+        
+        <button onclick="copiarPix()" style="background:#ff6600; color:white; border:none; padding:15px; border-radius:10px; margin-top:15px; width:100%; font-weight:bold; font-size:16px; cursor:pointer;">
+          Copiar Código PIX
+        </button>
+        
+        <p style="font-size:12px; margin-top:15px; color:#666;">
           Envie o comprovante para o WhatsApp:<br>
-          <strong>(85) 99242-5223</strong>
+          <strong style="color:#25d366;">(85) 99242-5223</strong>
         </p>
-    
-        <a href="https://wa.me/5585992425223" target="_blank"
-           style="display:block; background:#25d366; color:#fff; padding:10px; border-radius:10px; margin-top:10px; text-decoration:none;">
-           Enviar Comprovante
+        
+        <a href="https://wa.me/5585992425223" target="_blank" style="display:block; background:#25d366; color:#fff; padding:12px; border-radius:10px; margin-top:10px; text-decoration:none; font-weight:bold;">
+          Enviar Comprovante
         </a>
       </div>
     `;
-    
-    document.body.appendChild(tela);
-    
-    // 🔥 GERA QR AQUI
-    setTimeout(() => {
-      new QRCode(document.getElementById("qrcode"), {
-        text: pixCodigo,
-        width: 200,
-        height: 200
-      });
-    }, 100);
-  }
 
+    document.body.appendChild(tela);
+
+    setTimeout(() => {
+      new QRCode(document.getElementById("qrcodePix"), { text: pixCodigo, width: 180, height: 180 });
+    }, 100);
+  } 
   else if (escolha == "2") {
     pagamentoTexto = "Cartão (na entrega)";
-  }
-
+  } 
   else if (escolha == "3") {
-    let troco = prompt("Precisa de troco?");
-
-    pagamentoTexto = troco
-      ? `Dinheiro (troco para R$ ${troco})`
-      : "Dinheiro";
+    let troco = prompt("Precisa de troco para quanto? (Deixe vazio se não precisar)");
+    pagamentoTexto = troco ? `Dinheiro (troco para R$ ${troco})` : "Dinheiro";
   }
 
-  else {
-    alert("Opção inválida");
-    return;
-  }
-
-  // 🔹 ITENS
-  let listaItens = "";
-  let itensFormatados = [];
-
-  carrinho.forEach(item => {
-    listaItens += `- ${item.nome} (${item.tamanho}) x${item.qtd}\n`;
-
-    itensFormatados.push({
-      nome: item.nome,
-      tamanho: item.tamanho,
-      qtd: item.qtd,
-      preco: item.preco
-    });
-  });
-
-  // 🔥 OBS PADRÃO DO SEU SISTEMA
-  let obs = 
-`PEDIDO VIA SITE
-CLIENTE: ${nome}
-CONTATO: ${telefone}
-
-ITENS:
-${listaItens}
-
-PAGAMENTO: ${pagamentoTexto}
-STATUS: ${status}
-
-END: ${endereco}`;
-
+  // 4. PREPARAÇÃO DO PEDIDO PARA O SISTEMA
   let pedido = {
     cliente: nome.toUpperCase(),
-  
     pagamento: "Pendente",
-  
-    obs: `PEDIDO VIA SITE
-  CONTATO: ${telefone}
-  
-  ITENS: ${carrinho.map(i => 
-      `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
-  ).join(" ")}
-  
-  END: ${endereco}
-  
-  PAGAMENTO: ${pagamentoTexto}`,
-  
+    obs: `PEDIDO VIA SITE\nCONTATO: ${telefone}\n\nITENS: ${carrinho.map(i => `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`).join(" ")}\n\nEND: ${endereco}\n\nPAGAMENTO: ${pagamentoTexto}`,
     itens: carrinho.map(i => ({
       nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
       qtd: i.qtd
     }))
   };
-  
-  console.log("JSON FINAL:", pedido);
-  
+
+  // 5. ENVIO PARA O SERVIDOR
   fetch("https://cumbuca-servidor-production.up.railway.app/pedido", {
     method: "POST",
-    mode: "cors", // Adicione esta linha para forçar o modo CORS
-    headers: {
-      "Content-Type": "application/json"
-    },
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(pedido)
   })
-  .then(() => {
-    alert("Pedido enviado com sucesso!");
+  .then(response => {
+    if (!response.ok) throw new Error('Erro no servidor');
+
+    carrinho = [];
+    atualizarCarrinho();
+
+    const caixaCarrinho = document.getElementById("carrinhoBox");
+    if (caixaCarrinho) {
+      caixaCarrinho.innerHTML = `
+        <div class="status-container">
+          <div class="success-icon">✅</div>
+          <h2 style="color: #333;">Pedido Confirmado!</h2>
+          <p>Já recebemos seu pedido, <strong>${nome.split(' ')[0].toUpperCase()}</strong>!</p>
+          <div class="status-badge">👨‍🍳 Em preparação...</div>
+          <p style="margin-top:20px; font-size:13px; color:#666;">Tempo estimado: 30-50 min</p>
+          <button onclick="location.reload()" style="background:#eee; color:#333; border:none; padding:12px; border-radius:10px; margin-top:20px; cursor:pointer; width:100%; font-weight:bold;">Fazer novo pedido</button>
+        </div>
+      `;
+    }
   })
-  .catch(() => {
-    alert("Erro ao enviar pedido!");
+  .catch(error => {
+    console.error("Erro:", error);
+    alert("Erro ao enviar para o sistema! Redirecionando para o WhatsApp...");
+    window.open(`https://wa.me/5585992425223?text=${encodeURIComponent(pedido.obs)}`, '_blank');
   });
-  
-  carrinho = [];
-  atualizarCarrinho();
 }
 
 function copiarPix() {
@@ -871,18 +888,31 @@ carregarCardapio();
 </section>
 
 <button id="btnCarrinho" onclick="toggleCarrinho()">
-  🛒 <span id="qtdCarrinho">0</span>
+  <span style="font-size: 24px;">🛍️</span> 
+  <span id="qtdCarrinho" style="background: white; color: #ff6600; padding: 2px 8px; border-radius: 12px; font-size: 16px;">0</span>
 </button>
 
 <div id="carrinhoBox">
   <h3>Seu Pedido</h3>
   <div id="carrinho"></div>
 
+  <div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">
+    <input type="text" id="clienteNome" placeholder="Seu Nome" style="width:100%; padding:8px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc;">
+    <input type="text" id="clienteTel" placeholder="WhatsApp (85) 99242-5223" style="width:100%; padding:8px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc;">
+    <textarea id="clienteEnd" placeholder="Endereço de Entrega" style="width:100%; padding:8px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc;"></textarea>
+    
+    <select id="clientePag" style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+      <option value="">Forma de Pagamento</option>
+      <option value="1">PIX</option>
+      <option value="2">Cartão (Entrega)</option>
+      <option value="3">Dinheiro</option>
+    </select>
+  </div>
+
   <button onclick="finalizarPedido()" style="background:#d62828;">
     Finalizar Pedido
   </button>
 </div>
-
 <!-- ===================== FIM ===================== -->
 
 </body>
