@@ -12,6 +12,7 @@
   gtag('js', new Date());
 
   gtag('config', 'AW-18085188065');
+  let carrinho = [];
 </script>
 
 <style>
@@ -174,6 +175,54 @@ button {
   width: 100%;
 }
 
+#carrinhoBox {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  max-height: 60vh;
+
+  overflow-y: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+
+  display: none;
+  z-index: 1000;
+}
+
+#btnCarrinho {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  width: 60px;
+  height: 60px;
+
+  background: #25d366;
+  color: white;
+  border: none;
+  border-radius: 50%;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  z-index: 1000;
+}
+
+.flying-item {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  background: #25d366;
+  border-radius: 50%;
+  z-index: 2000;
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+}
+
 </style>
 </head>
 
@@ -263,6 +312,7 @@ button {
 <h2>Cardápio do Dia</h2>
 <div id="cardapio">Carregando...</div>
 
+
 <section>
   <h2>Localização</h2>
   <p>📍 Rua Parcifal Barroso, 174, Centro - Marco, CE</p>
@@ -334,8 +384,15 @@ function carregarCardapio() {
               ${item.p_g > 0 ? ` | G: R$ ${item.p_g}` : ""}
             </div>
 
-            <button onclick="pedir('${item.nome}')">
-              Fazer Pedido
+            <button onclick="clicarAdicionar(
+              this,
+              '${item.nome}',
+              ${item.p_p || 0},
+              ${item.p_g || 0},
+              '${item.codigo_estoque_p}',
+              '${item.codigo_estoque_g}'
+            )">
+              Adicionar ao Carrinho
             </button>
           </div>
         `;
@@ -348,9 +405,385 @@ function carregarCardapio() {
     });
 }
 
-function pedir(nome) {
-  let msg = `Olá, quero pedir: ${nome}`;
-  window.open(`https://wa.me/5585992425223?text=${encodeURIComponent(msg)}`);
+function abrirOpcoes(nome, precoP, precoG, codP, codG) {
+
+  let tamanho = "";
+  let preco = 0;
+  let codigo = "";
+
+  if (precoP > 0 && precoG > 0) {
+    let escolha = prompt("P ou M?");
+    if (!escolha) return;
+
+    escolha = escolha.toUpperCase();
+
+    if (escolha === "P") {
+      tamanho = "P";
+      preco = precoP;
+      codigo = codP;
+    } else if (escolha === "M") {
+      tamanho = "M";
+      preco = precoG;
+      codigo = codG;
+    } else {
+      alert("Tamanho inválido");
+      return;
+    }
+  } else {
+    tamanho = "P";
+    preco = precoP || precoG;
+    codigo = codP || codG;
+  }
+
+  let qtd = parseInt(prompt("Quantidade:", "1"));
+  if (!qtd || qtd <= 0) return;
+
+  console.log("CODIGO ESCOLHIDO:", codigo); // 👈 TESTE
+
+  adicionarCarrinho(nome, preco, tamanho, qtd, codigo);
+}
+
+function adicionarCarrinho(nome, preco, tamanho, qtd, codigo) {
+
+  // 🔥 validação forte
+  if (!nome || !tamanho || !qtd || !codigo) {
+    console.error("ERRO AO ADICIONAR:", { nome, tamanho, qtd, codigo });
+    alert("Erro ao adicionar item!");
+    return;
+  }
+
+  carrinho.push({
+    nome: nome.trim(),
+    preco: preco,
+    tamanho: tamanho,
+    qtd: qtd,
+    codigo: codigo   // 🔥 agora vem correto
+  });
+
+  console.log("CARRINHO:", carrinho);
+
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+  let html = "";
+  let total = 0;
+  let qtdTotal = 0;
+
+  carrinho.forEach(item => {
+    let subtotal = item.preco * item.qtd;
+
+    total += subtotal;
+    qtdTotal += item.qtd;
+
+    html += `
+      <div class="item">
+        <strong>${item.nome} (${item.tamanho})</strong><br>
+        Quantidade: ${item.qtd}<br>
+        Total: R$ ${subtotal.toFixed(2)}<br>
+
+        <button onclick="removerItem('${item.nome}')" style="background:#999;">
+          Remover
+        </button>
+      </div>
+    `;
+  });
+
+  html += `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+
+  document.getElementById("carrinho").innerHTML = html;
+  document.getElementById("qtdCarrinho").innerText = qtdTotal;
+}
+
+function removerItem(nome) {
+  let item = carrinho.find(i => i.nome === nome);
+
+  if (!item) return;
+
+  item.qtd -= 1;
+
+  if (item.qtd <= 0) {
+    carrinho = carrinho.filter(i => i.nome !== nome);
+  }
+
+  atualizarCarrinho();
+}
+
+function finalizarPedido() {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  let nome = prompt("Digite seu nome:");
+  if (!nome) return;
+
+  let telefone = prompt("Digite seu telefone:");
+  if (!telefone) return;
+
+  let endereco = prompt("Digite seu endereço:");
+  if (!endereco) return;
+
+  // 🔹 CALCULAR TOTAL
+  let total = 0;
+  
+  carrinho.forEach(item => {
+    total += item.preco * item.qtd;
+  });
+
+  // 🔹 ESCOLHER PAGAMENTO (BOTÕES SIMPLES)
+  let escolha = prompt("Escolha:\n1 - PIX\n2 - Cartão\n3 - Dinheiro");
+
+  let pagamentoTexto = "";
+  let status = "Pendente";
+
+  let pixChave = "cumbuca.marco@gmail.com";
+  let pixCodigo = "";
+  let qrUrl = "";
+
+  // 🔥 FUNÇÃO SIMPLES GERAR PIX (SIMULADO PADRÃO)
+  function gerarPix(valor) {
+    return `00020126580014BR.GOV.BCB.PIX0136${pixChave}520400005303986540${valor.toFixed(2)}5802BR5920SABORES CUMBUCA6009SAO PAULO62070503***6304ABCD`;
+  }
+
+  if (escolha == "1") {
+    pagamentoTexto = "PIX";
+    status = "Aguardando comprovante";
+  
+    pixCodigo = gerarPixCopiaECola(total);
+  
+    let qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(pixCodigo)}`;
+  
+    let tela = document.createElement("div");
+    tela.style = `
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:#000000cc; display:flex; align-items:center; justify-content:center;
+      z-index:9999;
+    `;
+  
+    tela.innerHTML = `
+      <div style="background:#fff; padding:20px; border-radius:15px; text-align:center; width:90%; max-width:350px;">
+        <h3>Pagar com PIX</h3>
+        <p><strong>Valor:</strong> R$ ${total.toFixed(2)}</p>
+    
+        <div id="qrcode"></div><br>
+    
+        <textarea id="pixCopia" style="width:100%; height:60px;">${pixCodigo}</textarea>
+    
+        <button onclick="copiarPix()">Copiar Código PIX</button>
+    
+        <p style="font-size:12px; margin-top:10px;">
+          Envie o comprovante para o WhatsApp:<br>
+          <strong>(85) 99242-5223</strong>
+        </p>
+    
+        <a href="https://wa.me/5585992425223" target="_blank"
+           style="display:block; background:#25d366; color:#fff; padding:10px; border-radius:10px; margin-top:10px; text-decoration:none;">
+           Enviar Comprovante
+        </a>
+      </div>
+    `;
+    
+    document.body.appendChild(tela);
+    
+    // 🔥 GERA QR AQUI
+    setTimeout(() => {
+      new QRCode(document.getElementById("qrcode"), {
+        text: pixCodigo,
+        width: 200,
+        height: 200
+      });
+    }, 100);
+  }
+
+  else if (escolha == "2") {
+    pagamentoTexto = "Cartão (na entrega)";
+  }
+
+  else if (escolha == "3") {
+    let troco = prompt("Precisa de troco?");
+
+    pagamentoTexto = troco
+      ? `Dinheiro (troco para R$ ${troco})`
+      : "Dinheiro";
+  }
+
+  else {
+    alert("Opção inválida");
+    return;
+  }
+
+  // 🔹 ITENS
+  let listaItens = "";
+  let itensFormatados = [];
+
+  carrinho.forEach(item => {
+    listaItens += `- ${item.nome} (${item.tamanho}) x${item.qtd}\n`;
+
+    itensFormatados.push({
+      nome: item.nome,
+      tamanho: item.tamanho,
+      qtd: item.qtd,
+      preco: item.preco
+    });
+  });
+
+  // 🔥 OBS PADRÃO DO SEU SISTEMA
+  let obs = 
+`PEDIDO VIA SITE
+CLIENTE: ${nome}
+CONTATO: ${telefone}
+
+ITENS:
+${listaItens}
+
+PAGAMENTO: ${pagamentoTexto}
+STATUS: ${status}
+
+END: ${endereco}`;
+
+  let pedido = {
+    cliente: nome.toUpperCase(),
+  
+    pagamento: "Pendente",
+  
+    obs: `PEDIDO VIA SITE
+  CONTATO: ${telefone}
+  
+  ITENS: ${carrinho.map(i => 
+      `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
+  ).join(" ")}
+  
+  END: ${endereco}
+  
+  PAGAMENTO: ${pagamentoTexto}`,
+  
+    itens: carrinho.map(i => ({
+      nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
+      qtd: i.qtd
+    }))
+  };
+  
+  console.log("JSON FINAL:", pedido);
+  
+  fetch("https://cumbuca-servidor-production.up.railway.app/pedido", {
+    method: "POST",
+    mode: "cors", // Adicione esta linha para forçar o modo CORS
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(pedido)
+  })
+  .then(() => {
+    alert("Pedido enviado com sucesso!");
+  })
+  .catch(() => {
+    alert("Erro ao enviar pedido!");
+  });
+  
+  carrinho = [];
+  atualizarCarrinho();
+}
+
+function copiarPix() {
+  let texto = document.getElementById("pixCopia");
+  texto.select();
+  document.execCommand("copy");
+  alert("PIX copiado!");
+}
+
+function gerarPixCopiaECola(valor) {
+  const chave = "cumbuca.marco@gmail.com";
+  const nome = "SABORES CUMBUCA";
+  const cidade = "MARCO";
+
+  function format(id, value) {
+    return id + value.length.toString().padStart(2, '0') + value;
+  }
+
+  let payload =
+    format("00", "01") +
+    format("26",
+      format("00", "BR.GOV.BCB.PIX") +
+      format("01", chave)
+    ) +
+    format("52", "0000") +
+    format("53", "986") +
+    format("54", valor.toFixed(2)) +
+    format("58", "BR") +
+    format("59", nome) +
+    format("60", cidade) +
+    format("62", format("05", "***"));
+
+  // 🔥 CALCULAR CRC16 (IGUAL BANCO)
+  function crc16(str) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        if ((crc & 0x8000) !== 0) {
+          crc = (crc << 1) ^ 0x1021;
+        } else {
+          crc <<= 1;
+        }
+        crc &= 0xFFFF;
+      }
+    }
+    return crc.toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  payload += "6304";
+  const crc = crc16(payload);
+  payload += crc;
+
+  return payload;
+}
+
+function toggleCarrinho() {
+  let box = document.getElementById("carrinhoBox");
+
+  if (box.style.display === "none") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
+
+function animarCarrinho(botaoClicado) {
+  const carrinho = document.getElementById("btnCarrinho");
+
+  const rectInicio = botaoClicado.getBoundingClientRect();
+  const rectFim = carrinho.getBoundingClientRect();
+
+  const bolinha = document.createElement("div");
+  bolinha.classList.add("flying-item");
+
+  // posição inicial
+  bolinha.style.left = rectInicio.left + rectInicio.width / 2 + "px";
+  bolinha.style.top = rectInicio.top + rectInicio.height / 2 + "px";
+
+  document.body.appendChild(bolinha);
+
+  // força render
+  setTimeout(() => {
+    bolinha.style.left = rectFim.left + "px";
+    bolinha.style.top = rectFim.top + "px";
+    bolinha.style.transform = "scale(0.3)";
+    bolinha.style.opacity = "0.5";
+  }, 10);
+
+  // remove depois
+  setTimeout(() => {
+    bolinha.remove();
+  }, 700);
+}
+
+function clicarAdicionar(botao, nome, precoP, precoG, codP, codG) {
+  animarCarrinho(botao);
+
+  setTimeout(() => {
+    abrirOpcoes(nome, precoP, precoG, codP, codG);
+  }, 400);
 }
 
 carregarCardapio();
@@ -436,6 +869,19 @@ carregarCardapio();
     Não compartilhamos informações com terceiros.
   </p>
 </section>
+
+<button id="btnCarrinho" onclick="toggleCarrinho()">
+  🛒 <span id="qtdCarrinho">0</span>
+</button>
+
+<div id="carrinhoBox">
+  <h3>Seu Pedido</h3>
+  <div id="carrinho"></div>
+
+  <button onclick="finalizarPedido()" style="background:#d62828;">
+    Finalizar Pedido
+  </button>
+</div>
 
 <!-- ===================== FIM ===================== -->
 
