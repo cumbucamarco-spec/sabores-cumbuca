@@ -4,7 +4,7 @@ echo =========================
 echo FECHANDO LOJA...
 echo =========================
 
-copy ..\cardapio_fechado.json cardapio_html.json /Y
+copy cardapio_fechado.json cardapio_html.json /Y
 
 echo =========================
 echo ENVIANDO PARA O GITHUB...

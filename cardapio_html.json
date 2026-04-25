@@ -1,47 +1,9 @@
-[
-    {
-        "nome": "Porco ao Molho Barbecue",
-        "desc": "Arroz, Feijão, Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Arroz de Camarão ",
-        "desc": "Internacional",
-        "cat": "Peixe",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
-        "codigo_estoque_g": ""
-    },
-    {
-        "nome": "Creme de Peixe",
-        "desc": "",
-        "cat": "Peixe",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Sopa de Carne",
-        "desc": "Pote 500ml",
-        "cat": "",
-        "p_p": 10.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770065318 - SOPA",
-        "codigo_estoque_g": ""
-    },
-    {
-        "nome": "Escondidinho de Carne do Sol",
-        "desc": "Arroz, Salada e Batata palha",
-        "cat": "Carne",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
-        "codigo_estoque_g": ""
-    }
-]
+[{
+    "nome": "🚫 Estamos fechados no momento",
+    "desc": "Atendemos de segunda a sexta das 08:00 às 21:00 hrs.<br><br>📲 <a href='https://wa.me/5588997845960?text=Olá,%20vi%20que%20está%20fechado,%20pode%20me%20ajudar?' target='_blank'>Falar no WhatsApp</a>",
+    "cat": "",
+    "p_p": 0.0,
+    "p_g": 0.0,
+    "codigo_estoque_p": "",
+    "codigo_estoque_g": ""
+}
