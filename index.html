@@ -349,15 +349,30 @@ button {
   </div>
 </section>
 
-<!-- GALERIA ATUALIZADA -->
+<!-- CARDÁPIO PRIMEIRO -->
+<h2>Cardápio do Dia</h2>
+<div id="cardapio">Carregando...</div>
+
+
+<!-- GALERIA DEPOIS -->
 <section>
   <h2 style="text-align: center;">Sugestões da Nossa Cozinha</h2>
-  <p style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 15px; text-align: center;">
+
+  <p style="
+    font-size:13px;
+    color:#666;
+    margin-top:-10px;
+    margin-bottom:15px;
+    text-align:center;
+  ">
     Consulte a disponibilidade do dia e faça seu pedido pelo nosso atendimento.
   </p>
 
   <div class="galeria-container">
-    <button class="seta esquerda" onclick="scrollGaleria(-1)">◀</button>
+    
+    <button class="seta esquerda" onclick="scrollGaleria(-1)">
+      ◀
+    </button>
 
     <div class="galeria" id="galeria">
       <img src="prato1.png" alt="Sugestão 1" onclick="abrirModal(this)">
@@ -373,12 +388,12 @@ button {
       <img src="prato12.png" alt="Sugestão 11" onclick="abrirModal(this)">
     </div>
 
-    <button class="seta direita" onclick="scrollGaleria(1)">▶</button>
+    <button class="seta direita" onclick="scrollGaleria(1)">
+      ▶
+    </button>
+
   </div>
 </section>
-
-<h2>Cardápio do Dia</h2>
-<div id="cardapio">Carregando...</div>
 
 
 <section>
