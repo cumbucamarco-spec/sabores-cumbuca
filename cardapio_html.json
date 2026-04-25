@@ -1,11 +1,47 @@
 [
     {
-        "nome": "FECHADO",
-        "desc": "🚫 Estamos fora do horário de funcionamento. Pedidos feitos agora não serão atendidos. ",
-        "cat": "",
-        "p_p": 0.0,
+        "nome": "Porco ao Molho Barbecue",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Arroz de Camarão ",
+        "desc": "Internacional",
+        "cat": "Peixe",
+        "p_p": 15.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "P1773058689 - AGUARDANDO OPÇÕES",
+        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Creme de Peixe",
+        "desc": "",
+        "cat": "Peixe",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Sopa de Carne",
+        "desc": "Pote 500ml",
+        "cat": "",
+        "p_p": 10.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770065318 - SOPA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Escondidinho de Carne do Sol",
+        "desc": "Arroz, Salada e Batata palha",
+        "cat": "Carne",
+        "p_p": 15.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
         "codigo_estoque_g": ""
     }
 ]
