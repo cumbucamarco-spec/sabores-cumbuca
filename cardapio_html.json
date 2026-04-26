@@ -25,5 +25,14 @@
         "p_g": 0.0,
         "codigo_estoque_p": "P1770150999 - MUCUNZA",
         "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Sopa de Carne",
+        "desc": "Pote 500ml",
+        "cat": "",
+        "p_p": 10.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770065318 - SOPA",
+        "codigo_estoque_g": ""
     }
 ]
