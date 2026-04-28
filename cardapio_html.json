@@ -1,11 +1,29 @@
 [
     {
-        "nome": "🚫 Estamos fechados no momento",
-        "desc": "Atendemos de segunda a sexta das 08:00 às 21:00 hrs.<br><br>📲 <a href='https://wa.me/5588997845960?text=Olá,%20vi%20que%20está%20fechado,%20pode%20me%20ajudar?' target='_blank'>Falar no WhatsApp</a>",
-        "cat": "",
-        "p_p": 0.0,
+        "nome": "Camarão Alho e Oleo",
+        "desc": "Arroz, Farofa, Limão e Salada",
+        "cat": "Peixe",
+        "p_p": 18.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "",
+        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Macarrão com Frango Cremoso",
+        "desc": "Macarrão Espaguete, Frango Cremoso, Queijo e Batata Palha",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Sanduiche Natural",
+        "desc": "Pão Integral com Patê de Frango Exclusivo",
+        "cat": "Carne",
+        "p_p": 8.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770227153 - SANDUICHE NATURAL",
         "codigo_estoque_g": ""
     }
 ]
