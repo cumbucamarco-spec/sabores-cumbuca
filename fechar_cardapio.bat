@@ -1,48 +1,29 @@
-<<<<<<< HEAD
+@echo off
+
+:: roda oculto
+if "%1" neq "hidden" (
+start "" /min cmd /c "%~f0 hidden"
+exit
+)
+
 cd /d %~dp0
 
 echo =========================
 echo FECHANDO LOJA...
 echo =========================
 
-copy cardapio_fechado.json cardapio_html.json /Y
+copy /Y "cardapio_fechado.json" "cardapio_html.json" >nul
 
 echo =========================
 echo ENVIANDO PARA O GITHUB...
 echo =========================
 
-git add .
-
-git diff --cached --quiet
-IF %ERRORLEVEL%==0 (
-    echo Nenhuma alteracao.
-) ELSE (
-    git commit -m "Loja fechada automaticamente"
-    git push
-)
-
-=======
-cd /d %~dp0
+git add . >nul 2>&1
+git commit -m "Loja fechada %date% %time%" >nul 2>&1
+git push origin main >nul 2>&1
 
 echo =========================
-echo FECHANDO LOJA...
+echo FINALIZADO
 echo =========================
 
-copy cardapio_fechado.json cardapio_html.json /Y
-
-echo =========================
-echo ENVIANDO PARA O GITHUB...
-echo =========================
-
-git add .
-
-git diff --cached --quiet
-IF %ERRORLEVEL%==0 (
-    echo Nenhuma alteracao.
-) ELSE (
-    git commit -m "Loja fechada automaticamente"
-    git push
-)
-
->>>>>>> 283c1c9efbe98e45384772404245cf7fc4b776bb
 exit
