@@ -1,11 +1,5 @@
 @echo off
 
-:: roda oculto
-if "%1" neq "hidden" (
-start "" /min cmd /c "%~f0 hidden"
-exit
-)
-
 cd /d %~dp0
 
 echo =========================
@@ -21,9 +15,5 @@ echo =========================
 git add . >nul 2>&1
 git commit -m "Loja fechada %date% %time%" >nul 2>&1
 git push origin main >nul 2>&1
-
-echo =========================
-echo FINALIZADO
-echo =========================
 
 exit
