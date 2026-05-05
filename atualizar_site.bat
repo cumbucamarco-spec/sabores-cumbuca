@@ -26,15 +26,16 @@ git push origin main
 echo SITE ATUALIZADO!
 
 echo =========================
-echo INICIANDO SISTEMAS...
+echo INICIANDO SISTEMA...
 echo =========================
 
-:: 🔥 LIGA O BOT WHATSAPP
-start "" "..\BOT-WHATSAPP\Ligar_Marinete.bat"
+:: 🔥 MOSTRA O BOT (janela normal)
+call "..\BOT-WHATSAPP\Ligar_Marinete.bat"
 
-:: 🔥 INICIA BUSCADOR DE PEDIDOS (PYTHON)
-start "" python baixar_pedidos.py
+:: 🔥 BUSCADOR EM SEGUNDO PLANO (invisível)
+start "" /min cmd /c python baixar_pedidos.py
 
 echo =========================
+
 
 if "%1"=="" pause
