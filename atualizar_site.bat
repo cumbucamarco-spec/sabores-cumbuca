@@ -8,7 +8,7 @@ echo =========================
 copy /Y "..\cardapio_hoje.json" "cardapio_html.json"
 
 if not exist "cardapio_html.json" (
-echo ERRO: nao foi possivel copiar o arquivo!
+echo ERRO AO COPIAR O CARDAPIO!
 pause
 exit /b
 )
@@ -19,19 +19,21 @@ echo =========================
 
 git add .
 
-REM força commit mesmo se o Git nao detectar mudanca
 git commit -m "Atualizacao do site %date% %time%" 2>nul
 
-REM garante que esta na branch correta
-git branch | find "main" >nul
-IF %ERRORLEVEL%==0 (
 git push origin main
-) ELSE (
-git push origin master
-)
+
+echo SITE ATUALIZADO!
 
 echo =========================
-echo SITE ATUALIZADO!
+echo INICIANDO SISTEMAS...
+echo =========================
+
+:: 🔥 AJUSTA AQUI COM SEUS ARQUIVOS REAIS
+
+start "" "..\ligar_marmita.bat"
+start "" "..\buscar_pedidos.bat"
+
 echo =========================
 
 if "%1"=="" pause

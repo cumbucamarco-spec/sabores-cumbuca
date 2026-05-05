@@ -1,14 +1,5 @@
 [
     {
-        "nome": "Strogonoff de Frango",
-        "desc": "Arroz, Batata Palha e Salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
         "nome": "Camarão Alho e Oleo",
         "desc": "Arroz, Farofa, Limão e Salada",
         "cat": "Peixe",

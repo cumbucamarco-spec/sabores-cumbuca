@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabores Cumbuca</title>
+<meta name="google-site-verification" content="SOH2rkwLtcM_fMDCb55NQz9cxdO-IqCykm5iokL3OH4" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18085188065"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18085188065');
+  let carrinho = [];
+</script>
+
+<style>
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* HEADER */
+header {
+  background: #d9a441;
+  padding: 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 140px;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* CONTAINER */
+.container {
+  padding: 15px;
+  max-width: 700px;
+  width: 100%; /* Adicione isso */
+  margin: auto;
+  box-sizing: border-box; /* Garante que o padding não "estoure" a tela */
+}
+
+/* INSTAGRAM */
+.instagram {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+  margin-bottom: 15px;
+}
+
+/* GALERIA NOVA */
+.galeria-container {
+  position: relative;
+}
+
+.galeria {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 20px;
+}
+
+.galeria img {
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* SETAS */
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  width: 40px;
+  height: 40px;
+
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+}
+
+.esquerda {
+  left: 5px;
+}
+
+.direita {
+  right: 5px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal img {
+  max-width: 90%;
+  border-radius: 10px;
+}
+
+.modal p {
+  color: white;
+}
+
+/* CARDAPIO */
+.item {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.item strong {
+  font-size: 18px;
+}
+
+.item small {
+  color: #777;
+}
+
+.preco {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #d62828;
+}
+
+button {
+  margin-top: 10px;
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#carrinhoBox {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  max-height: 60vh;
+
+  overflow-y: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+
+  display: none;
+  z-index: 1000;
+}
+
+/* Tela de Sucesso e Acompanhamento */
+.status-container {
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.success-icon {
+  font-size: 50px;
+  color: #25d366;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  background: #ffecb3;
+  color: #b8860b;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* BOTÃO DO CARRINHO ESTILIZADO */
+#btnCarrinho {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  /* Formato de Cápsula para caber texto */
+  width: auto;
+  padding: 0 20px;
+  height: 65px;
+
+  /* Cor Laranja Forte */
+  background: #ff6600; 
+  color: white;
+  border: none;
+  border-radius: 35px;
+
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  
+  /* Pulsação Lenta por padrão */
+  animation: pulsar 2s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+/* Texto chamativo dentro do botão */
+#btnCarrinho::before {
+  content: "FECHAR PEDIDO";
+  font-size: 14px;
+}
+
+/* Quando houver itens, a pulsação fica mais rápida e o botão cresce */
+.carrinho-urgente {
+  animation: pulsar 0.8s infinite ease-in-out !important;
+  background: #ff4500 !important; /* Laranja ainda mais forte */
+  transform: scale(1.1);
+}
+
+@keyframes pulsar {
+  0% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); transform: scale(1); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 102, 0, 0); transform: scale(1.05); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); transform: scale(1); }
+}
+
+/* BOLINHA QUE VOA (Mantida a cor laranja para combinar) */
+.flying-item {
+  position: fixed;
+  width: 45px;
+  height: 45px;
+  background: #ff4500;
+  border-radius: 50%;
+  z-index: 2000;
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo-cumbuca.png" class="logo">
+  <h1>Sabores Cumbuca</h1>
+  <p>Comida de verdade, sabor de casa! Almoço, lanche e jantar com quentinhas a partir de R$13,00.</p>
+</header>
+
+<div class="container">
+
+<a class="instagram" href="https://www.instagram.com/cumbuca.marco" target="_blank">
+  Ver Instagram
+</a>
+
+<section>
+  <h2>Nossa História</h2>
+
+  <div style="
+    background:#fff;
+    padding:12px;
+    border-radius:10px;
+    max-height:180px;
+    overflow-y:auto;
+    font-size:13px;
+    line-height:1.5;
+    color:#333;
+  ">
+
+    <p>
+      O Sabores Cumbuca começou sua trajetória em 2022, de forma simples e humilde,
+      como um pequeno negócio de rua nas praias de Caucaia, no Ceará.
+      No início, trabalhávamos com vendas ambulantes, eu e minha esposa,
+      oferecendo refeições preparadas com muito esforço e dedicação.
+    </p>
+
+    <p>
+      Com o tempo, percebemos o potencial do nosso trabalho e a aceitação dos clientes,
+      o que nos motivou a evoluir e transformar esse sonho em algo maior.
+      A habilidade e o talento gastronômico da minha esposa Fabiana foram fundamentais
+      nesse crescimento, atraindo cada vez mais pessoas.
+    </p>
+
+    <p>
+      Ao longo da nossa jornada, enfrentamos momentos difíceis, mas com persistência e união,
+      conseguimos superar cada desafio.
+    </p>
+
+    <p>
+      Em 2024, mudamos para a cidade de Marco - CE, onde hoje o Sabores Cumbuca funciona oficialmente,
+      mantendo a mesma essência de quando começamos: comida caseira feita com amor, dedicação e qualidade para você.
+    </p>
+
+  </div>
+</section>
+
+<!-- GALERIA ATUALIZADA -->
+<section>
+  <h2 style="text-align: center;">Sugestões da Nossa Cozinha</h2>
+  <p style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 15px; text-align: center;">
+    Consulte a disponibilidade do dia e faça seu pedido pelo nosso atendimento.
+  </p>
+
+  <div class="galeria-container">
+    <button class="seta esquerda" onclick="scrollGaleria(-1)">◀</button>
+
+    <div class="galeria" id="galeria">
+      <img src="prato1.png" alt="Sugestão 1" onclick="abrirModal(this)">
+      <img src="prato2.png" alt="Sugestão 2" onclick="abrirModal(this)">
+      <img src="prato3.png" alt="Sugestão 3" onclick="abrirModal(this)">
+      <img src="prato4.png" alt="Sugestão 4" onclick="abrirModal(this)">
+      <img src="prato5.png" alt="Sugestão 5" onclick="abrirModal(this)">
+      <img src="prato6.png" alt="Sugestão 6" onclick="abrirModal(this)">
+      <img src="prato7.png" alt="Sugestão 7" onclick="abrirModal(this)">
+      <img src="prato9.png" alt="Sugestão 8" onclick="abrirModal(this)">
+      <img src="prato10.png" alt="Sugestão 9" onclick="abrirModal(this)">
+      <img src="prato11.png" alt="Sugestão 10" onclick="abrirModal(this)">
+      <img src="prato12.png" alt="Sugestão 11" onclick="abrirModal(this)">
+    </div>
+
+    <button class="seta direita" onclick="scrollGaleria(1)">▶</button>
+  </div>
+</section>
+
+<h2>Cardápio do Dia</h2>
+<div id="cardapio">Carregando...</div>
+
+
+<section>
+  <h2>Localização</h2>
+  <p>📍 Rua Parcifal Barroso, 174, Centro - Marco, CE</p>
+
+  <a href="https://www.google.com/maps/search/?api=1&query=Sabores+Cumbuca+Marco+CE" target="_blank" style="
+    display:block;
+    text-align:center;
+    background:#4285F4;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+    margin-top:10px;
+    font-weight:bold;
+  ">
+    🗺️ Ver localização no Google Maps
+  </a>
+</section>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="fecharModal()">
+  <img id="imgModal">
+</div>
+
+<script>
+// GALERIA
+function scrollGaleria(direcao) {
+  const galeria = document.getElementById("galeria");
+  galeria.scrollLeft += direcao * 220;
+}
+
+// AUTOPLAY
+setInterval(() => {
+  const galeria = document.getElementById("galeria");
+  galeria.scrollLeft += 220;
+
+  if (galeria.scrollLeft + galeria.clientWidth >= galeria.scrollWidth) {
+    galeria.scrollLeft = 0;
+  }
+}, 3000);
+
+// MODAL
+function abrirModal(img) {
+  document.getElementById("modal").style.display = "flex";
+  document.getElementById("imgModal").src = img.src;
+}
+
+function fecharModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+// CARDÁPIO
+function carregarCardapio() {
+  fetch('cardapio_html.json?t=' + new Date().getTime())
+    .then(res => res.json())
+    .then(data => {
+      let html = "";
+
+      data.forEach(item => {
+        html += `
+          <div class="item">
+            <strong>${item.nome}</strong><br>
+            <small>${item.desc}</small><br>
+
+            <div class="preco">
+              ${item.p_p > 0 ? `P: R$ ${item.p_p}` : ""}
+              ${item.p_g > 0 ? ` | G: R$ ${item.p_g}` : ""}
+            </div>
+
+            <button onclick="clicarAdicionar(
+              this,
+              '${item.nome}',
+              ${item.p_p || 0},
+              ${item.p_g || 0},
+              '${item.codigo_estoque_p}',
+              '${item.codigo_estoque_g}'
+            )">
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        `;
+      });
+
+      document.getElementById("cardapio").innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById("cardapio").innerHTML = "Erro ao carregar";
+    });
+}
+
+function abrirOpcoes(nome, precoP, precoG, codP, codG) {
+
+  let tamanho = "";
+  let preco = 0;
+  let codigo = "";
+
+  if (precoP > 0 && precoG > 0) {
+    let escolha = prompt("P ou M?");
+    if (!escolha) return;
+
+    escolha = escolha.toUpperCase();
+
+    if (escolha === "P") {
+      tamanho = "P";
+      preco = precoP;
+      codigo = codP;
+    } else if (escolha === "M") {
+      tamanho = "M";
+      preco = precoG;
+      codigo = codG;
+    } else {
+      alert("Tamanho inválido");
+      return;
+    }
+  } else {
+    tamanho = "P";
+    preco = precoP || precoG;
+    codigo = codP || codG;
+  }
+
+  let qtd = parseInt(prompt("Quantidade:", "1"));
+  if (!qtd || qtd <= 0) return;
+
+  console.log("CODIGO ESCOLHIDO:", codigo); // 👈 TESTE
+
+  adicionarCarrinho(nome, preco, tamanho, qtd, codigo);
+}
+
+function adicionarCarrinho(nome, preco, tamanho, qtd, codigo) {
+
+  // 🔥 validação forte
+  if (!nome || !tamanho || !qtd || !codigo) {
+    console.error("ERRO AO ADICIONAR:", { nome, tamanho, qtd, codigo });
+    alert("Erro ao adicionar item!");
+    return;
+  }
+
+  carrinho.push({
+    nome: nome.trim(),
+    preco: preco,
+    tamanho: tamanho,
+    qtd: qtd,
+    codigo: codigo   // 🔥 agora vem correto
+  });
+
+  console.log("CARRINHO:", carrinho);
+
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+  let html = "";
+  let total = 0;
+  let qtdTotal = 0;
+
+  carrinho.forEach(item => {
+    let subtotal = item.preco * item.qtd;
+
+    total += subtotal;
+    qtdTotal += item.qtd;
+
+    html += `
+      <div class="item">
+        <strong>${item.nome} (${item.tamanho})</strong><br>
+        Quantidade: ${item.qtd}<br>
+        Total: R$ ${subtotal.toFixed(2)}<br>
+
+        <button onclick="removerItem('${item.nome}')" style="background:#999;">
+          Remover
+        </button>
+      </div>
+    `;
+  });
+
+  html += `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+
+  document.getElementById("carrinho").innerHTML = html;
+  document.getElementById("qtdCarrinho").innerText = qtdTotal;
+}
+
+function removerItem(nome) {
+  let item = carrinho.find(i => i.nome === nome);
+
+  if (!item) return;
+
+  item.qtd -= 1;
+
+  if (item.qtd <= 0) {
+    carrinho = carrinho.filter(i => i.nome !== nome);
+  }
+
+  atualizarCarrinho();
+}
+
+ function finalizarPedido() {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  // 1. CAPTURA DE DADOS
+  let nome = document.getElementById("clienteNome").value;
+  let telefone = document.getElementById("clienteTel").value;
+  let endereco = document.getElementById("clienteEnd").value;
+  let escolha = document.getElementById("clientePag").value;
+
+  if (!nome || !telefone || !endereco || !escolha) {
+    alert("Por favor, preencha todos os campos e selecione o pagamento no carrinho!");
+    return;
+  }
+
+  // 2. CALCULAR TOTAL
+  let total = 0;
+  carrinho.forEach(item => {
+    total += item.preco * item.qtd;
+  });
+
+  let pagamentoTexto = "";
+  let status = "Pendente";
+
+  // 3. LÓGICA DE PAGAMENTO
+  if (escolha == "1") {
+    pagamentoTexto = "PIX";
+    status = "Aguardando comprovante";
+    let pixCodigo = gerarPixCopiaECola(total);
+
+    let tela = document.createElement("div");
+    tela.id = "telaPix";
+    tela.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:#000000cc; display:flex; align-items:center; justify-content:center; z-index:9999;";
+
+    tela.innerHTML = `
+      <div style="background:#fff; padding:30px 20px 20px 20px; border-radius:15px; text-align:center; width:90%; max-width:350px; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        
+        <button onclick="document.getElementById('telaPix').remove()" 
+                style="position:absolute; top:12px; right:12px; background:#f2f2f2; border:none; width:35px; height:35px; border-radius:50%; font-size:20px; cursor:pointer; color:#666; display:flex; align-items:center; justify-content:center; line-height:0;">
+          ✕
+        </button>
+
+        <h3 style="margin: 0 0 15px 0; color: #333;">Pagar com PIX</h3>
+        <p style="margin-bottom: 15px;"><strong>Valor:</strong> R$ ${total.toFixed(2)}</p>
+        
+        <div id="qrcodePix" style="display:flex; justify-content:center; margin-bottom:15px;"></div>
+        
+        <textarea id="pixCopia" style="width:100%; height:65px; font-size:12px; border:1px solid #ddd; border-radius:8px; padding:8px; resize:none; background:#f9f9f9; color:#444;" readonly>${pixCodigo}</textarea>
+        
+        <button onclick="copiarPix()" style="background:#ff6600; color:white; border:none; padding:15px; border-radius:10px; margin-top:15px; width:100%; font-weight:bold; font-size:16px; cursor:pointer;">
+          Copiar Código PIX
+        </button>
+        
+        <p style="font-size:12px; margin-top:15px; color:#666;">
+          Envie o comprovante para o WhatsApp:<br>
+          <strong style="color:#25d366;">(85) 99242-5223</strong>
+        </p>
+        
+        <a href="https://wa.me/5585992425223" target="_blank" style="display:block; background:#25d366; color:#fff; padding:12px; border-radius:10px; margin-top:10px; text-decoration:none; font-weight:bold;">
+          Enviar Comprovante
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(tela);
+
+    setTimeout(() => {
+      new QRCode(document.getElementById("qrcodePix"), { text: pixCodigo, width: 180, height: 180 });
+    }, 100);
+  } 
+  else if (escolha == "2") {
+    pagamentoTexto = "Cartão (na entrega)";
+  } 
+  else if (escolha == "3") {
+    let troco = prompt("Precisa de troco para quanto? (Deixe vazio se não precisar)");
+    pagamentoTexto = troco ? `Dinheiro (troco para R$ ${troco})` : "Dinheiro";
+  }
+
+  // 4. PREPARAÇÃO DO PEDIDO PARA O SISTEMA
+  let pedido = {
+    cliente: nome.toUpperCase(),
+    pagamento: "Pendente",
+    obs: `PEDIDO VIA SITE\nCONTATO: ${telefone}\n\nITENS: ${carrinho.map(i => `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`).join(" ")}\n\nEND: ${endereco}\n\nPAGAMENTO: ${pagamentoTexto}`,
+    itens: carrinho.map(i => ({
+      nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
+      qtd: i.qtd
+    }))
+  };
+
+  // 5. ENVIO PARA O SERVIDOR
+  fetch("https://cumbuca-servidor-production.up.railway.app/pedido", {
+    method: "POST",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(pedido)
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Erro no servidor');
+
+    carrinho = [];
+    atualizarCarrinho();
+
+    const caixaCarrinho = document.getElementById("carrinhoBox");
+    if (caixaCarrinho) {
+      caixaCarrinho.innerHTML = `
+        <div class="status-container">
+          <div class="success-icon">✅</div>
+          <h2 style="color: #333;">Pedido Confirmado!</h2>
+          <p>Já recebemos seu pedido, <strong>${nome.split(' ')[0].toUpperCase()}</strong>!</p>
+          <div class="status-badge">👨‍🍳 Em preparação...</div>
+          <p style="margin-top:20px; font-size:13px; color:#666;">Tempo estimado: 30-50 min</p>
+          <button onclick="location.reload()" style="background:#eee; color:#333; border:none; padding:12px; border-radius:10px; margin-top:20px; cursor:pointer; width:100%; font-weight:bold;">Fazer novo pedido</button>
+        </div>
+      `;
+    }
+  })
+  .catch(error => {
+    console.error("Erro:", error);
+    alert("Erro ao enviar para o sistema! Redirecionando para o WhatsApp...");
+    window.open(`https://wa.me/5585992425223?text=${encodeURIComponent(pedido.obs)}`, '_blank');
+  });
+}
+
+function copiarPix() {
+  let texto = document.getElementById("pixCopia");
+  texto.select();
+  document.execCommand("copy");
+  alert("PIX copiado!");
+}
+
+function gerarPixCopiaECola(valor) {
+  const chave = "cumbuca.marco@gmail.com";
+  const nome = "SABORES CUMBUCA";
+  const cidade = "MARCO";
+
+  function format(id, value) {
+    return id + value.length.toString().padStart(2, '0') + value;
+  }
+
+  let payload =
+    format("00", "01") +
+    format("26",
+      format("00", "BR.GOV.BCB.PIX") +
+      format("01", chave)
+    ) +
+    format("52", "0000") +
+    format("53", "986") +
+    format("54", valor.toFixed(2)) +
+    format("58", "BR") +
+    format("59", nome) +
+    format("60", cidade) +
+    format("62", format("05", "***"));
+
+  // 🔥 CALCULAR CRC16 (IGUAL BANCO)
+  function crc16(str) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        if ((crc & 0x8000) !== 0) {
+          crc = (crc << 1) ^ 0x1021;
+        } else {
+          crc <<= 1;
+        }
+        crc &= 0xFFFF;
+      }
+    }
+    return crc.toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  payload += "6304";
+  const crc = crc16(payload);
+  payload += crc;
+
+  return payload;
+}
+
+function toggleCarrinho() {
+  let box = document.getElementById("carrinhoBox");
+
+  if (box.style.display === "none") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
+
+function animarCarrinho(botaoClicado) {
+  const carrinho = document.getElementById("btnCarrinho");
+
+  const rectInicio = botaoClicado.getBoundingClientRect();
+  const rectFim = carrinho.getBoundingClientRect();
+
+  const bolinha = document.createElement("div");
+  bolinha.classList.add("flying-item");
+
+  // posição inicial
+  bolinha.style.left = rectInicio.left + rectInicio.width / 2 + "px";
+  bolinha.style.top = rectInicio.top + rectInicio.height / 2 + "px";
+
+  document.body.appendChild(bolinha);
+
+  // força render
+  setTimeout(() => {
+    bolinha.style.left = rectFim.left + "px";
+    bolinha.style.top = rectFim.top + "px";
+    bolinha.style.transform = "scale(0.3)";
+    bolinha.style.opacity = "0.5";
+  }, 10);
+
+  // remove depois
+  setTimeout(() => {
+    bolinha.remove();
+  }, 700);
+}
+
+function clicarAdicionar(botao, nome, precoP, precoG, codP, codG) {
+  animarCarrinho(botao);
+
+  setTimeout(() => {
+    abrirOpcoes(nome, precoP, precoG, codP, codG);
+  }, 400);
+}
+
+carregarCardapio();
+</script>
+
+<!-- ===================== INFORMAÇÕES LEGAIS ===================== -->
+
+<section style="
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:20px;
+  font-size:12.5px;
+  line-height:1.4;
+  color:#333;
+  text-align:center;
+">
+
+  <h2 style="font-size:15px;margin-bottom:10px;">Informações da Empresa</h2>
+
+  <p><strong>Nome:</strong> 62.662.899 RAFAEL SILVA GUIMARÃES</p>
+  <p><strong>CNPJ:</strong> 62.662.899/0001-65</p>
+
+  <p><strong>Endereço:</strong> Parcifal Barroso 174 - Centro</p>
+  <p><strong>CEP:</strong> 62560-000</p>
+  <p><strong>Cidade:</strong> Marco - CE</p>
+
+  <p><strong>Email:</strong> cumbuca.marco@gmail.com</p>
+</section>
+
+<section style="
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:12.5px;
+  line-height:1.4;
+  color:#333;
+  text-align:center;
+">
+
+  <h2 style="font-size:15px;margin-bottom:10px;">Horário de Funcionamento</h2>
+
+  <p>🕒 Segunda a Sexta: 08h às 21h</p>
+  <p><strong>Pagamento:</strong> Pix, Cartão e Dinheiro</p>
+  <p><strong>Entrega:</strong> Taxa calculada por distância</p>
+</section>
+
+<section style="
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:12.5px;
+  line-height:1.4;
+  color:#333;
+  text-align:center;
+">
+
+  <h2 style="font-size:15px;margin-bottom:10px;">Termos de Uso</h2>
+
+  <p>
+    O serviço de delivery está sujeito à disponibilidade dos produtos e área de entrega.
+    O cliente é responsável por fornecer informações corretas no pedido.
+  </p>
+</section>
+
+<section style="
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:12.5px;
+  line-height:1.4;
+  color:#333;
+  text-align:center;
+">
+
+  <h2 style="font-size:15px;margin-bottom:10px;">Política de Privacidade</h2>
+
+  <p>
+    Os dados informados são usados apenas para atendimento e entrega via WhatsApp.
+    Não compartilhamos informações com terceiros.
+  </p>
+</section>
+
+<button id="btnCarrinho" onclick="toggleCarrinho()">
+  <span style="font-size: 24px;">🛍️</span> 
+  <span id="qtdCarrinho" style="background: white; color: #ff6600; padding: 2px 8px; border-radius: 12px; font-size: 16px;">0</span>
+</button>
+
+<div id="carrinhoBox">
+  <h3>Seu Pedido</h3>
+  <div id="carrinho"></div>
+
+  <div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">
+    <input type="text" id="clienteNome" placeholder="Seu Nome" style="width:100%; padding:8px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc;">
+    <input type="text" id="clienteTel" placeholder="WhatsApp (85) 99242-5223" style="width:100%; padding:8px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc;">
+    <textarea id="clienteEnd" placeholder="Endereço de Entrega" style="width:100%; padding:8px; margin-bottom:5px; border-radius:5px; border:1px solid #ccc;"></textarea>
+    
+    <select id="clientePag" style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+      <option value="">Forma de Pagamento</option>
+      <option value="1">PIX</option>
+      <option value="2">Cartão (Entrega)</option>
+      <option value="3">Dinheiro</option>
+    </select>
+  </div>
+
+  <button onclick="finalizarPedido()" style="background:#d62828;">
+    Finalizar Pedido
+  </button>
+</div>
+<!-- ===================== FIM ===================== -->
+
+</body>
+</html>
