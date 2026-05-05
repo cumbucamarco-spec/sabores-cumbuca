@@ -26,16 +26,19 @@ git push origin main
 echo SITE ATUALIZADO!
 
 echo =========================
-echo INICIANDO SISTEMA...
+echo INICIANDO BUSCADOR...
 echo =========================
 
-:: 🔥 MOSTRA O BOT (janela normal)
-call "..\BOT-WHATSAPP\Ligar_Marinete.bat"
-
-:: 🔥 BUSCADOR EM SEGUNDO PLANO (invisível)
+:: 🔥 EVITA ABRIR VARIOS BUSCADORES
+tasklist | find "python.exe" >nul
+if %errorlevel%==0 (
+echo Buscador ja esta rodando
+) else (
 start "" /min cmd /c python baixar_pedidos.py
+)
 
 echo =========================
 
+:: 🔥 IMPORTANTE: NÃO CHAMA A MARINETE (evita loop)
 
 if "%1"=="" pause
