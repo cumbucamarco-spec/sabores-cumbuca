@@ -29,10 +29,11 @@ echo =========================
 echo INICIANDO SISTEMAS...
 echo =========================
 
-:: 🔥 AJUSTA AQUI COM SEUS ARQUIVOS REAIS
+:: 🔥 LIGA O BOT WHATSAPP
+start "" "..\BOT-WHATSAPP\Ligar_Marinete.bat"
 
-start "" "..\ligar_marmita.bat"
-start "" "..\buscar_pedidos.bat"
+:: 🔥 INICIA BUSCADOR DE PEDIDOS (PYTHON)
+start "" python baixar_pedidos.py
 
 echo =========================
 
