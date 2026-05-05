@@ -1,11 +1,11 @@
 [
     {
-        "nome": "FECHADO NO MOMENTO ",
-        "desc": "",
-        "cat": "Peixe",
-        "p_p": 12.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1773058689 - AGUARDANDO OPÇÕES",
-        "codigo_estoque_g": ""
+        "nome": "Strogonoff de Frango",
+        "desc": "Arroz, Batata Palha e Salada",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     }
 ]
