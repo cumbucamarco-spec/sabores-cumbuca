@@ -29,13 +29,15 @@ echo =========================
 echo INICIANDO BUSCADOR...
 echo =========================
 
-:: 🔥 EVITA ABRIR VARIOS BUSCADORES
-tasklist | find "python.exe" >nul
+:: 🔥 EVITA ABRIR VARIOS BUSCADORES (verifica pelo nome do script)
+tasklist /v | find "baixar_pedidos.py" >nul
+
 if %errorlevel%==0 (
 echo Buscador ja esta rodando
 ) else (
-start "" /min cmd /c python baixar_pedidos.py
+start "" /b python "%~dp0baixar_pedidos.py"
 )
+
 
 echo =========================
 
