@@ -349,30 +349,15 @@ button {
   </div>
 </section>
 
-<!-- CARDÁPIO PRIMEIRO -->
-<h2>Cardápio do Dia</h2>
-<div id="cardapio">Carregando...</div>
-
-
-<!-- GALERIA DEPOIS -->
+<!-- GALERIA ATUALIZADA -->
 <section>
   <h2 style="text-align: center;">Sugestões da Nossa Cozinha</h2>
-
-  <p style="
-    font-size:13px;
-    color:#666;
-    margin-top:-10px;
-    margin-bottom:15px;
-    text-align:center;
-  ">
+  <p style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 15px; text-align: center;">
     Consulte a disponibilidade do dia e faça seu pedido pelo nosso atendimento.
   </p>
 
   <div class="galeria-container">
-    
-    <button class="seta esquerda" onclick="scrollGaleria(-1)">
-      ◀
-    </button>
+    <button class="seta esquerda" onclick="scrollGaleria(-1)">◀</button>
 
     <div class="galeria" id="galeria">
       <img src="prato1.png" alt="Sugestão 1" onclick="abrirModal(this)">
@@ -388,12 +373,12 @@ button {
       <img src="prato12.png" alt="Sugestão 11" onclick="abrirModal(this)">
     </div>
 
-    <button class="seta direita" onclick="scrollGaleria(1)">
-      ▶
-    </button>
-
+    <button class="seta direita" onclick="scrollGaleria(1)">▶</button>
   </div>
 </section>
+
+<h2>Cardápio do Dia</h2>
+<div id="cardapio">Carregando...</div>
 
 
 <section>
@@ -413,28 +398,9 @@ button {
   ">
     🗺️ Ver localização no Google Maps
   </a>
-  
-  <a href="https://wa.me/5585992425223?text=Olá!%20😊%20Gostaria%20de%20avaliar%20o%20atendimento%20do%20Sabores%20Cumbuca." target="_blank" style="
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    background:#25D366;
-    color:white;
-    padding:12px;
-    border-radius:10px;
-    text-decoration:none;
-    margin-top:10px;
-    font-weight:bold;
-  ">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20">
-    Avalie nosso atendimento
-  </a>
 </section>
 
 </div>
-
-
 
 <!-- MODAL -->
 <div class="modal" id="modal" onclick="fecharModal()">
@@ -468,49 +434,6 @@ function fecharModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-function gerarPossiveisNomes(nome) {
-  nome = nome.toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9 ]/g, "");
-
-  const palavras = nome.split(" ");
-  const nomes = [];
-
-  // Monta combinações do maior para o menor
-  for (let i = palavras.length; i > 0; i--) {
-    const combinado = palavras.slice(0, i).join("");
-    nomes.push(combinado);
-  }
-
-  return nomes;
-}
-
-function carregarImagemInteligente(imgElement, nome) {
-  const nomes = gerarPossiveisNomes(nome);
-  let index = 0;
-
-  function tentar() {
-    if (index >= nomes.length) {
-      imgElement.src = "imagens/padrao.png";
-      return;
-    }
-
-    const caminho = `imagens/${nomes[index]}.png`;
-
-    const img = new Image();
-    img.onload = () => {
-      imgElement.src = caminho;
-    };
-    img.onerror = () => {
-      index++;
-      tentar();
-    };
-    img.src = caminho;
-  }
-
-  tentar();
-}
-
 // CARDÁPIO
 function carregarCardapio() {
   fetch('cardapio_html.json?t=' + new Date().getTime())
@@ -520,49 +443,30 @@ function carregarCardapio() {
 
       data.forEach(item => {
         html += `
-          <div class="item" style="display:flex; gap:10px; align-items:center;">
-      
-            <img id="img-${item.nome.replace(/\s/g, '')}"
-                 style="width:80px; height:80px; object-fit:cover; border-radius:10px;">
-      
-            <div style="flex:1;">
-              <strong>${item.nome}</strong><br>
-              <small>${item.desc}</small><br>
-      
-              <div class="preco">
-                ${item.p_p > 0 ? `P: R$ ${item.p_p}` : ""}
-                ${item.p_g > 0 ? ` | G: R$ ${item.p_g}` : ""}
-              </div>
-      
-              <button onclick="clicarAdicionar(
-                this,
-                '${item.nome}',
-                ${item.p_p || 0},
-                ${item.p_g || 0},
-                '${item.codigo_estoque_p}',
-                '${item.codigo_estoque_g}'
-              )">
-                Adicionar ao Carrinho
-              </button>
+          <div class="item">
+            <strong>${item.nome}</strong><br>
+            <small>${item.desc}</small><br>
+
+            <div class="preco">
+              ${item.p_p > 0 ? `P: R$ ${item.p_p}` : ""}
+              ${item.p_g > 0 ? ` | G: R$ ${item.p_g}` : ""}
             </div>
-      
+
+            <button onclick="clicarAdicionar(
+              this,
+              '${item.nome}',
+              ${item.p_p || 0},
+              ${item.p_g || 0},
+              '${item.codigo_estoque_p}',
+              '${item.codigo_estoque_g}'
+            )">
+              Adicionar ao Carrinho
+            </button>
           </div>
         `;
       });
 
       document.getElementById("cardapio").innerHTML = html;
-
-      // ✅ AQUI DENTRO (CORRETO)
-      setTimeout(() => {
-        data.forEach(item => {
-          const id = `img-${item.nome.replace(/\s/g, '')}`;
-          const img = document.getElementById(id);
-
-          if (img) {
-            carregarImagemInteligente(img, item.nome);
-          }
-        });
-      }, 100);
     })
     .catch(() => {
       document.getElementById("cardapio").innerHTML = "Erro ao carregar";
