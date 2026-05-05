@@ -1,10 +1,17 @@
+@echo off
 cd /d %~dp0
 
 echo =========================
 echo COPIANDO CARDAPIO...
 echo =========================
 
-copy ..\cardapio_hoje.json cardapio_html.json /Y
+copy /Y "..\cardapio_hoje.json" "cardapio_html.json"
+
+if not exist "cardapio_html.json" (
+echo ERRO: nao foi possivel copiar o arquivo!
+pause
+exit /b
+)
 
 echo =========================
 echo ENVIANDO PARA O GITHUB...
@@ -12,16 +19,19 @@ echo =========================
 
 git add .
 
-git diff --cached --quiet
+REM força commit mesmo se o Git nao detectar mudanca
+git commit -m "Atualizacao do site %date% %time%" 2>nul
+
+REM garante que esta na branch correta
+git branch | find "main" >nul
 IF %ERRORLEVEL%==0 (
-    echo Nenhuma alteracao.
+git push origin main
 ) ELSE (
-    git commit -m "Atualizacao do site"
-    git push
-    echo SITE ATUALIZADO!
+git push origin master
 )
 
 echo =========================
+echo SITE ATUALIZADO!
+echo =========================
 
-:: Só pausa se NÃO foi chamado por outro .bat
 if "%1"=="" pause
