@@ -1,47 +1,11 @@
 [
     {
-        "nome": "Camarão Alho e Oleo",
-        "desc": "Arroz, Farofa, Limão e Salada",
-        "cat": "Peixe",
-        "p_p": 18.0,
+        "nome": "Sopa de Carne",
+        "desc": "Pote 500ml",
+        "cat": "",
+        "p_p": 10.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_p": "P1770065318 - SOPA",
         "codigo_estoque_g": ""
-    },
-    {
-        "nome": "Fígado Acebolado",
-        "desc": "Arroz, Feijão, Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Frango Frito",
-        "desc": "Arroz, Feijão , Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Peixe Frito",
-        "desc": "Baião, Batata doce, Farofa  e Salada",
-        "cat": "Peixe",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "frango ao molho",
-        "desc": "arroz feijao macarao salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     }
 ]
