@@ -16,14 +16,5 @@
         "p_g": 17.0,
         "codigo_estoque_p": "P1770025146 - ALMOÇO P",
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Strogonoff de Camarão",
-        "desc": "Arroz, Batata Palha, Salada",
-        "cat": "Peixe",
-        "p_p": 18.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
-        "codigo_estoque_g": ""
     }
 ]
