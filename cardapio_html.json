@@ -1,21 +1,21 @@
 [
     {
-        "nome": "Vatapá de Frango",
-        "desc": "Arroz, Calabresa Acebolada e Farofa",
+        "nome": "Porco na Farofa",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
         "cat": "Carne",
         "p_p": 14.0,
         "p_g": 17.0,
-        "codigo_estoque_p": "P1776976895 - Vatapá de Frango",
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Camarão Alho e Oleo",
-        "desc": "Arroz, Farofa, Limão e Salada",
-        "cat": "Peixe",
-        "p_p": 18.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
-        "codigo_estoque_g": ""
+        "nome": "Frango com Legumes",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
         "nome": "Calabresa Acebolada",
@@ -25,5 +25,14 @@
         "p_g": 17.0,
         "codigo_estoque_p": "P1770025146 - ALMOÇO P",
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Strogonoff de Camarão",
+        "desc": "Arroz, Batata Palha, Salada",
+        "cat": "Peixe",
+        "p_p": 18.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
+        "codigo_estoque_g": ""
     }
 ]
