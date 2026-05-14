@@ -1,14 +1,5 @@
 [
     {
-        "nome": "Strogonoff de Camarão",
-        "desc": "Arroz, Batata Palha, Purê de Batata",
-        "cat": "Peixe",
-        "p_p": 18.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
-        "codigo_estoque_g": ""
-    },
-    {
         "nome": "Galinha ao molho",
         "desc": "Arroz, Feijão, Macarrão Purê de Batata",
         "cat": "Carne",
