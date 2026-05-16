@@ -1,11 +1,92 @@
 [
     {
-        "nome": "Strogonoff de Carne",
-        "desc": "Arroz, Batata palha, Salada",
+        "nome": "Porco ao Molho Barbecue",
+        "desc": "Arroz, Feijão, Macarrão e Purê de Batata",
         "cat": "Carne",
         "p_p": 14.0,
         "p_g": 17.0,
         "codigo_estoque_p": "P1770025146 - ALMOÇO P",
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Strogonoff de Frango",
+        "desc": "Arroz, Batata Palha e Salada",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Mugunzá",
+        "desc": "Mugunzá doce, Pote de 500ml",
+        "cat": "Porções",
+        "p_p": 10.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770150999 - MUCUNZA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Calabresa Acebolada",
+        "desc": "Arroz, Feijão, Macarrão, Farofa e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Filé trinchado",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Coxa de Frango com Queijo",
+        "desc": "Arroz, Feijão, Macarrão e Purê de batata",
+        "cat": "Carne",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Strogonoff de Camarão",
+        "desc": "Arroz, Batata Palha, Purê de Batata",
+        "cat": "Peixe",
+        "p_p": 18.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Almondegas ao Molho",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "LASANHA DE CAMARÃO",
+        "desc": "Massa leve intercaladas com camarões e queijo.",
+        "cat": "Peixe",
+        "p_p": 18.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1774959693 - LASANHA DE CAMARÃO",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Peixada ao Molho de Camarão",
+        "desc": "Arroz e Legumes ",
+        "cat": "Peixe",
+        "p_p": 15.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1774437948 - Peixada ao Molho de Camarão",
+        "codigo_estoque_g": ""
     }
 ]
