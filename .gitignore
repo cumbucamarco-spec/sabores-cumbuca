@@ -1,0 +1,11 @@
+# Arquivos executáveis
+*.exe
+
+# Dependências Node
+node_modules/
+
+# Cache Python
+__pycache__/
+
+# 🔐 Firebase / Google service account (SOMENTE O ARQUIVO PROBLEMÁTICO)
+sabores-cumbuca-firebase-adminsdk-fbsvc-ada6773814.json
