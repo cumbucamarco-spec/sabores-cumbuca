@@ -1,11 +1,48 @@
-# Arquivos executáveis
+# =========================
+# EXECUTÁVEIS
+# =========================
 *.exe
 
-# Dependências Node
+# =========================
+# NODE / DEPENDÊNCIAS
+# =========================
 node_modules/
+npm-debug.log*
 
-# Cache Python
+# =========================
+# PYTHON
+# =========================
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# 🔐 Firebase / Google service account (SOMENTE O ARQUIVO PROBLEMÁTICO)
+# =========================
+# AMBIENTE VIRTUAL
+# =========================
+venv/
+.env/
+
+# =========================
+# FIREBASE / GOOGLE KEYS
+# =========================
+*-firebase-adminsdk-*.json
+firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# ARQUIVO ESPECÍFICO ANTIGO
 sabores-cumbuca-firebase-adminsdk-fbsvc-ada6773814.json
+
+# =========================
+# ARQUIVOS TEMPORÁRIOS
+# =========================
+*.log
+*.tmp
+Thumbs.db
+.DS_Store
+
+# =========================
+# BACKUPS
+# =========================
+backup/
+*.bak
