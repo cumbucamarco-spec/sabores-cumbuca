@@ -18,7 +18,7 @@ os.makedirs(PASTA_SAIDA, exist_ok=True)
 # =========================
 
 cred = credentials.Certificate(
-    os.path.join(BASE_DIR, "sabores-cumbuca-firebase-adminsdk-fbsvc-ada6773814.json")
+    os.path.join(BASE_DIR, "firebase-key.json")
 )
 
 firebase_admin.initialize_app(cred)
