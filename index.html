@@ -1059,18 +1059,22 @@ function finalizarPedido() {
   let total = 0; carrinho.forEach(item => { total += item.preco * item.qtd; });
 
   let pagamentoTexto = escolha == "1" ? "PIX" : escolha == "2" ? "Cartão" : "Dinheiro";
+  
+  // Criamos o objeto já contendo o telefone isolado de forma explícita
   let pedido = {
-    cliente: nome.toUpperCase(), endereco: endereco, pagamento: "Pendente",
+    cliente: nome.toUpperCase(), 
+    telefone: telefone.trim(), // <--- NOVO CAMPO ISOLADO
+    endereco: endereco, 
+    pagamento: "Pendente",
     obs: `PEDIDO SITE\nCONTATO: ${telefone}\n\nITENS:\n${carrinho.map(i => `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`).join("\n")}\n\nPAGTO: ${pagamentoTexto}`,
     itens: carrinho.map(i => ({ nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`, qtd: i.qtd }))
   };
 
   const controller = new AbortController();
-  
-  const timeout = setTimeout(() => {
-    controller.abort();
-  }, 30000); // 30 segundos
-  //endereço quando muda no servidor ///////////////////////////////////////////////////////////////////
+  const timeout = setTimeout(() => { controller.abort(); }, 30000); // 30 segundos
+
+  // Se você for usar o servidor_pedidos.py local no futuro, a URL mudará aqui.
+  // Mantendo a estrutura do seu Firestore atualizada com o novo campo:
   fetch("https://firestore.googleapis.com/v1/projects/sabores-cumbuca/databases/(default)/documents/pedidos", {
     method: "POST",
     headers: {
@@ -1079,6 +1083,7 @@ function finalizarPedido() {
     body: JSON.stringify({
       fields: {
         cliente: { stringValue: pedido.cliente },
+        telefone: { stringValue: pedido.telefone }, // <--- SALVA O TELEFONE SEPARADO NO BANCO
         pagamento: { stringValue: pedido.pagamento },
         obs: { stringValue: pedido.obs },
         itens: { stringValue: JSON.stringify(pedido.itens) },
@@ -1088,6 +1093,7 @@ function finalizarPedido() {
     }),
     signal: controller.signal
   })
+
   .then(res => {
   
       clearTimeout(timeout);
