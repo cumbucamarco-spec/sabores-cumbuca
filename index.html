@@ -1062,12 +1062,29 @@ function finalizarPedido() {
   
   // Criamos o objeto já contendo o telefone isolado de forma explícita
   let pedido = {
-    cliente: nome.toUpperCase(), 
-    telefone: telefone.trim(), // <--- NOVO CAMPO ISOLADO
-    endereco: endereco, 
-    pagamento: "Pendente",
-    obs: `PEDIDO SITE\nCONTATO: ${telefone}\n\nITENS:\n${carrinho.map(i => `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`).join("\n")}\n\nPAGTO: ${pagamentoTexto}`,
-    itens: carrinho.map(i => ({ nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`, qtd: i.qtd }))
+      cliente: nome.toUpperCase(),
+  
+      telefone: telefone.trim(),
+      endereco: endereco.trim(),
+  
+      pagamento: "Pendente",
+  
+      obs: `PEDIDO SITE
+  
+  CLIENTE: ${nome.toUpperCase()}
+  TELEFONE: ${telefone}
+  
+  ITENS:
+  ${carrinho.map(i =>
+  `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
+  ).join("\n")}
+  
+  PAGTO: ${pagamentoTexto}`,
+  
+      itens: carrinho.map(i => ({
+          nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
+          qtd: i.qtd
+      }))
   };
 
   const controller = new AbortController();
