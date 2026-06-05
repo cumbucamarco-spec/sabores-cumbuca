@@ -1,47 +1,11 @@
 [
-    {
-        "nome": "Aguardando atualizações",
-        "desc": "Estamamos fechados , aguarde atualização ",
-        "cat": "",
-        "p_p": 0.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1773058689 - AGUARDANDO OPÇÕES",
-        "codigo_estoque_g": ""
-    },
-    {
-        "nome": "Frango Assado",
-        "desc": "Baião, Farofa e Salada",
-        "cat": "Carne",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Porco na Farofa",
-        "desc": "Arroz, Feijão, Macarrão e Salada",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Sanduiche Natural",
-        "desc": "Pão Integral com Patê de Frango Exclusivo",
-        "cat": "Carne",
-        "p_p": 8.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770227153 - SANDUICHE NATURAL",
-        "codigo_estoque_g": ""
-    },
-    {
-        "nome": "Macarrão com Frango Cremoso",
-        "desc": "Macarrão Espaguete, Frango Cremoso, Queijo e Batata Palha",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": ""
-    }
+  {
+    "nome": "🍲 Estamos preparando uma nova remessa",
+    "desc": "Nossos pratos do momento já saíram rapidinho 😋<br><br>Estamos preparando novas refeições fresquinhas para você, em breve atualizaremos o cardápio<br><br>📲 <a href='https://wa.me/5585992425223?text=Olá,%20quero%20saber%20quando%20sairá%20a%20nova%20remessa' target='_blank'>Falar no WhatsApp</a>",
+    "cat": "",
+    "p_p": 0.0,
+    "p_g": 0.0,
+    "codigo_estoque_p": "",
+    "codigo_estoque_g": ""
+  }
 ]
