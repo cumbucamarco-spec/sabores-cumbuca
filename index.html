@@ -6,6 +6,8 @@
 <title>Sabores Cumbuca</title>
 <meta name="google-site-verification" content="SOH2rkwLtcM_fMDCb55NQz9cxdO-IqCykm5iokL3OH4" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18085188065"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -16,6 +18,9 @@
   let pedidoAtual = JSON.parse(localStorage.getItem("pedidoAtual")) || null;
   let pedidoEnviando = false;
   let pedidoEnvioIdAtual = null;
+  let codigoOrigemWebEnvioAtual = null;
+  let cancelarMonitoramentoStatusEntrega = null;
+  let inicializacaoFirestoreStatus = null;
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1121,10 +1126,26 @@ function gerarIdUnicoPedido(telefone) {
   return pedidoEnvioIdAtual;
 }
 
+function gerarCodigoOrigemWeb(criadoEm) {
+  if (codigoOrigemWebEnvioAtual) return codigoOrigemWebEnvioAtual;
+
+  const data = new Date(criadoEm);
+  const dataCodigo = [
+    data.getFullYear(),
+    String(data.getMonth() + 1).padStart(2, "0"),
+    String(data.getDate()).padStart(2, "0")
+  ].join("");
+  const aleatorio = Math.random().toString(36).slice(2, 7).toUpperCase().padEnd(5, "0");
+
+  codigoOrigemWebEnvioAtual = `WEB-${dataCodigo}-${aleatorio}`;
+  return codigoOrigemWebEnvioAtual;
+}
+
 function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
   return {
     fields: {
       id_unico_pedido: { stringValue: idUnicoPedido },
+      codigo_origem_web: { stringValue: pedido.codigo_origem_web },
       cliente: { stringValue: pedido.cliente },
       telefone: { stringValue: pedido.telefone },
       pagamento: { stringValue: pedido.pagamento },
@@ -1185,11 +1206,13 @@ async function finalizarPedido() {
   let total = 0; itensPedido.forEach(item => { total += item.preco * item.qtd; });
   const criadoEm = Date.now();
   const idUnicoPedido = gerarIdUnicoPedido(telefone);
+  const codigoOrigemWeb = gerarCodigoOrigemWeb(criadoEm);
 
   let pagamentoTexto = escolha == "1" ? "PIX" : escolha == "2" ? "Cartão" : "Dinheiro";
   
   // Criamos o objeto já contendo o telefone isolado de forma explícita
   let pedido = {
+      codigo_origem_web: codigoOrigemWeb,
       cliente: nome.toUpperCase(),
   
       telefone: telefone.trim(),
@@ -1201,6 +1224,7 @@ async function finalizarPedido() {
 
   CLIENTE: ${nome.toUpperCase()}
   TELEFONE: ${telefone}
+  CODIGO_ORIGEM_WEB: ${codigoOrigemWeb}
 
   ITENS:
   ${itensPedido.map(i =>
@@ -1234,11 +1258,14 @@ async function finalizarPedido() {
 
     let dadosPedido = {
       id_unico_pedido: idUnicoPedido,
+      codigo_origem_web: codigoOrigemWeb,
       cliente: nome,
       telefone: telefone,
       endereco: endereco,
       pagamento: pagamentoTexto,
       itens: itensPedido,
+      subtotal: total,
+      total: total,
       status: "preparando",
       data: criadoEm,
       avaliado: false
@@ -1246,6 +1273,7 @@ async function finalizarPedido() {
 
     salvarPedidoLocal(dadosPedido);
     pedidoEnvioIdAtual = null;
+    codigoOrigemWebEnvioAtual = null;
 
     const btn =
     document.getElementById(
@@ -1274,17 +1302,21 @@ async function finalizarPedido() {
       if (await pedidoExisteNoFirestore(idUnicoPedido)) {
         let dadosPedido = {
           id_unico_pedido: idUnicoPedido,
+          codigo_origem_web: codigoOrigemWeb,
           cliente: nome,
           telefone: telefone,
           endereco: endereco,
           pagamento: pagamentoTexto,
           itens: itensPedido,
+          subtotal: total,
+          total: total,
           status: "preparando",
           data: criadoEm,
           avaliado: false
         };
         salvarPedidoLocal(dadosPedido);
         pedidoEnvioIdAtual = null;
+        codigoOrigemWebEnvioAtual = null;
         carrinho=[];
         atualizarCarrinho();
         dispararConfetesPedido();
@@ -1301,9 +1333,268 @@ async function finalizarPedido() {
   }
 }
 
+function numeroSeguro(valor) {
+  const numero = Number(valor);
+  return Number.isFinite(numero) ? numero : 0;
+}
+
+function calcularSubtotalItens(itens) {
+  return (Array.isArray(itens) ? itens : []).reduce((total, item) => {
+    return total + (numeroSeguro(item.preco) * numeroSeguro(item.qtd));
+  }, 0);
+}
+
+function obterResumoFinanceiroPedido(pedido) {
+  const subtotalCalculado = calcularSubtotalItens(pedido && pedido.itens);
+  const subtotalSalvo = Number(pedido && pedido.subtotal);
+  const taxaSalva = Number(pedido && (pedido.taxa_entrega ?? pedido.taxaEntrega));
+  const totalSalvo = Number(pedido && pedido.total);
+
+  const subtotal = Number.isFinite(subtotalSalvo) ? subtotalSalvo : subtotalCalculado;
+  const taxaEntrega = Number.isFinite(taxaSalva) ? taxaSalva : 0;
+  const total = Number.isFinite(totalSalvo) ? totalSalvo : subtotal + taxaEntrega;
+
+  return { subtotal, taxaEntrega, total };
+}
+
+function formatarMoeda(valor) {
+  return numeroSeguro(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
+function numeroPedidoConfirmado(pedido) {
+  return String((pedido && (pedido.id_unico_pedido || pedido.id)) || "não informado");
+}
+
+function montarMensagemWhatsAppPedido(pedido) {
+  const resumo = obterResumoFinanceiroPedido(pedido);
+  const linhasItens = (Array.isArray(pedido.itens) ? pedido.itens : []).map(item => {
+    const tamanho = item.tamanho ? ` (${item.tamanho})` : "";
+    return `${numeroSeguro(item.qtd)}x ${item.nome}${tamanho}`;
+  });
+
+  const linhas = [
+    "Olá, acabei de realizar um pedido.",
+    "",
+    `Pedido: #${numeroPedidoConfirmado(pedido)}`,
+    "",
+    ...linhasItens,
+    "",
+    `Subtotal dos itens: ${formatarMoeda(resumo.subtotal)}`
+  ];
+
+  if (resumo.taxaEntrega > 0) {
+    linhas.push(`Taxa de entrega: ${formatarMoeda(resumo.taxaEntrega)}`);
+  }
+
+  linhas.push(
+    `Valor total: ${formatarMoeda(resumo.total)}`,
+    "",
+    `Nome: ${pedido.cliente || ""}`,
+    `Endereço: ${pedido.endereco || ""}`
+  );
+
+  return linhas.join("\n");
+}
+
+function gerarUrlWhatsAppPedido(pedido) {
+  return `https://wa.me/5585992425223?text=${encodeURIComponent(montarMensagemWhatsAppPedido(pedido))}`;
+}
+
+function campoEmv(id, valor) {
+  const texto = String(valor);
+  return `${id}${String(texto.length).padStart(2, "0")}${texto}`;
+}
+
+function crc16Pix(texto) {
+  let crc = 0xFFFF;
+  const bytes = new TextEncoder().encode(texto);
+
+  bytes.forEach(byte => {
+    crc ^= byte << 8;
+    for (let bit = 0; bit < 8; bit++) {
+      crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+      crc &= 0xFFFF;
+    }
+  });
+
+  return crc.toString(16).toUpperCase().padStart(4, "0");
+}
+
+function textoPixSeguro(valor, limite) {
+  return String(valor || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^A-Za-z0-9 ]/g, "")
+    .trim()
+    .toUpperCase()
+    .slice(0, limite);
+}
+
+function gerarPixCopiaECola(chavePix, valor, pedido) {
+  const contaPix = campoEmv("00", "br.gov.bcb.pix") + campoEmv("01", chavePix);
+  const txidBruto = numeroPedidoConfirmado(pedido).replace(/[^A-Za-z0-9]/g, "");
+  const txid = txidBruto.slice(0, 25) || "***";
+  const valorFormatado = numeroSeguro(valor).toFixed(2);
+
+  const payloadSemCrc = [
+    campoEmv("00", "01"),
+    campoEmv("26", contaPix),
+    campoEmv("52", "0000"),
+    campoEmv("53", "986"),
+    campoEmv("54", valorFormatado),
+    campoEmv("58", "BR"),
+    campoEmv("59", textoPixSeguro("Cumbuca", 25)),
+    campoEmv("60", textoPixSeguro("Fortaleza", 15)),
+    campoEmv("62", campoEmv("05", txid)),
+    "6304"
+  ].join("");
+
+  return payloadSemCrc + crc16Pix(payloadSemCrc);
+}
+
+async function copiarTexto(texto) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(texto);
+    return;
+  }
+
+  const campo = document.createElement("textarea");
+  campo.value = texto;
+  campo.setAttribute("readonly", "");
+  campo.style.position = "fixed";
+  campo.style.opacity = "0";
+  document.body.appendChild(campo);
+  campo.select();
+  const copiado = document.execCommand("copy");
+  campo.remove();
+  if (!copiado) throw new Error("Não foi possível copiar");
+}
+
+function encerrarMonitoramentoStatusEntrega() {
+  if (typeof cancelarMonitoramentoStatusEntrega === "function") {
+    cancelarMonitoramentoStatusEntrega();
+  }
+  cancelarMonitoramentoStatusEntrega = null;
+}
+
+function dadosVisuaisStatusEntrega(statusEntrega) {
+  const status = String(statusEntrega || "").trim().toLowerCase();
+
+  if (status === "pendente") {
+    return { texto: "Preparando", icone: "👨‍🍳", classe: "preparando" };
+  }
+  if (status === "em rota") {
+    return { texto: "Saiu para Entrega", icone: "🛵", classe: "em-rota" };
+  }
+  if (status === "entregue") {
+    return { texto: "Entregue", icone: "✅", classe: "entregue" };
+  }
+
+  return { texto: "Pedido Recebido", icone: "📋", classe: "recebido" };
+}
+
+function atualizarStatusConfirmacaoCliente(statusEntrega, opcoes = {}) {
+  const badge = document.getElementById("statusPedidoCliente");
+  if (!badge) return;
+
+  const statusConhecido = ["pendente", "em rota", "entregue"].includes(
+    String(statusEntrega || "").trim().toLowerCase()
+  );
+
+  if (!statusConhecido && opcoes.manterUltimo && badge.dataset.statusConhecido === "true") {
+    return;
+  }
+
+  const visual = dadosVisuaisStatusEntrega(statusEntrega);
+  badge.textContent = `${visual.icone} ${visual.texto}`;
+  badge.dataset.status = visual.classe;
+  badge.dataset.statusConhecido = statusConhecido ? "true" : "false";
+
+  if (statusConhecido && pedidoAtual) {
+    pedidoAtual.status_entrega = statusEntrega;
+    salvarPedidoLocal(pedidoAtual);
+  }
+}
+
+async function obterFirestoreStatusEntrega() {
+  if (inicializacaoFirestoreStatus) return inicializacaoFirestoreStatus;
+
+  inicializacaoFirestoreStatus = (async () => {
+    if (!window.firebase || typeof window.firebase.initializeApp !== "function") {
+      throw new Error("SDK do Firebase indisponível");
+    }
+
+    if (!window.firebase.apps.length) {
+      let configuracaoFirebase;
+
+      try {
+        const resposta = await fetch("/__/firebase/init.json", { cache: "force-cache" });
+        if (!resposta.ok) throw new Error(`Configuração Firebase ${resposta.status}`);
+        configuracaoFirebase = await resposta.json();
+      } catch (erro) {
+        configuracaoFirebase = { projectId: "sabores-cumbuca" };
+      }
+
+      window.firebase.initializeApp(configuracaoFirebase);
+    }
+
+    return window.firebase.firestore();
+  })().catch((erro) => {
+    inicializacaoFirestoreStatus = null;
+    throw erro;
+  });
+
+  return inicializacaoFirestoreStatus;
+}
+
+async function iniciarMonitoramentoStatusEntrega(pedidoConfirmado) {
+  encerrarMonitoramentoStatusEntrega();
+  atualizarStatusConfirmacaoCliente(
+    pedidoConfirmado && pedidoConfirmado.status_entrega,
+    { manterUltimo: false }
+  );
+
+  const codigoOrigemWeb = String(
+    pedidoConfirmado && pedidoConfirmado.codigo_origem_web || ""
+  ).trim();
+
+  if (!codigoOrigemWeb) return;
+
+  try {
+    const firestore = await obterFirestoreStatusEntrega();
+
+    if (!pedidoAtual || pedidoAtual.codigo_origem_web !== codigoOrigemWeb) return;
+
+    cancelarMonitoramentoStatusEntrega = firestore
+      .collection("cumbuca_entregas_pedidos")
+      .where("codigo_origem_web", "==", codigoOrigemWeb)
+      .limit(1)
+      .onSnapshot((snapshot) => {
+        if (snapshot.empty) {
+          atualizarStatusConfirmacaoCliente("", { manterUltimo: true });
+          return;
+        }
+
+        const pedidoEntrega = snapshot.docs[0].data() || {};
+        atualizarStatusConfirmacaoCliente(pedidoEntrega.status, { manterUltimo: true });
+      }, (erro) => {
+        console.warn("Não foi possível acompanhar o status da entrega:", erro.message || erro);
+        atualizarStatusConfirmacaoCliente("", { manterUltimo: true });
+      });
+  } catch (erro) {
+    console.warn("Monitoramento de status indisponível:", erro.message || erro);
+    atualizarStatusConfirmacaoCliente("", { manterUltimo: true });
+  }
+}
+
 function mostrarStatusPedido() {
 
   if (!pedidoAtual) return;
+
+  const resumoFinanceiro = obterResumoFinanceiroPedido(pedidoAtual);
 
   document.getElementById("carrinhoBox").innerHTML = `
 
@@ -1317,8 +1608,8 @@ function mostrarStatusPedido() {
         Obrigado ${pedidoAtual.cliente}. Seu pedido foi enviado e já está disponível para a cozinha.
       </p>
 
-      <div class="status-badge">
-        👨‍🍳 Em preparação...
+      <div id="statusPedidoCliente" class="status-badge">
+        📋 Pedido Recebido
       </div>
 
       <div style="
@@ -1336,6 +1627,16 @@ function mostrarStatusPedido() {
           • ${i.nome} (${i.tamanho}) x${i.qtd}
         `).join("<br>")}
 
+        <div style="
+          margin-top:14px;
+          padding-top:12px;
+          border-top:1px solid #ead8ca;
+          font-size:15px;
+          color:#4b2e2e;
+        ">
+          <strong>Valor Total do Pedido: ${formatarMoeda(resumoFinanceiro.total)}</strong>
+        </div>
+
       </div>
 
       <div style="
@@ -1344,8 +1645,9 @@ function mostrarStatusPedido() {
         margin-top:18px;
       ">
 
-        <a href="https://wa.me/5585992425223"
+        <a href="${gerarUrlWhatsAppPedido(pedidoAtual)}"
            target="_blank"
+           rel="noopener noreferrer"
            style="
             flex:1;
             background:#25d366;
@@ -1372,7 +1674,7 @@ function mostrarStatusPedido() {
             cursor:pointer;
             font-size:14px;
           ">
-          PIX
+          Copiar PIX
         </button>
 
       </div>
@@ -1394,6 +1696,8 @@ function mostrarStatusPedido() {
 
     </div>
   `;
+
+  iniciarMonitoramentoStatusEntrega(pedidoAtual);
 }
 
 
@@ -1553,12 +1857,15 @@ setInterval(verificarPedidoExpirado, 60000);
 
 function limparSessaoPedido() {
 
+  encerrarMonitoramentoStatusEntrega();
+
   // limpa pedido salvo
   localStorage.removeItem("pedidoAtual");
 
   // limpa variáveis
   pedidoAtual = null;
   pedidoEnvioIdAtual = null;
+  codigoOrigemWebEnvioAtual = null;
   pedidoEnviando = false;
 
   carrinho = [];
@@ -1681,39 +1988,33 @@ function limparSessaoPedido() {
   atualizarCarrinho();
 }
 
-function mostrarPix() {
-
+async function mostrarPix() {
   const chavePix = "cumbuca.marco@gmail.com";
 
-  navigator.clipboard.writeText(chavePix)
-    .then(() => {
+  if (!pedidoAtual) {
+    alert("Finalize o pedido para gerar o PIX com o valor preenchido.");
+    return;
+  }
 
-      alert(
-`✅ Chave PIX copiada!
+  const resumo = obterResumoFinanceiroPedido(pedidoAtual);
+  const pixCopiaECola = gerarPixCopiaECola(chavePix, resumo.total, pedidoAtual);
 
-PIX:
-${chavePix}
+  try {
+    await copiarTexto(pixCopiaECola);
+    alert(
+`✅ PIX Copia e Cola copiado!
 
-Após o pagamento envie o comprovante pelo WhatsApp.`
-      );
+Valor: ${formatarMoeda(resumo.total)}
+Chave PIX: ${chavePix}
 
-      window.open(
-        "https://wa.me/5585992425223",
-        "_blank"
-      );
-
-    })
-    .catch(() => {
-
-      alert(
-`PIX:
-${chavePix}
-
-Copie manualmente e envie o comprovante pelo WhatsApp.`
-      );
-
-    });
-
+Cole o código no aplicativo do banco. Após o pagamento, envie o comprovante pelo WhatsApp.`
+    );
+  } catch (erro) {
+    window.prompt(
+      `Copie o código PIX abaixo. Valor: ${formatarMoeda(resumo.total)}`,
+      pixCopiaECola
+    );
+  }
 }
 
 carregarCardapio();
