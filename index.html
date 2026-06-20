@@ -14,6 +14,8 @@
   gtag('config', 'AW-18085188065');
   let carrinho = [];
   let pedidoAtual = JSON.parse(localStorage.getItem("pedidoAtual")) || null;
+  let pedidoEnviando = false;
+  let pedidoEnvioIdAtual = null;
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -267,6 +269,34 @@ header {
   margin-top: 10px;
 }
 
+.botao-finalizar-pedido.enviando {
+  opacity: .82;
+  cursor: wait !important;
+}
+
+.botao-finalizar-pedido.enviando::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  border: 2px solid rgba(255,255,255,.45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  vertical-align: -2px;
+  animation: girarEnvioPedido .75s linear infinite;
+}
+
+.confete-pedido {
+  position: fixed;
+  top: -12px;
+  width: 8px;
+  height: 12px;
+  z-index: 99999;
+  pointer-events: none;
+  animation: cairConfetePedido 1.4s ease-out forwards;
+}
+
 /* BOTÃO FLUTUANTE DO CARRINHO */
 #btnCarrinho {
   position: fixed;
@@ -344,6 +374,15 @@ h2 {
   0% { box-shadow: 0 0 0 0 rgba(214, 40, 40, 0.8); transform: scale(1.05); }
   50% { transform: scale(1.1); }
   100% { box-shadow: 0 0 0 15px rgba(214, 40, 40, 0); transform: scale(1.05); }
+}
+
+@keyframes girarEnvioPedido {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cairConfetePedido {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
 @media(max-width:768px){
@@ -594,7 +633,7 @@ font-weight:bold;
   
   </div>
   
-  <button onclick="finalizarPedido()" style="
+  <button id="btnFinalizarPedido" class="botao-finalizar-pedido" onclick="finalizarPedido()" style="
     background:#d62828;
     width:100%;
     padding:14px;
@@ -1048,15 +1087,104 @@ function salvarPedidoLocal(dados) {
   pedidoAtual = dados;
 }
 
-function finalizarPedido() {
-  if (carrinho.length === 0) { alert("Carrinho vazio!"); return; }
+function obterBotaoFinalizarPedido() {
+  return document.getElementById("btnFinalizarPedido") || document.querySelector('button[onclick="finalizarPedido()"]');
+}
+
+function bloquearFinalizacaoPedido() {
+  const botao = obterBotaoFinalizarPedido();
+  if (!botao) return;
+  botao.disabled = true;
+  botao.classList.add("enviando");
+  botao.dataset.textoOriginal = botao.dataset.textoOriginal || botao.textContent.trim() || "Finalizar Pedido";
+  botao.textContent = "⏳ Enviando pedido...";
+  botao.style.animation = "none";
+  botao.style.transform = "scale(1)";
+}
+
+function liberarFinalizacaoPedido() {
+  const botao = obterBotaoFinalizarPedido();
+  if (!botao) return;
+  botao.disabled = false;
+  botao.classList.remove("enviando");
+  botao.textContent = botao.dataset.textoOriginal || "Finalizar Pedido";
+  atualizarBarraProgresso();
+}
+
+function telefoneParaId(telefone) {
+  return String(telefone || "").replace(/\D/g, "").slice(-11) || "semtelefone";
+}
+
+function gerarIdUnicoPedido(telefone) {
+  if (pedidoEnvioIdAtual) return pedidoEnvioIdAtual;
+  pedidoEnvioIdAtual = `pedido_${Date.now()}_${telefoneParaId(telefone)}`;
+  return pedidoEnvioIdAtual;
+}
+
+function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
+  return {
+    fields: {
+      id_unico_pedido: { stringValue: idUnicoPedido },
+      cliente: { stringValue: pedido.cliente },
+      telefone: { stringValue: pedido.telefone },
+      pagamento: { stringValue: pedido.pagamento },
+      obs: { stringValue: pedido.obs },
+      itens: { stringValue: JSON.stringify(pedido.itens) },
+      endereco: { stringValue: pedido.endereco || "" },
+      data: { integerValue: String(criadoEm) }
+    }
+  };
+}
+
+function dispararConfetesPedido() {
+  const cores = ["#d62828", "#f77f00", "#25d366", "#5f2eea", "#ffd166"];
+  for (let i = 0; i < 36; i++) {
+    const confete = document.createElement("span");
+    confete.className = "confete-pedido";
+    confete.style.left = Math.random() * 100 + "vw";
+    confete.style.background = cores[i % cores.length];
+    confete.style.animationDelay = Math.random() * .25 + "s";
+    confete.style.transform = `rotate(${Math.random() * 180}deg)`;
+    document.body.appendChild(confete);
+    setTimeout(() => confete.remove(), 1800);
+  }
+}
+
+async function pedidoExisteNoFirestore(idUnicoPedido) {
+  const resposta = await fetch(`https://firestore.googleapis.com/v1/projects/sabores-cumbuca/databases/(default)/documents/pedidos/${encodeURIComponent(idUnicoPedido)}?t=${Date.now()}`, {
+    cache: "no-store"
+  });
+  return resposta.ok;
+}
+
+async function finalizarPedido() {
+  if (pedidoEnviando) return;
+  pedidoEnviando = true;
+  bloquearFinalizacaoPedido();
+
+  if (carrinho.length === 0) {
+    pedidoEnviando = false;
+    liberarFinalizacaoPedido();
+    alert("Carrinho vazio!");
+    return;
+  }
+
   let nome = document.getElementById("clienteNome").value;
   let telefone = document.getElementById("clienteTel").value;
   let endereco = document.getElementById("clienteEnd").value;
   let escolha = document.getElementById("clientePag").value;
 
-  if (!nome || !telefone || !endereco || !escolha) { alert("Preencha todos os dados de entrega!"); return; }
-  let total = 0; carrinho.forEach(item => { total += item.preco * item.qtd; });
+  if (!nome || !telefone || !endereco || !escolha) {
+    pedidoEnviando = false;
+    liberarFinalizacaoPedido();
+    alert("Preencha todos os dados de entrega!");
+    return;
+  }
+
+  const itensPedido = carrinho.map(item => ({ ...item }));
+  let total = 0; itensPedido.forEach(item => { total += item.preco * item.qtd; });
+  const criadoEm = Date.now();
+  const idUnicoPedido = gerarIdUnicoPedido(telefone);
 
   let pagamentoTexto = escolha == "1" ? "PIX" : escolha == "2" ? "Cartão" : "Dinheiro";
   
@@ -1070,18 +1198,18 @@ function finalizarPedido() {
       pagamento: "Pendente",
   
       obs: `PEDIDO SITE
-  
+
   CLIENTE: ${nome.toUpperCase()}
   TELEFONE: ${telefone}
-  
+
   ITENS:
-  ${carrinho.map(i =>
+  ${itensPedido.map(i =>
   `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
   ).join("\n")}
-  
+
   PAGTO: ${pagamentoTexto}`,
-  
-      itens: carrinho.map(i => ({
+
+      itens: itensPedido.map(i => ({
           nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
           qtd: i.qtd
       }))
@@ -1090,46 +1218,35 @@ function finalizarPedido() {
   const controller = new AbortController();
   const timeout = setTimeout(() => { controller.abort(); }, 30000); // 30 segundos
 
-  // Se você for usar o servidor_pedidos.py local no futuro, a URL mudará aqui.
-  // Mantendo a estrutura do seu Firestore atualizada com o novo campo:
-  fetch("https://firestore.googleapis.com/v1/projects/sabores-cumbuca/databases/(default)/documents/pedidos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      fields: {
-        cliente: { stringValue: pedido.cliente },
-        telefone: { stringValue: pedido.telefone }, // <--- SALVA O TELEFONE SEPARADO NO BANCO
-        pagamento: { stringValue: pedido.pagamento },
-        obs: { stringValue: pedido.obs },
-        itens: { stringValue: JSON.stringify(pedido.itens) },
-        endereco: { stringValue: pedido.endereco || "" },
-        data: { integerValue: Date.now().toString() }
-      }
-    }),
-    signal: controller.signal
-  })
+  try {
+      const res = await fetch(`https://firestore.googleapis.com/v1/projects/sabores-cumbuca/databases/(default)/documents/pedidos/${encodeURIComponent(idUnicoPedido)}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(camposFirestorePedido(pedido, idUnicoPedido, criadoEm)),
+        signal: controller.signal
+      });
 
-  .then(res => {
-  
       clearTimeout(timeout);
 
-      if (!res.ok) throw new Error();
-  
+      if (!res.ok) throw new Error("Firestore " + res.status);
+
     let dadosPedido = {
+      id_unico_pedido: idUnicoPedido,
       cliente: nome,
       telefone: telefone,
       endereco: endereco,
       pagamento: pagamentoTexto,
-      itens: carrinho,
+      itens: itensPedido,
       status: "preparando",
-      data: new Date().getTime(),
+      data: criadoEm,
       avaliado: false
     };
-  
+
     salvarPedidoLocal(dadosPedido);
-    
+    pedidoEnvioIdAtual = null;
+
     const btn =
     document.getElementById(
     "btnCarrinho"
@@ -1143,16 +1260,45 @@ function finalizarPedido() {
     document.getElementById(
     "textoCarrinho"
     ).innerText="100%";
-    
+
     carrinho=[];
     atualizarCarrinho();
-    
+    dispararConfetesPedido();
+
     mostrarStatusPedido();
-  
-  })
-  .catch(() => {
+
+  } catch (erro) {
+    clearTimeout(timeout);
+
+    try {
+      if (await pedidoExisteNoFirestore(idUnicoPedido)) {
+        let dadosPedido = {
+          id_unico_pedido: idUnicoPedido,
+          cliente: nome,
+          telefone: telefone,
+          endereco: endereco,
+          pagamento: pagamentoTexto,
+          itens: itensPedido,
+          status: "preparando",
+          data: criadoEm,
+          avaliado: false
+        };
+        salvarPedidoLocal(dadosPedido);
+        pedidoEnvioIdAtual = null;
+        carrinho=[];
+        atualizarCarrinho();
+        dispararConfetesPedido();
+        mostrarStatusPedido();
+        return;
+      }
+    } catch (verificacaoErro) {}
+
+    alert("Erro ao enviar para o sistema! Vamos abrir o WhatsApp para garantir seu atendimento.");
     window.open(`https://wa.me/5585992425223?text=${encodeURIComponent(pedido.obs)}`, '_blank');
-  });
+    liberarFinalizacaoPedido();
+  } finally {
+    pedidoEnviando = false;
+  }
 }
 
 function mostrarStatusPedido() {
@@ -1168,7 +1314,7 @@ function mostrarStatusPedido() {
       <h2>Pedido Confirmado!</h2>
 
       <p style="font-size:14px; color:#555;">
-        Obrigado ${pedidoAtual.cliente}
+        Obrigado ${pedidoAtual.cliente}. Seu pedido foi enviado e já está disponível para a cozinha.
       </p>
 
       <div class="status-badge">
@@ -1412,6 +1558,8 @@ function limparSessaoPedido() {
 
   // limpa variáveis
   pedidoAtual = null;
+  pedidoEnvioIdAtual = null;
+  pedidoEnviando = false;
 
   carrinho = [];
 
@@ -1472,7 +1620,7 @@ function limparSessaoPedido() {
 
     </div>
 
-    <button onclick="finalizarPedido()"
+    <button id="btnFinalizarPedido" class="botao-finalizar-pedido" onclick="finalizarPedido()"
       style="
         background:#d62828;
         width:100%;
