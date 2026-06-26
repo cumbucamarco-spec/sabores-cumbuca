@@ -8,6 +8,25 @@ service cloud.firestore {
     }
 
     match /cumbuca_entregas_pedidos/{pedidoId} {
+      allow read, create, update, delete: if true;
+    }
+
+    match /cumbuca_entregas_baixas/{baixaId} {
+      allow read, create, update: if true;
+      allow delete: if false;
+    }
+
+    match /cumbuca_entregas_login/{loginId} {
+      allow read, create, update: if true;
+      allow delete: if false;
+    }
+
+    match /cumbuca_entregas_controle/{controleId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /cumbuca_entregas_historico/{historicoId} {
       allow read: if true;
       allow write: if false;
     }
