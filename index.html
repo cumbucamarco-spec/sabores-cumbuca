@@ -1144,14 +1144,27 @@ function gerarCodigoOrigemWeb(criadoEm) {
 function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
   return {
     fields: {
+      id: { stringValue: idUnicoPedido },
       id_unico_pedido: { stringValue: idUnicoPedido },
       codigo_origem_web: { stringValue: pedido.codigo_origem_web },
+      origem: { stringValue: "SITE" },
       cliente: { stringValue: pedido.cliente },
+      nome: { stringValue: pedido.cliente },
       telefone: { stringValue: pedido.telefone },
+      fone: { stringValue: pedido.telefone },
+      whatsapp: { stringValue: pedido.telefone },
       pagamento: { stringValue: pedido.pagamento },
+      forma_pagamento: { stringValue: pedido.forma_pagamento || pedido.pagamento },
       obs: { stringValue: pedido.obs },
+      observacao: { stringValue: pedido.obs },
       itens: { stringValue: JSON.stringify(pedido.itens) },
       endereco: { stringValue: pedido.endereco || "" },
+      valor: { doubleValue: Number(pedido.valor || 0) },
+      total: { doubleValue: Number(pedido.total || pedido.valor || 0) },
+      troco: { doubleValue: Number(pedido.troco || 0) },
+      motoboy: { stringValue: pedido.motoboy || "motoboy_teste" },
+      status: { stringValue: pedido.status || "Pendente" },
+      recebido_em: { stringValue: pedido.recebido_em || new Date(criadoEm).toISOString() },
       data: { integerValue: String(criadoEm) }
     }
   };
@@ -1273,13 +1286,21 @@ async function finalizarPedido() {
   
   // Criamos o objeto já contendo o telefone isolado de forma explícita
   let pedido = {
+      id: idUnicoPedido,
+      valor: total,
+      total: total,
+      troco: 0,
+      motoboy: "motoboy_teste",
+      status: "Pendente",
+      recebido_em: new Date(criadoEm).toISOString(),
       codigo_origem_web: codigoOrigemWeb,
       cliente: nome.toUpperCase(),
   
       telefone: telefone.trim(),
       endereco: endereco.trim(),
   
-      pagamento: "Pendente",
+      pagamento: pagamentoTexto,
+      forma_pagamento: pagamentoTexto,
   
       obs: `PEDIDO SITE
 
@@ -1295,7 +1316,9 @@ async function finalizarPedido() {
   PAGTO: ${pagamentoTexto}`,
 
       itens: itensPedido.map(i => ({
-          nome_id: `${i.codigo} - ${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
+          nome_id: `${i.codigo}`,
+          codigo: `${i.codigo}`,
+          produto: `${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
           qtd: i.qtd
       }))
   };
@@ -2098,3 +2121,4 @@ if (pedidoAtual) {
 </script>
 </body>
 </html>
+

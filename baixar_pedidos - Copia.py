@@ -1,11 +1,11 @@
-import firebase_admin
+﻿import firebase_admin
 from firebase_admin import credentials, firestore
 import os
 import json
 import time
 
 # =========================
-# 📁 CAMINHOS DO SISTEMA
+# ðŸ“ CAMINHOS DO SISTEMA
 # =========================
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,21 +14,18 @@ PASTA_SAIDA = r"C:\exe4_2\pedidos_entrada"
 os.makedirs(PASTA_SAIDA, exist_ok=True)
 
 # =========================
-# 🔑 FIREBASE (CHAVE LOCAL)
+# ðŸ”‘ FIREBASE (CHAVE LOCAL)
 # =========================
 
 cred = credentials.Certificate(
-    os.path.join(
-        BASE_DIR,
-        "sabores-cumbuca-firebase-adminsdk-fbsvc-ada6773814.json"
-    )
+    r"C:\exe4_2\firebase-key.json"
 )
 
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # =========================
-# 💾 SALVAR PEDIDO LOCAL
+# ðŸ’¾ SALVAR PEDIDO LOCAL
 # =========================
 
 def converter_firestore(obj):
@@ -57,10 +54,10 @@ def salvar_arquivo(doc_id, data):
         json.dump(data_limpa, f, ensure_ascii=False, indent=2)
 
 # =========================
-# 🔁 LOOP PRINCIPAL
+# ðŸ” LOOP PRINCIPAL
 # =========================
 
-print("🚀 Iniciando monitor de pedidos...")
+print("ðŸš€ Iniciando monitor de pedidos...")
 
 while True:
     docs = db.collection("pedidos").stream()
@@ -77,9 +74,10 @@ while True:
         # remove do firebase (fila consumida)
         db.collection("pedidos").document(doc.id).delete()
 
-        print(f"✔ Pedido baixado e removido: {doc.id}")
+        print(f"âœ” Pedido baixado e removido: {doc.id}")
 
     if not encontrou:
-        print("⏳ Nenhum pedido novo...")
+        print("â³ Nenhum pedido novo...")
 
     time.sleep(5)
+
