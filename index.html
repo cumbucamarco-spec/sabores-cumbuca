@@ -1545,7 +1545,7 @@ function dadosVisuaisStatusEntrega(statusEntrega) {
   const status = String(statusEntrega || "").trim().toLowerCase();
 
   if (status === "pendente") {
-    return { texto: "Preparando", ic👨‍🍳, classe: "preparando" };
+    return { texto: "Preparando", icone: "👨‍🍳", classe: "preparando" };
   }
   if (status === "em rota") {
     return { texto: "Saiu para Entrega", icone: "🛵", classe: "em-rota" };
