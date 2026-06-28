@@ -1299,8 +1299,8 @@ async function finalizarPedido() {
       telefone: telefone.trim(),
       endereco: endereco.trim(),
   
-      pagamento: pagamentoTexto,
-      forma_pagamento: pagamentoTexto,
+      pagamento: "Pendente",
+      forma_pagamento: "Pendente",
   
       obs: `PEDIDO SITE
 
@@ -1313,7 +1313,8 @@ async function finalizarPedido() {
   `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
   ).join("\n")}
 
-  PAGTO: ${pagamentoTexto}`,
+  PAGTO: ${pagamentoTexto}
+  (PAGAMENTO PENDENTE - CONFIRMAR COM CLIENTE)`,
 
       itens: itensPedido.map(i => ({
           nome_id: `${i.codigo}`,
@@ -2121,4 +2122,3 @@ if (pedidoAtual) {
 </script>
 </body>
 </html>
-
