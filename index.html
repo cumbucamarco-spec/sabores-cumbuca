@@ -482,7 +482,7 @@ h2 {
       line-height:1.6;
       margin-bottom:20px;
     ">
-      Sua opinião © muito importante para nós.
+      Sua opinião é muito importante para nós.
       Avalie sua experiência com o Sabores Cumbuca no Google.
     </p>
 
@@ -1575,7 +1575,7 @@ function dadosVisuaisStatusEntrega(statusEntrega) {
     return { texto: "Saiu para Entrega", icone: "🛵", classe: "em-rota" };
   }
   if (status === "entregue") {
-    return { texto: "Entregue", icone: "âœ…", classe: "entregue" };
+    return { texto: "Entregue", icone: "✅", classe: "entregue" };
   }
 
   return { texto: "Pedido Recebido", icone: "📋", classe: "recebido" };
@@ -1685,7 +1685,7 @@ function mostrarStatusPedido() {
 
     <div class="status-container">
 
-      <div class="success-icon">âœ…</div>
+      <div class="success-icon">✅</div>
 
       <h2>Pedido Confirmado!</h2>
 
@@ -1776,7 +1776,7 @@ function mostrarStatusPedido() {
           font-weight:bold;
           cursor:pointer;
         ">
-        âœ”️ Novo Pedido
+        ✔️ Novo Pedido
       </button>
 
     </div>
@@ -2093,7 +2093,7 @@ async function mostrarPix() {
   try {
     await copiarTexto(pixCopiaECola);
     alert(
-`âœ… PIX Copia e Cola copiado!
+`✅ PIX Copia e Cola copiado!
 
 Valor: ${formatarMoeda(resumo.total)}
 Chave PIX: ${chavePix}
