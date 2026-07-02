@@ -7,23 +7,5 @@
         "p_g": 17.0,
         "codigo_estoque_p": "P1770025146 - ALMOÇO P",
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Creme de Peixe",
-        "desc": "",
-        "cat": "Peixe",
-        "p_p": 13.0,
-        "p_g": 16.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
-        "nome": "Arroz de Camarão ",
-        "desc": "Internacional",
-        "cat": "Peixe",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
-        "codigo_estoque_g": ""
     }
 ]
