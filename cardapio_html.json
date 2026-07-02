@@ -1,5 +1,23 @@
 [
     {
+        "nome": "Guaraná Antartica LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_g": ""
+    },
+    {
         "nome": "Pepsi Black 200ML",
         "desc": "",
         "cat": "Bebidas",
