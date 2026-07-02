@@ -108,8 +108,21 @@ echo =========================
 echo CARDAPIO FECHADO COM SUCESSO!
 echo =========================
 echo Itens removidos. A pagina publica mostra a mensagem de remessa encerrada.
-if "%1"=="" pause
-exit /b 0
+
+echo.
+echo =========================
+echo ENCERRANDO BUSCADORES E API...
+echo =========================
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$processos = Get-CimInstance Win32_Process | Where-Object { $cmd = $_.CommandLine; $_.ProcessId -ne $PID -and $cmd -and ($cmd -like '*C:\exe4_2\BOT-WHATSAPP\baixar_pedidos.py*' -or $cmd -like '*cd /d C:\exe4_2\novo_app*' -or $cmd -like '*servidor.py*') }; if (-not $processos) { Write-Host 'Nenhum buscador/API encontrado em execucao.'; exit 0 }; foreach ($p in $processos) { Write-Host ('Encerrando ' + $p.Name + ' PID ' + $p.ProcessId); Stop-Process -Id $p.ProcessId -Force -ErrorAction SilentlyContinue }"
+
+echo.
+echo =========================
+echo FECHAMENTO FINALIZADO!
+echo =========================
+echo Cardapio removido, site conferido, buscador e API encerrados.
+powershell -NoProfile -Command "Start-Sleep -Seconds 3" >nul
+exit
 
 :erro_git
 echo.
