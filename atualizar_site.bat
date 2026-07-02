@@ -1,45 +1,111 @@
 @echo off
-
-:: ==================================================
-:: 📂 DEFINE PASTA
-:: ==================================================
+setlocal
 
 cd /d "%~dp0"
 
 echo =========================
-echo COPIANDO CARDAPIO...
+echo ATUALIZANDO CARDAPIO...
 echo =========================
 
-copy /Y "..\cardapio_hoje.json" "cardapio_html.json"
-
-if not exist "cardapio_html.json" (
-
+if not exist "..\cardapio_hoje.json" (
     echo.
-    echo ERRO AO COPIAR O CARDAPIO!
-    pause
-    exit /b
+    echo ERRO: arquivo ..\cardapio_hoje.json nao encontrado.
+    goto erro
+)
+
+py -m json.tool "..\cardapio_hoje.json" >nul 2>&1
+if errorlevel 1 python -m json.tool "..\cardapio_hoje.json" >nul 2>&1
+if errorlevel 1 (
+    echo.
+    echo ERRO: cardapio_hoje.json esta com JSON invalido.
+    goto erro
 )
 
 echo.
 echo =========================
-echo SINCRONIZANDO E ENVIANDO...
+echo CHECANDO GIT...
 echo =========================
 
-git add .
-git commit -m "Atualizacao do site %date% %time%" 2>nul
+git rev-parse --is-inside-work-tree >nul 2>&1
+if errorlevel 1 (
+    echo.
+    echo ERRO: esta pasta nao parece ser um repositorio Git.
+    goto erro
+)
 
-:: Adicione estas duas linhas antes do push para evitar erros:
-git pull origin main --rebase
+git status --porcelain | findstr /R "^UU ^AA ^DD ^DU ^UD ^UA ^AU" >nul
+if not errorlevel 1 (
+    echo.
+    echo ERRO: existe conflito de Git pendente. Resolva antes de publicar.
+    git status --short
+    goto erro
+)
+
+git rebase --abort >nul 2>&1
+
+echo.
+echo =========================
+echo BAIXANDO ULTIMA VERSAO...
+echo =========================
+
+git fetch origin main
+if errorlevel 1 goto erro_git
+
+git merge --ff-only origin/main
+if errorlevel 1 (
+    echo.
+    echo ERRO: o historico local divergiu do GitHub.
+    echo Para seguranca, o script nao vai fazer rebase automatico nem sobrescrever nada.
+    echo Rode: git status
+    goto erro
+)
+
+echo.
+echo =========================
+echo COPIANDO CARDAPIO...
+echo =========================
+
+copy /Y "..\cardapio_hoje.json" "cardapio_html.json" >nul
+if errorlevel 1 (
+    echo.
+    echo ERRO AO COPIAR O CARDAPIO.
+    goto erro
+)
+
+git diff --quiet -- cardapio_html.json
+if not errorlevel 1 (
+    echo.
+    echo Nada mudou no cardapio. Site ja esta com esta versao.
+    goto enviar
+)
+
+git add cardapio_html.json
+git commit -m "Atualizacao do cardapio %date% %time%"
+if errorlevel 1 goto erro_git
+
+:enviar
+echo.
+echo =========================
+echo ENVIANDO PARA O GITHUB...
+echo =========================
+
 git push origin main
+if errorlevel 1 goto erro_git
 
+:sucesso
 echo.
 echo =========================
 echo SITE ATUALIZADO!
 echo =========================
-
-:: ==================================================
-:: 🔥 NÃO INICIA MAIS NADA
-:: Tudo agora é controlado pela Marinete
-:: ==================================================
-
 if "%1"=="" pause
+exit /b 0
+
+:erro_git
+echo.
+echo ERRO: comando Git falhou.
+
+:erro
+echo.
+echo PUBLICACAO CANCELADA COM SEGURANCA.
+if "%1"=="" pause
+exit /b 1
