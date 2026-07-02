@@ -92,6 +92,19 @@ echo =========================
 git push origin main
 if errorlevel 1 goto erro_git
 
+echo.
+echo =========================
+echo VERIFICANDO SITE PUBLICADO...
+echo =========================
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$local = (Get-FileHash -Algorithm SHA256 -LiteralPath 'cardapio_html.json').Hash; $ok = $false; for ($i = 1; $i -le 18; $i++) { try { $url = 'https://cumbucamarco-spec.github.io/sabores-cumbuca/cardapio_html.json?t=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); $tmp = Join-Path $env:TEMP ('cardapio_pages_' + [guid]::NewGuid() + '.json'); Invoke-WebRequest -Uri $url -UseBasicParsing -OutFile $tmp -TimeoutSec 15 | Out-Null; $remote = (Get-FileHash -Algorithm SHA256 -LiteralPath $tmp).Hash; Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue; if ($remote -eq $local) { $ok = $true; break } } catch { }; Start-Sleep -Seconds 10 }; if (-not $ok) { exit 1 }"
+if errorlevel 1 (
+    echo.
+    echo ERRO: GitHub recebeu o envio, mas a pagina publica ainda nao publicou o cardapio novo.
+    echo Aguarde alguns minutos e tente novamente.
+    goto erro
+)
+
 :sucesso
 echo.
 echo =========================
