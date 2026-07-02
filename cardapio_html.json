@@ -1,29 +1,29 @@
 [
     {
-        "nome": "Guaraná Antartica LATA",
-        "desc": "",
-        "cat": "Bebidas",
-        "p_p": 5.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-        "codigo_estoque_g": ""
+        "nome": "Bisteca Suína",
+        "desc": "Arroz, Feijão, Macarrão, Farofa e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Coca Cola Zero LATA",
+        "nome": "Creme de Peixe",
         "desc": "",
-        "cat": "Bebidas",
-        "p_p": 5.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-        "codigo_estoque_g": ""
+        "cat": "Peixe",
+        "p_p": 13.0,
+        "p_g": 16.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Pepsi Black 200ML",
-        "desc": "",
-        "cat": "Bebidas",
-        "p_p": 3.0,
+        "nome": "Arroz de Camarão ",
+        "desc": "Internacional",
+        "cat": "Peixe",
+        "p_p": 15.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "P1782903942 - PEPSI BLACK 200ML",
+        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
         "codigo_estoque_g": ""
     }
 ]
