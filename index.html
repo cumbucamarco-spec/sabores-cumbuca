@@ -709,10 +709,18 @@ function carregarImagemInteligente(imgElement, nome) {
   tentar();
 }
 
-function carregarCardapio() {
-  fetch('cardapio_html.json?t=' + new Date().getTime())
-    .then(res => res.json())
+function carregarCardapio(tentativa = 1) {
+  fetch('cardapio_html.json?t=' + new Date().getTime(), { cache: "no-store" })
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
     .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        document.getElementById("cardapio").innerHTML =
+          "<p style='text-align:center; color:#666; padding:20px;'>Estamos preparando o cardápio de hoje. Volte em instantes! 🍽️</p>";
+        return;
+      }
       let html = "";
       data.forEach(item => {
         html += `
@@ -743,7 +751,13 @@ function carregarCardapio() {
       }, 100);
     })
     .catch(() => {
-      document.getElementById("cardapio").innerHTML = "Erro ao carregar o cardápio.";
+      // Falha momentânea de rede/cache: tenta de novo antes de desistir
+      if (tentativa < 3) {
+        setTimeout(() => carregarCardapio(tentativa + 1), 1500);
+      } else {
+        document.getElementById("cardapio").innerHTML =
+          "<p style='text-align:center; color:#666; padding:20px;'>Não foi possível carregar o cardápio agora. Puxe a página para atualizar.</p>";
+      }
     });
 }
 
