@@ -1,0 +1,33 @@
+[05/07/2026 19:33:52,62] ========================================== 
+[05/07/2026 19:33:52,63] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 19:33:58,65] Push rejeitado por divergencia. Sincronizado com origin/main, tentando push novamente (1x). 
+[05/07/2026 19:34:08,13] Push concluido com sucesso. 
+[05/07/2026 19:48:07,23] ========================================== 
+[05/07/2026 19:48:07,23] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 19:48:07,25] ERRO: ja existe uma atualizacao em andamento (lock ativo). 
+[05/07/2026 19:48:58,70] ========================================== 
+[05/07/2026 19:48:58,70] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 19:48:58,72] ERRO: ja existe uma atualizacao em andamento (lock ativo). 
+[05/07/2026 19:55:13,67] ========================================== 
+[05/07/2026 19:55:13,67] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 19:55:13,69] Lock ja existe. Verificando se esta desatualizado (travado ha muito tempo)... 
+[05/07/2026 19:55:13,97] Idade do lock (minutos): 21 
+[05/07/2026 19:55:13,98] Lock com mais de 20 minutos. Considerado residuo de execucao anterior (travada/interrompida). Removendo. 
+[05/07/2026 19:55:18,55] Push rejeitado por divergencia. Sincronizado com origin/main, tentando push novamente (1x). 
+[05/07/2026 19:55:28,21] Push concluido com sucesso. 
+[05/07/2026 20:15:09,57] ========================================== 
+[05/07/2026 20:15:09,57] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 20:15:09,59] Lock ja existe. Verificando se esta desatualizado (travado ha muito tempo)... 
+[05/07/2026 20:15:10,01] Idade do lock (minutos): 19 
+[05/07/2026 20:15:10,01] ERRO: ja existe uma atualizacao em andamento (lock ativo). 
+[05/07/2026 20:18:04,76] ========================================== 
+[05/07/2026 20:18:04,76] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 20:18:04,78] Lock ja existe. Verificando se esta desatualizado (travado ha muito tempo)... 
+[05/07/2026 20:18:05,10] Idade do lock (minutos): 22 
+[05/07/2026 20:18:05,10] Lock com mais de 20 minutos. Considerado residuo de execucao anterior (travada/interrompida). Removendo. 
+[05/07/2026 20:18:07,31] ERRO: historico local divergiu do GitHub. 
+[05/07/2026 20:18:07,32] PUBLICACAO CANCELADA. 
+[05/07/2026 20:20:43,39] ========================================== 
+[05/07/2026 20:20:43,39] INICIANDO atualizar_alteracao.bat 
+[05/07/2026 20:20:45,27] ERRO: historico local divergiu do GitHub. 
+[05/07/2026 20:20:45,27] PUBLICACAO CANCELADA. 
