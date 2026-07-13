@@ -242,33 +242,22 @@ if "!PUSH_OK!"=="0" (
 
 call :log "Push concluido com sucesso."
 
-echo.
-echo =========================
-echo VERIFICANDO SITE PUBLICADO...
-echo =========================
-
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$local = (Get-FileHash -Algorithm SHA256 -LiteralPath 'cardapio_html.json').Hash; $ok = $false; for ($i = 1; $i -le 24; $i++) { try { $url = 'https://cumbucamarco-spec.github.io/sabores-cumbuca/cardapio_html.json?t=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); $tmp = Join-Path $env:TEMP ('cardapio_pages_' + [guid]::NewGuid() + '.json'); Invoke-WebRequest -Uri $url -UseBasicParsing -OutFile $tmp -TimeoutSec 15 | Out-Null; $remote = (Get-FileHash -Algorithm SHA256 -LiteralPath $tmp).Hash; Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue; if ($remote -eq $local) { $ok = $true; break } } catch { }; Start-Sleep -Seconds 15 }; if (-not $ok) { exit 1 }"
-if errorlevel 1 (
-    call :log "AVISO: push OK, mas publicacao publica nao confirmada dentro do tempo limite."
-    echo.
-    echo AVISO: o GitHub recebeu o envio (push OK), mas a pagina publica
-    echo ainda nao confirmou o cardapio novo dentro do tempo esperado.
-    echo Isso pode ser apenas demora de propagacao do GitHub Pages.
-    echo O envio foi feito com sucesso; verifique o site em alguns minutos.
-    goto sucesso_parcial
-)
+:: =====================================================
+:: NAO HA MAIS VERIFICACAO DE PUBLICACAO NO GITHUB PAGES.
+:: Esse passo (loop de ate 6 minutos batendo na URL publica)
+:: foi removido porque estourava o timeout de 600s do Python
+:: e derrubava outros processos (ex.: o chatbot) via taskkill
+:: /T na arvore de processos. O push em si ja confirma que o
+:: GitHub recebeu a atualizacao; a propagacao do Pages e feita
+:: pelo proprio GitHub em segundo plano.
+:: =====================================================
 
 :sucesso
-call :log "SUCESSO: cardapio publicado e confirmado no site."
+call :log "SUCESSO: cardapio enviado ao GitHub."
 echo.
 echo =========================
 echo CARDAPIO ATUALIZADO COM SUCESSO!
 echo =========================
-rmdir "%LOCKDIR%" >nul 2>&1
-if "%1"=="" pause
-exit /b 0
-
-:sucesso_parcial
 rmdir "%LOCKDIR%" >nul 2>&1
 if "%1"=="" pause
 exit /b 0
