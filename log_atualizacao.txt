@@ -35,3 +35,10 @@
 [13/07/2026 12:07:15,14] INICIANDO atualizar_alteracao.bat 
 [13/07/2026 12:07:21,87] Push rejeitado por divergencia. Sincronizado com origin/main, tentando push novamente (1x). 
 [13/07/2026 12:07:21,89] Push concluido com sucesso. 
+[13/07/2026 12:40:19,24] ========================================== 
+[13/07/2026 12:40:19,24] INICIANDO atualizar_alteracao.bat 
+[13/07/2026 12:40:19,25] Lock ja existe. Verificando se esta desatualizado (travado ha muito tempo)... 
+[13/07/2026 12:40:19,70] Idade do lock (minutos): 33 
+[13/07/2026 12:40:19,70] Lock com mais de 20 minutos. Considerado residuo de execucao anterior (travada/interrompida). Removendo. 
+[13/07/2026 12:40:24,83] Push rejeitado por divergencia. Sincronizado com origin/main, tentando push novamente (1x). 
+[13/07/2026 12:40:24,85] Push concluido com sucesso. 
