@@ -27,15 +27,6 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Porco na Farofa",
-        "desc": "Arroz, Feijão, Macarrão e Purê de Batata",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
         "nome": "Calabresa Acebolada",
         "desc": "Arroz, Feijão, Macarrão, e Salada",
         "cat": "Carne",
