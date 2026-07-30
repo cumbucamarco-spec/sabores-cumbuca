@@ -1,11 +1,65 @@
 [
-  {
-    "nome": "🍲 Estamos preparando uma nova remessa",
-    "desc": "Nossos pratos do momento já saíram rapidinho 😋<br><br>Estamos preparando novas refeições fresquinhas para você, em breve atualizaremos o cardápio<br><br>📲 <a href='https://wa.me/5585992425223?text=Olá,%20quero%20saber%20quando%20sairá%20a%20nova%20remessa' target='_blank'>Falar no WhatsApp</a>",
-    "cat": "",
-    "p_p": 0.0,
-    "p_g": 0.0,
-    "codigo_estoque_p": "",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Galinha ao molho",
+        "desc": "Arroz, Feijão, Macarrão e Salada doce",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Bisteca Suína",
+        "desc": "Baião, Farofa e Salada Doce",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Fígado Acebolado",
+        "desc": "Arroz, Feijão, Macarrão e Salada Doce",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Escondidinho de Carne do Sol",
+        "desc": "Carne do Sol, Macaxeira, Arroz, Salada e Batata palha",
+        "cat": "Carne",
+        "p_p": 15.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Laranja Lt",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
+        "codigo_estoque_g": ""
+    }
 ]
