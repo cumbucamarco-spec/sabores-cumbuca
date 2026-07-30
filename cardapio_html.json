@@ -27,15 +27,6 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Escondidinho de Carne do Sol",
-        "desc": "Carne do Sol, Macaxeira, Arroz, Salada e Batata palha",
-        "cat": "Carne",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
-        "codigo_estoque_g": ""
-    },
-    {
         "nome": "Guaraná Antartica LATA",
         "desc": "",
         "cat": "Bebidas",
