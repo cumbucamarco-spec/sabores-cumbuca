@@ -1169,6 +1169,7 @@ function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
       whatsapp: { stringValue: pedido.telefone },
       pagamento: { stringValue: pedido.pagamento },
       forma_pagamento: { stringValue: pedido.forma_pagamento || pedido.pagamento },
+      forma_pagamento_escolhida: { stringValue: pedido.forma_pagamento_escolhida || pedido.forma_pagamento || pedido.pagamento || "" },
       obs: { stringValue: pedido.obs },
       observacao: { stringValue: pedido.obs },
       itens: { stringValue: JSON.stringify(pedido.itens) },
@@ -1315,6 +1316,7 @@ async function finalizarPedido() {
   
       pagamento: "Pendente",
       forma_pagamento: "Pendente",
+      forma_pagamento_escolhida: pagamentoTexto,
   
       obs: `PEDIDO SITE
 
