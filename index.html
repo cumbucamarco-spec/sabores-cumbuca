@@ -623,7 +623,7 @@ font-weight:bold;
        WhatsApp
     </a>
   
-    <button onclick="mostrarPix()"
+    <button onclick="mostrarPix(this)"
       style="
         flex:1;
         background:#5f2eea;
@@ -1761,7 +1761,7 @@ function mostrarStatusPedido() {
            WhatsApp
         </a>
 
-        <button onclick="mostrarPix()"
+        <button onclick="mostrarPix(this)"
           style="
             flex:1;
             background:#5f2eea;
@@ -2014,7 +2014,7 @@ function limparSessaoPedido() {
          WhatsApp
       </a>
 
-      <button onclick="mostrarPix()"
+      <button onclick="mostrarPix(this)"
         style="
           flex:1;
           background:#5f2eea;
@@ -2093,32 +2093,83 @@ function limparSessaoPedido() {
   atualizarCarrinho();
 }
 
-async function mostrarPix() {
-  const chavePix = "cumbuca.marco@gmail.com";
+// Busca o Pix "copia e cola" que o servidor.py gera via Mercado Pago
+// (mesma cobrança que o sis.py usa pra imprimir) e grava de volta no
+// documento do pedido. Fica tentando por até ~15s, porque a geração
+// acontece em segundo plano assim que o pedido cai no Firestore.
+async function buscarPixDoPedido(idUnicoPedido, tentativasRestantes = 10) {
+  const resposta = await fetch(
+    `https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos/${encodeURIComponent(idUnicoPedido)}?t=${Date.now()}`,
+    { cache: "no-store" }
+  );
 
+  if (!resposta.ok) return { pixCopiaCola: "", pixStatus: "" };
+
+  const doc = await resposta.json();
+  const campos = doc.fields || {};
+  const pixCopiaCola = campos.pix_copia_cola ? campos.pix_copia_cola.stringValue : "";
+  const pixStatus = campos.pix_status ? campos.pix_status.stringValue : "";
+
+  if (pixCopiaCola) return { pixCopiaCola, pixStatus };
+  if (pixStatus === "erro") return { pixCopiaCola: "", pixStatus };
+  if (tentativasRestantes <= 0) return { pixCopiaCola: "", pixStatus: "tempo_esgotado" };
+
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  return buscarPixDoPedido(idUnicoPedido, tentativasRestantes - 1);
+}
+
+async function mostrarPix(botao) {
   if (!pedidoAtual) {
     alert("Finalize o pedido para gerar o PIX com o valor preenchido.");
     return;
   }
 
+  const idUnicoPedido = pedidoAtual.id_unico_pedido || pedidoAtual.id;
+  if (!idUnicoPedido) {
+    alert("Não encontrei o número do seu pedido. Finalize novamente.");
+    return;
+  }
+
   const resumo = obterResumoFinanceiroPedido(pedidoAtual);
-  const pixCopiaECola = gerarPixCopiaECola(chavePix, resumo.total, pedidoAtual);
+  const textoOriginalBotao = botao ? botao.textContent : "";
+
+  if (botao) {
+    botao.disabled = true;
+    botao.textContent = "Gerando Pix...";
+  }
 
   try {
-    await copiarTexto(pixCopiaECola);
-    alert(
+    const resultado = await buscarPixDoPedido(idUnicoPedido);
+
+    if (!resultado.pixCopiaCola) {
+      alert(
+        "Não consegui gerar o código Pix agora. Tente novamente em instantes ou finalize pelo WhatsApp."
+      );
+      return;
+    }
+
+    try {
+      await copiarTexto(resultado.pixCopiaCola);
+      alert(
 `✅ PIX Copia e Cola copiado!
 
 Valor: ${formatarMoeda(resumo.total)}
-Chave PIX: ${chavePix}
 
 Cole o código no aplicativo do banco. Após o pagamento, envie o comprovante pelo WhatsApp.`
-    );
+      );
+    } catch (erroCopia) {
+      window.prompt(
+        `Copie o código PIX abaixo. Valor: ${formatarMoeda(resumo.total)}`,
+        resultado.pixCopiaCola
+      );
+    }
   } catch (erro) {
-    window.prompt(
-      `Copie o código PIX abaixo. Valor: ${formatarMoeda(resumo.total)}`,
-      pixCopiaECola
-    );
+    alert("Não consegui gerar o código Pix agora. Tente novamente em instantes ou finalize pelo WhatsApp.");
+  } finally {
+    if (botao) {
+      botao.disabled = false;
+      botao.textContent = textoOriginalBotao;
+    }
   }
 }
 
