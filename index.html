@@ -1364,6 +1364,7 @@ async function finalizarPedido() {
       telefone: telefone,
       endereco: endereco,
       pagamento: pagamentoTexto,
+      forma_pagamento_escolhida: pagamentoTexto,
       itens: itensPedido,
       subtotal: total,
       total: total,
@@ -1408,6 +1409,7 @@ async function finalizarPedido() {
           telefone: telefone,
           endereco: endereco,
           pagamento: pagamentoTexto,
+          forma_pagamento_escolhida: pagamentoTexto,
           itens: itensPedido,
           subtotal: total,
           total: total,
@@ -1604,6 +1606,16 @@ async function buscarPixDoPedido(pedido, tentativas = 12, intervaloMs = 2500) {
         throw new Error(pixErro || "Erro ao gerar Pix no servidor");
       }
     }
+
+    try {
+      const respostaBackend = await fetch(`http://localhost:5000/api/mercadopago/pix?id_pedido=${encodeURIComponent(idPedido)}&t=${Date.now()}`, {
+        cache: "no-store"
+      });
+      if (respostaBackend.ok) {
+        const dadosBackend = await respostaBackend.json();
+        if (dadosBackend && dadosBackend.qr_code) return String(dadosBackend.qr_code);
+      }
+    } catch (erroBackend) {}
 
     if (tentativa < tentativas - 1) {
       await new Promise(resolve => setTimeout(resolve, intervaloMs));
