@@ -27,15 +27,6 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Camarão Alho e Oleo",
-        "desc": "Arroz, Farofa, Limão e Salada",
-        "cat": "Peixe",
-        "p_p": 20.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
-        "codigo_estoque_g": ""
-    },
-    {
         "nome": "Coca Cola Zero LATA",
         "desc": "",
         "cat": "Bebidas",
