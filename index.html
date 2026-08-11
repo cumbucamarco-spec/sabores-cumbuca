@@ -623,7 +623,7 @@ font-weight:bold;
        WhatsApp
     </a>
   
-    <button onclick="mostrarPix(this)"
+    <button onclick="mostrarPix()"
       style="
         flex:1;
         background:#5f2eea;
@@ -1169,7 +1169,7 @@ function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
       whatsapp: { stringValue: pedido.telefone },
       pagamento: { stringValue: pedido.pagamento },
       forma_pagamento: { stringValue: pedido.forma_pagamento || pedido.pagamento },
-      forma_pagamento_escolhida: { stringValue: pedido.forma_pagamento_escolhida || pedido.forma_pagamento || pedido.pagamento || "" },
+      forma_pagamento_escolhida: { stringValue: pedido.forma_pagamento_escolhida || "" },
       obs: { stringValue: pedido.obs },
       observacao: { stringValue: pedido.obs },
       itens: { stringValue: JSON.stringify(pedido.itens) },
@@ -1574,6 +1574,45 @@ async function copiarTexto(texto) {
   if (!copiado) throw new Error("Não foi possível copiar");
 }
 
+function valorCampoFirestore(campo) {
+  if (!campo) return "";
+  if (campo.stringValue !== undefined) return campo.stringValue;
+  if (campo.integerValue !== undefined) return Number(campo.integerValue);
+  if (campo.doubleValue !== undefined) return Number(campo.doubleValue);
+  if (campo.booleanValue !== undefined) return Boolean(campo.booleanValue);
+  return "";
+}
+
+async function buscarPixDoPedido(pedido, tentativas = 12, intervaloMs = 2500) {
+  const idPedido = pedido && (pedido.id_unico_pedido || pedido.id);
+  if (!idPedido) return "";
+
+  for (let tentativa = 0; tentativa < tentativas; tentativa++) {
+    const resposta = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos/${encodeURIComponent(idPedido)}?t=${Date.now()}`, {
+      cache: "no-store"
+    });
+
+    if (resposta.ok) {
+      const documento = await resposta.json();
+      const campos = documento.fields || {};
+      const pix = valorCampoFirestore(campos.pix_copia_cola);
+      if (pix) return String(pix);
+
+      const pixStatus = String(valorCampoFirestore(campos.pix_status) || "").toLowerCase();
+      const pixErro = valorCampoFirestore(campos.pix_erro);
+      if (pixStatus === "erro") {
+        throw new Error(pixErro || "Erro ao gerar Pix no servidor");
+      }
+    }
+
+    if (tentativa < tentativas - 1) {
+      await new Promise(resolve => setTimeout(resolve, intervaloMs));
+    }
+  }
+
+  return "";
+}
+
 function encerrarMonitoramentoStatusEntrega() {
   if (typeof cancelarMonitoramentoStatusEntrega === "function") {
     cancelarMonitoramentoStatusEntrega();
@@ -1763,7 +1802,7 @@ function mostrarStatusPedido() {
            WhatsApp
         </a>
 
-        <button onclick="mostrarPix(this)"
+        <button onclick="mostrarPix()"
           style="
             flex:1;
             background:#5f2eea;
@@ -2016,7 +2055,7 @@ function limparSessaoPedido() {
          WhatsApp
       </a>
 
-      <button onclick="mostrarPix(this)"
+      <button onclick="mostrarPix()"
         style="
           flex:1;
           background:#5f2eea;
@@ -2095,83 +2134,32 @@ function limparSessaoPedido() {
   atualizarCarrinho();
 }
 
-// Busca o Pix "copia e cola" que o servidor.py gera via Mercado Pago
-// (mesma cobrança que o sis.py usa pra imprimir) e grava de volta no
-// documento do pedido. Fica tentando por até ~15s, porque a geração
-// acontece em segundo plano assim que o pedido cai no Firestore.
-async function buscarPixDoPedido(idUnicoPedido, tentativasRestantes = 10) {
-  const resposta = await fetch(
-    `https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos/${encodeURIComponent(idUnicoPedido)}?t=${Date.now()}`,
-    { cache: "no-store" }
-  );
-
-  if (!resposta.ok) return { pixCopiaCola: "", pixStatus: "" };
-
-  const doc = await resposta.json();
-  const campos = doc.fields || {};
-  const pixCopiaCola = campos.pix_copia_cola ? campos.pix_copia_cola.stringValue : "";
-  const pixStatus = campos.pix_status ? campos.pix_status.stringValue : "";
-
-  if (pixCopiaCola) return { pixCopiaCola, pixStatus };
-  if (pixStatus === "erro") return { pixCopiaCola: "", pixStatus };
-  if (tentativasRestantes <= 0) return { pixCopiaCola: "", pixStatus: "tempo_esgotado" };
-
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-  return buscarPixDoPedido(idUnicoPedido, tentativasRestantes - 1);
-}
-
-async function mostrarPix(botao) {
+async function mostrarPix() {
   if (!pedidoAtual) {
     alert("Finalize o pedido para gerar o PIX com o valor preenchido.");
     return;
   }
 
-  const idUnicoPedido = pedidoAtual.id_unico_pedido || pedidoAtual.id;
-  if (!idUnicoPedido) {
-    alert("Não encontrei o número do seu pedido. Finalize novamente.");
-    return;
-  }
-
   const resumo = obterResumoFinanceiroPedido(pedidoAtual);
-  const textoOriginalBotao = botao ? botao.textContent : "";
-
-  if (botao) {
-    botao.disabled = true;
-    botao.textContent = "Gerando Pix...";
-  }
 
   try {
-    const resultado = await buscarPixDoPedido(idUnicoPedido);
+    const pixCopiaECola = await buscarPixDoPedido(pedidoAtual);
 
-    if (!resultado.pixCopiaCola) {
-      alert(
-        "Não consegui gerar o código Pix agora. Tente novamente em instantes ou finalize pelo WhatsApp."
-      );
+    if (!pixCopiaECola) {
+      alert("Aguarde... criando chave Pix antes de copiar. Tente novamente em instantes.");
       return;
     }
 
-    try {
-      await copiarTexto(resultado.pixCopiaCola);
-      alert(
+    await copiarTexto(pixCopiaECola);
+    alert(
 `✅ PIX Copia e Cola copiado!
 
 Valor: ${formatarMoeda(resumo.total)}
 
 Cole o código no aplicativo do banco. Após o pagamento, envie o comprovante pelo WhatsApp.`
-      );
-    } catch (erroCopia) {
-      window.prompt(
-        `Copie o código PIX abaixo. Valor: ${formatarMoeda(resumo.total)}`,
-        resultado.pixCopiaCola
-      );
-    }
+    );
   } catch (erro) {
-    alert("Não consegui gerar o código Pix agora. Tente novamente em instantes ou finalize pelo WhatsApp.");
-  } finally {
-    if (botao) {
-      botao.disabled = false;
-      botao.textContent = textoOriginalBotao;
-    }
+    alert("Não consegui gerar o código Pix agora. Tente novamente em instantes.");
   }
 }
 
