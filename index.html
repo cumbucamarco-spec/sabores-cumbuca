@@ -1185,6 +1185,27 @@ function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
   };
 }
 
+function camposFirestorePixSite(pedido, idUnicoPedido, criadoEm) {
+  return {
+    fields: {
+      id: { stringValue: idUnicoPedido },
+      id_unico_pedido: { stringValue: idUnicoPedido },
+      codigo_origem_web: { stringValue: pedido.codigo_origem_web },
+      cliente: { stringValue: pedido.cliente },
+      nome: { stringValue: pedido.cliente },
+      telefone: { stringValue: pedido.telefone },
+      valor: { doubleValue: Number(pedido.valor || 0) },
+      total: { doubleValue: Number(pedido.total || pedido.valor || 0) },
+      forma_pagamento_escolhida: { stringValue: pedido.forma_pagamento_escolhida || "" },
+      pix_status: { stringValue: "criando" },
+      status: { stringValue: "Pendente" },
+      origem: { stringValue: "SITE" },
+      recebido_em: { stringValue: pedido.recebido_em || new Date(criadoEm).toISOString() },
+      data: { integerValue: String(criadoEm) }
+    }
+  };
+}
+
 function dispararConfetesPedido() {
   const cores = ["#d62828", "#f77f00", "#25d366", "#5f2eea", "#ffd166"];
   for (let i = 0; i < 36; i++) {
@@ -1344,6 +1365,19 @@ async function finalizarPedido() {
   const timeout = setTimeout(() => { controller.abort(); }, 30000); // 30 segundos
 
   try {
+      if (pagamentoTexto === "PIX") {
+        const resPixSite = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos_pix_site/${encodeURIComponent(idUnicoPedido)}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(camposFirestorePixSite(pedido, idUnicoPedido, criadoEm)),
+          signal: controller.signal
+        });
+
+        if (!resPixSite.ok) throw new Error("Firestore Pix Site " + resPixSite.status);
+      }
+
       const res = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos/${encodeURIComponent(idUnicoPedido)}`, {
         method: "PATCH",
         headers: {
@@ -1590,7 +1624,7 @@ async function buscarPixDoPedido(pedido, tentativas = 12, intervaloMs = 2500) {
   if (!idPedido) return "";
 
   for (let tentativa = 0; tentativa < tentativas; tentativa++) {
-    const resposta = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos/${encodeURIComponent(idPedido)}?t=${Date.now()}`, {
+    const resposta = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos_pix_site/${encodeURIComponent(idPedido)}?t=${Date.now()}`, {
       cache: "no-store"
     });
 
