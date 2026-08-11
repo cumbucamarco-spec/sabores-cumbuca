@@ -8,7 +8,17 @@
       "**/*.py",
       "**/*.bat",
       "**/*.exe",
-      "**/backup/**"
+      "**/*.backup*",
+      "**/*backup*",
+      "**/*Copia*",
+      "**/__pycache__/**",
+      "**/backup/**",
+      ".firebase/**",
+      ".git/**",
+      "log_atualizacao.txt",
+      "requirements.txt",
+      "servidor_pedidos.py",
+      "teste.py"
     ],
     "rewrites": [
       {

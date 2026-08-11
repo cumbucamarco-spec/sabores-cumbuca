@@ -1365,19 +1365,6 @@ async function finalizarPedido() {
   const timeout = setTimeout(() => { controller.abort(); }, 30000); // 30 segundos
 
   try {
-      if (pagamentoTexto === "PIX") {
-        const resPixSite = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos_pix_site/${encodeURIComponent(idUnicoPedido)}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(camposFirestorePixSite(pedido, idUnicoPedido, criadoEm)),
-          signal: controller.signal
-        });
-
-        if (!resPixSite.ok) throw new Error("Firestore Pix Site " + resPixSite.status);
-      }
-
       const res = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos/${encodeURIComponent(idUnicoPedido)}`, {
         method: "PATCH",
         headers: {
@@ -1390,6 +1377,25 @@ async function finalizarPedido() {
       clearTimeout(timeout);
 
       if (!res.ok) throw new Error("Firestore " + res.status);
+
+    if (pagamentoTexto === "PIX") {
+      try {
+        const resPixSite = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos_pix_site/${encodeURIComponent(idUnicoPedido)}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(camposFirestorePixSite(pedido, idUnicoPedido, criadoEm)),
+          signal: controller.signal
+        });
+
+        if (!resPixSite.ok) {
+          console.warn("Pix do site ainda nao foi registrado:", resPixSite.status);
+        }
+      } catch (erroPixSite) {
+        console.warn("Falha ao registrar Pix do site:", erroPixSite);
+      }
+    }
 
     let dadosPedido = {
       id_unico_pedido: idUnicoPedido,

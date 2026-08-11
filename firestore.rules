@@ -7,6 +7,11 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    match /pedidos_pix_site/{pedidoId} {
+      allow create, update, read: if true;
+      allow delete: if false;
+    }
+
     match /cumbuca_entregas_pedidos/{pedidoId} {
       allow read, create, update, delete: if true;
     }
