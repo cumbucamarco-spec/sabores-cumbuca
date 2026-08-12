@@ -27,6 +27,15 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
+        "nome": "Mugunzá",
+        "desc": "Mugunzá doce, Pote de 500ml",
+        "cat": "Porções",
+        "p_p": 10.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770150999 - MUCUNZA",
+        "codigo_estoque_g": ""
+    },
+    {
         "nome": "Coca Cola Zero LATA",
         "desc": "",
         "cat": "Bebidas",
