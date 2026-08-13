@@ -1169,6 +1169,7 @@ function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
       whatsapp: { stringValue: pedido.telefone },
       pagamento: { stringValue: pedido.pagamento },
       forma_pagamento: { stringValue: pedido.forma_pagamento || pedido.pagamento },
+      forma_pagamento_escolhida: { stringValue: pedido.forma_pagamento_escolhida || "" },
       obs: { stringValue: pedido.obs },
       observacao: { stringValue: pedido.obs },
       itens: { stringValue: JSON.stringify(pedido.itens) },
@@ -1178,6 +1179,27 @@ function camposFirestorePedido(pedido, idUnicoPedido, criadoEm) {
       troco: { doubleValue: Number(pedido.troco || 0) },
       motoboy: { stringValue: pedido.motoboy || "motoboy_teste" },
       status: { stringValue: pedido.status || "Pendente" },
+      recebido_em: { stringValue: pedido.recebido_em || new Date(criadoEm).toISOString() },
+      data: { integerValue: String(criadoEm) }
+    }
+  };
+}
+
+function camposFirestorePixSite(pedido, idUnicoPedido, criadoEm) {
+  return {
+    fields: {
+      id: { stringValue: idUnicoPedido },
+      id_unico_pedido: { stringValue: idUnicoPedido },
+      codigo_origem_web: { stringValue: pedido.codigo_origem_web },
+      cliente: { stringValue: pedido.cliente },
+      nome: { stringValue: pedido.cliente },
+      telefone: { stringValue: pedido.telefone },
+      valor: { doubleValue: Number(pedido.valor || 0) },
+      total: { doubleValue: Number(pedido.total || pedido.valor || 0) },
+      forma_pagamento_escolhida: { stringValue: pedido.forma_pagamento_escolhida || "" },
+      pix_status: { stringValue: "criando" },
+      status: { stringValue: "Pendente" },
+      origem: { stringValue: "SITE" },
       recebido_em: { stringValue: pedido.recebido_em || new Date(criadoEm).toISOString() },
       data: { integerValue: String(criadoEm) }
     }
@@ -1315,6 +1337,7 @@ async function finalizarPedido() {
   
       pagamento: "Pendente",
       forma_pagamento: "Pendente",
+      forma_pagamento_escolhida: pagamentoTexto,
   
       obs: `PEDIDO SITE
 
@@ -1355,6 +1378,25 @@ async function finalizarPedido() {
 
       if (!res.ok) throw new Error("Firestore " + res.status);
 
+    if (pagamentoTexto === "PIX") {
+      try {
+        const resPixSite = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos_pix_site/${encodeURIComponent(idUnicoPedido)}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(camposFirestorePixSite(pedido, idUnicoPedido, criadoEm)),
+          signal: controller.signal
+        });
+
+        if (!resPixSite.ok) {
+          console.warn("Pix do site ainda nao foi registrado:", resPixSite.status);
+        }
+      } catch (erroPixSite) {
+        console.warn("Falha ao registrar Pix do site:", erroPixSite);
+      }
+    }
+
     let dadosPedido = {
       id_unico_pedido: idUnicoPedido,
       codigo_origem_web: codigoOrigemWeb,
@@ -1362,6 +1404,7 @@ async function finalizarPedido() {
       telefone: telefone,
       endereco: endereco,
       pagamento: pagamentoTexto,
+      forma_pagamento_escolhida: pagamentoTexto,
       itens: itensPedido,
       subtotal: total,
       total: total,
@@ -1406,6 +1449,7 @@ async function finalizarPedido() {
           telefone: telefone,
           endereco: endereco,
           pagamento: pagamentoTexto,
+          forma_pagamento_escolhida: pagamentoTexto,
           itens: itensPedido,
           subtotal: total,
           total: total,
@@ -1570,6 +1614,55 @@ async function copiarTexto(texto) {
   const copiado = document.execCommand("copy");
   campo.remove();
   if (!copiado) throw new Error("Não foi possível copiar");
+}
+
+function valorCampoFirestore(campo) {
+  if (!campo) return "";
+  if (campo.stringValue !== undefined) return campo.stringValue;
+  if (campo.integerValue !== undefined) return Number(campo.integerValue);
+  if (campo.doubleValue !== undefined) return Number(campo.doubleValue);
+  if (campo.booleanValue !== undefined) return Boolean(campo.booleanValue);
+  return "";
+}
+
+async function buscarPixDoPedido(pedido, tentativas = 12, intervaloMs = 2500) {
+  const idPedido = pedido && (pedido.id_unico_pedido || pedido.id);
+  if (!idPedido) return "";
+
+  for (let tentativa = 0; tentativa < tentativas; tentativa++) {
+    const resposta = await fetch(`https://firestore.googleapis.com/v1/projects/cumbucamarco-499ce/databases/(default)/documents/pedidos_pix_site/${encodeURIComponent(idPedido)}?t=${Date.now()}`, {
+      cache: "no-store"
+    });
+
+    if (resposta.ok) {
+      const documento = await resposta.json();
+      const campos = documento.fields || {};
+      const pix = valorCampoFirestore(campos.pix_copia_cola);
+      if (pix) return String(pix);
+
+      const pixStatus = String(valorCampoFirestore(campos.pix_status) || "").toLowerCase();
+      const pixErro = valorCampoFirestore(campos.pix_erro);
+      if (pixStatus === "erro") {
+        throw new Error(pixErro || "Erro ao gerar Pix no servidor");
+      }
+    }
+
+    try {
+      const respostaBackend = await fetch(`http://localhost:5000/api/mercadopago/pix?id_pedido=${encodeURIComponent(idPedido)}&t=${Date.now()}`, {
+        cache: "no-store"
+      });
+      if (respostaBackend.ok) {
+        const dadosBackend = await respostaBackend.json();
+        if (dadosBackend && dadosBackend.qr_code) return String(dadosBackend.qr_code);
+      }
+    } catch (erroBackend) {}
+
+    if (tentativa < tentativas - 1) {
+      await new Promise(resolve => setTimeout(resolve, intervaloMs));
+    }
+  }
+
+  return "";
 }
 
 function encerrarMonitoramentoStatusEntrega() {
@@ -2094,31 +2187,31 @@ function limparSessaoPedido() {
 }
 
 async function mostrarPix() {
-  const chavePix = "cumbuca.marco@gmail.com";
-
   if (!pedidoAtual) {
     alert("Finalize o pedido para gerar o PIX com o valor preenchido.");
     return;
   }
 
   const resumo = obterResumoFinanceiroPedido(pedidoAtual);
-  const pixCopiaECola = gerarPixCopiaECola(chavePix, resumo.total, pedidoAtual);
 
   try {
+    const pixCopiaECola = await buscarPixDoPedido(pedidoAtual);
+
+    if (!pixCopiaECola) {
+      alert("Aguarde... criando chave Pix antes de copiar. Tente novamente em instantes.");
+      return;
+    }
+
     await copiarTexto(pixCopiaECola);
     alert(
 `✅ PIX Copia e Cola copiado!
 
 Valor: ${formatarMoeda(resumo.total)}
-Chave PIX: ${chavePix}
 
 Cole o código no aplicativo do banco. Após o pagamento, envie o comprovante pelo WhatsApp.`
     );
   } catch (erro) {
-    window.prompt(
-      `Copie o código PIX abaixo. Valor: ${formatarMoeda(resumo.total)}`,
-      pixCopiaECola
-    );
+    alert("Não consegui gerar o código Pix agora. Tente novamente em instantes.");
   }
 }
 

@@ -1330,8 +1330,19 @@ async function finalizarPedido() {
       status: "Pendente",
       recebido_em: new Date(criadoEm).toISOString(),
       codigo_origem_web: codigoOrigemWeb,
+      // Identifica a origem do pedido pro sis.py (ele mesmo monta a linha
+      // "ORIGEM: SITE" na observacao a partir deste campo -- nao precisa
+      // mais escrever isso a mao no obs abaixo).
+      origem: "SITE",
       cliente: nome.toUpperCase(),
   
+      // Cliente/telefone/endereco vao SO nestes campos dedicados -- o
+      // sis.py ja le eles daqui (normalizar_pedido_entrada), preenche a
+      // tela de pedido certinho, e guarda o telefone de um jeito que NAO
+      // aparece impresso na nota (fica soh disponivel internamente, pro
+      // WhatsApp e pra tela de detalhes do pedido). Nao repetir esses
+      // dados no obs abaixo -- e exatamente essa duplicacao que estava
+      // fazendo o telefone do cliente vazar pra nota impressa.
       telefone: telefone.trim(),
       endereco: endereco.trim(),
   
@@ -1339,19 +1350,19 @@ async function finalizarPedido() {
       forma_pagamento: "Pendente",
       forma_pagamento_escolhida: pagamentoTexto,
   
+      // O obs agora carrega só o que a cozinha realmente precisa: que é
+      // um pedido do site, qual prato/tamanho/quantidade, e a forma de
+      // pagamento ESCOLHIDA pelo cliente (que ainda fica como "Pendente"
+      // nos campos de pagamento acima, de propósito, até o valor ser
+      // confirmado/recebido -- ver forma_pagamento_escolhida acima).
       obs: `PEDIDO SITE
-
-  CLIENTE: ${nome.toUpperCase()}
-  TELEFONE: ${telefone}
-  CODIGO_ORIGEM_WEB: ${codigoOrigemWeb}
 
   ITENS:
   ${itensPedido.map(i =>
   `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
   ).join("\n")}
 
-  PAGTO: ${pagamentoTexto}
-  (PAGAMENTO PENDENTE - CONFIRMAR COM CLIENTE)`,
+  Pagamento escolhido: ${pagamentoTexto} (confirmar com cliente)`,
 
       itens: itensPedido.map(i => ({
           nome_id: `${i.codigo}`,
