@@ -1,11 +1,83 @@
 [
-  {
-    "nome": "🍲 Estamos preparando uma nova remessa",
-    "desc": "Nossos pratos do momento já saíram rapidinho 😋<br><br>Estamos preparando novas refeições fresquinhas para você, em breve atualizaremos o cardápio<br><br>📲 <a href='https://wa.me/5585992425223?text=Olá,%20quero%20saber%20quando%20sairá%20a%20nova%20remessa' target='_blank'>Falar no WhatsApp</a>",
-    "cat": "",
-    "p_p": 0.0,
-    "p_g": 0.0,
-    "codigo_estoque_p": "",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Aguardando atualizações",
+        "desc": "Estamamos fechados , aguarde atualização ",
+        "cat": "",
+        "p_p": 0.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1773058689 - AGUARDANDO OPÇÕES",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Calabresa Acebolada",
+        "desc": "Arroz, farofa e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Arroz de Camarão ",
+        "desc": "Internacional",
+        "cat": "Peixe",
+        "p_p": 20.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1781010951 - CAMARÃO NO VAPOR ",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Mugunzá",
+        "desc": "Mugunzá doce, Pote de 500ml",
+        "cat": "Porções",
+        "p_p": 10.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770150999 - MUCUNZA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Sanduiche Natural",
+        "desc": "Pão Integral com Patê de Frango Exclusivo",
+        "cat": "Carne",
+        "p_p": 8.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770227153 - SANDUICHE NATURAL",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Frango ao Molho Branco",
+        "desc": "Arroz, Batata Palha e Salada ",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Escondidinho de Carne do Sol",
+        "desc": "Carne do Sol, Macaxeira, Arroz, Salada e Batata palha",
+        "cat": "Carne",
+        "p_p": 15.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770151039 - ESCONDIDINHO C DO SOL",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Porco ao Molho Barbecue",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Strogonoff de Frango",
+        "desc": "Arroz, Batata Palha e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    }
 ]
