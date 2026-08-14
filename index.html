@@ -518,7 +518,7 @@ h2 {
   ">
 
     <iframe
-      src="https://www.google.com/maps?q=-3.123021,-40.146950&hl=pt&z=18&output=embed"
+      src="https://www.google.com/maps?q=Rua+Rios,+80+-+Centro,+Marco+-+CE,+62560-970&hl=pt&z=18&output=embed"
       width="100%"
       height="260"
       style="border:0;"
@@ -532,11 +532,11 @@ h2 {
       </strong>
 
       <p style="margin:8px 0; font-size:13px; color:#666;">
-        Rua Parcifal Barroso, 174 — Centro, Marco/CE
+        Rua Rios, 80 — Centro, Marco/CE
       </p>
 
       <a
-        href="https://www.google.com/maps/search/?api=1&query=Sabores+Cumbuca+Marco+CE"
+        href="https://www.google.com/maps/search/?api=1&query=Rua+Rios,+80+-+Centro,+Marco+-+CE,+62560-970"
         target="_blank"
         style="
           display:inline-block;
@@ -558,7 +558,7 @@ h2 {
 <section style="background:#fff; padding:15px; border-radius:12px; margin-top:25px; font-size:11px; line-height:1.5; color:#666; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
   <h3 style="font-size:13px; margin:0 0 8px 0; color:#222; font-weight:600;">Informações da Empresa</h3>
   <p><strong>Razão Social:</strong> 62.662.899 RAFAEL SILVA GUIMARÃES | <strong>CNPJ:</strong> 62.662.899/0001-65</p>
-  <p><strong>Endereço:</strong> Rua Parcifal Barroso, 174 - Centro — Marco/CE | <strong>E-mail:</strong> cumbuca.marco@gmail.com</p>
+  <p><strong>Endereço:</strong> Rua Rios, 80 - Centro — Marco/CE | <strong>E-mail:</strong> cumbuca.marco@gmail.com</p>
 </section>
 
 <section style="background:#fff; padding:15px; border-radius:12px; margin-top:10px; font-size:11px; line-height:1.5; color:#666; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
@@ -1355,6 +1355,11 @@ async function finalizarPedido() {
       // pagamento ESCOLHIDA pelo cliente (que ainda fica como "Pendente"
       // nos campos de pagamento acima, de propósito, até o valor ser
       // confirmado/recebido -- ver forma_pagamento_escolhida acima).
+      //
+      // A ULTIMA LINHA (so o codigoOrigemWeb, sem rotulo) NAO E TEXTO
+      // A TOA -- e o que o servidor.py usa pra achar esse pedido quando o
+      // Mercado Pago confirma o Pix (ele procura essa string dentro do
+      // obs). NAO REMOVER essa linha, mesmo que pareca lixo/sobra.
       obs: `PEDIDO SITE
 
   ITENS:
@@ -1362,7 +1367,8 @@ async function finalizarPedido() {
   `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
   ).join("\n")}
 
-  Pagamento escolhido: ${pagamentoTexto} (confirmar com cliente)`,
+  Pagamento escolhido: ${pagamentoTexto} (confirmar com cliente)
+  ${codigoOrigemWeb}`,
 
       itens: itensPedido.map(i => ({
           nome_id: `${i.codigo}`,
