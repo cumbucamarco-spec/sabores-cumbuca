@@ -1,30 +1,30 @@
 [
     {
-        "nome": "Galinha Caipira",
-        "desc": "Arroz, Feijão, Macarrão e Pirão",
+        "nome": "PANELADA PF",
+        "desc": "ARROZ, CUSCUZ, CHEIRO VERDE",
         "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+        "p_p": 15.0,
+        "p_g": 15.0,
+        "codigo_estoque_p": "P1786834390 - PANELADA PF",
+        "codigo_estoque_g": "P1786834390 - PANELADA PF"
     },
     {
-        "nome": "Feijoada",
-        "desc": "Arroz, Couve refogado, farofa e laranja ",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+        "nome": "CALDO DE QUENGA",
+        "desc": "FRANGO, BACON, CALABRESA, MACAXEIRA",
+        "cat": "Caldos",
+        "p_p": 5.0,
+        "p_g": 5.0,
+        "codigo_estoque_p": "P1786834436 - CALDO QUENGA COPO",
+        "codigo_estoque_g": "P1786834436 - CALDO QUENGA COPO"
     },
     {
-        "nome": "Camarão Alho e Oleo",
-        "desc": "Arroz, Farofa, Limão e Salada",
-        "cat": "Peixe",
-        "p_p": 20.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
-        "codigo_estoque_g": ""
+        "nome": "CALDO DE CARNE",
+        "desc": "CARNE, LEGUMES",
+        "cat": "Caldos",
+        "p_p": 5.0,
+        "p_g": 5.0,
+        "codigo_estoque_p": "P1786834447 - CALDO DE CARNE COPO",
+        "codigo_estoque_g": "P1786834447 - CALDO DE CARNE COPO"
     },
     {
         "nome": "Coca Cola LATA",
@@ -63,12 +63,30 @@
         "codigo_estoque_g": ""
     },
     {
-        "nome": "Guaraná Antartica 2L",
+        "nome": "CORONA 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 15.0,
+        "p_g": 15.0,
+        "codigo_estoque_p": "P1786834293 - CORONA 330ML",
+        "codigo_estoque_g": "P1786834293 - CORONA 330ML"
+    },
+    {
+        "nome": "HEINEKEN 330ML",
         "desc": "",
         "cat": "Bebidas",
         "p_p": 12.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1785855513 - GUARANA ANTARTICA 2LT",
-        "codigo_estoque_g": ""
+        "p_g": 12.0,
+        "codigo_estoque_p": "P1786834147 - HEINEKEN 330ML",
+        "codigo_estoque_g": "P1786834147 - HEINEKEN 330ML"
+    },
+    {
+        "nome": "BUDWEISER 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 12.0,
+        "p_g": 12.0,
+        "codigo_estoque_p": "P1786834189 - BUDWEISER 330ML",
+        "codigo_estoque_g": "P1786834189 - BUDWEISER 330ML"
     }
 ]
