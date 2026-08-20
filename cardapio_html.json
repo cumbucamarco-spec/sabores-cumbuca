@@ -1,12 +1,39 @@
 [
     {
+        "nome": "Porco ao Molho Barbecue",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Galinha ao molho",
+        "desc": "Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
         "nome": "Creme de Frango",
         "desc": "Arroz,Creme de Frango, Batata palha e salada",
         "cat": "Carne",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1773058721 - Creme de Frango",
-        "codigo_estoque_g": ""
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Calabresa Acebolada",
+        "desc": "Arroz, Feijão, Macarrão, farofa e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
         "nome": "Coca Cola LATA",
@@ -45,21 +72,21 @@
         "codigo_estoque_g": ""
     },
     {
+        "nome": "Fanta Laranja LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
+        "codigo_estoque_g": ""
+    },
+    {
         "nome": "Cajuina São Geraldo 1L",
         "desc": "",
         "cat": "Bebidas",
         "p_p": 10.0,
         "p_g": 0.0,
         "codigo_estoque_p": "P1786965949 - CAJUINA S GERALDO",
-        "codigo_estoque_g": ""
-    },
-    {
-        "nome": "AGUA AZUL",
-        "desc": "",
-        "cat": "Bebidas",
-        "p_p": 2.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1786967092 - AGUA AZUL 510ML",
         "codigo_estoque_g": ""
     },
     {
