@@ -1,7 +1,7 @@
 [
     {
         "nome": "Escondidinho de Carne do Sol",
-        "desc": "Carne, Macaxeira, Arroz, e Batata palha",
+        "desc": "Carne do sol desfiada, Macaxeira, Arroz colorido, e Batata palha",
         "cat": "Carne",
         "p_p": 15.0,
         "p_g": 0.0,
@@ -34,5 +34,50 @@
         "p_g": 0.0,
         "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
         "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Laranja LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Uva LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1786965915 - FANTA UVA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "CORONA 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 15.0,
+        "p_g": 15.0,
+        "codigo_estoque_p": "P1786834293 - CORONA 330ML",
+        "codigo_estoque_g": "P1786834293 - CORONA 330ML"
+    },
+    {
+        "nome": "HEINEKEN 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 12.0,
+        "p_g": 12.0,
+        "codigo_estoque_p": "P1786834147 - HEINEKEN 330ML",
+        "codigo_estoque_g": "P1786834147 - HEINEKEN 330ML"
+    },
+    {
+        "nome": "BUDWEISER 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 10.0,
+        "p_g": 10.0,
+        "codigo_estoque_p": "P1786834189 - BUDWEISER 330ML",
+        "codigo_estoque_g": "P1786834189 - BUDWEISER 330ML"
     }
 ]
