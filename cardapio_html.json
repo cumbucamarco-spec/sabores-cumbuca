@@ -1,7 +1,7 @@
 [
     {
-        "nome": "CHURRASCO DE GADO",
-        "desc": "Carne de Gado na Brasa, Baião e Farofa",
+        "nome": "Churrasco de Gado",
+        "desc": "Carne de Gado na Brasa, Baião, Salada doce e Farofa de Gengibre",
         "cat": "Carne",
         "p_p": 14.0,
         "p_g": 17.0,
@@ -10,7 +10,7 @@
     },
     {
         "nome": "Galinha ao molho",
-        "desc": "Frango abatido, Arroz, Feijão, Macarrão e Salada",
+        "desc": "Frango abatido, Arroz, Feijão, Macarrão e Salada doce",
         "cat": "Carne",
         "p_p": 14.0,
         "p_g": 17.0,
@@ -19,7 +19,7 @@
     },
     {
         "nome": "Porco ao Molho Barbecue",
-        "desc": "Lombo Suino, Arroz, Feijão, Macarrão e Salada",
+        "desc": "Lombo Suino, Arroz, Feijão, Macarrão e Salada doce",
         "cat": "Carne",
         "p_p": 14.0,
         "p_g": 17.0,
@@ -27,12 +27,12 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO M"
     },
     {
-        "nome": "Strogonoff de Camarão",
-        "desc": "Arroz, Batata Palha e Salada",
+        "nome": "Camarão Alho e Oleo",
+        "desc": "Camarão, Arroz, Farofa de gengibre, Limão e Salada",
         "cat": "Peixe",
         "p_p": 20.0,
         "p_g": 0.0,
-        "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
+        "codigo_estoque_p": "P1770329394 - CAMARÃO ALHO E OLEO ",
         "codigo_estoque_g": ""
     },
     {
