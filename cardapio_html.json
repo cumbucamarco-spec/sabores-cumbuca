@@ -1,11 +1,101 @@
 [
-  {
-    "nome": "🍲 Estamos preparando uma nova remessa",
-    "desc": "Nossos pratos do momento já saíram rapidinho 😋<br><br>Estamos preparando novas refeições fresquinhas para você, em breve atualizaremos o cardápio<br><br>📲 <a href='https://wa.me/5585992425223?text=Olá,%20quero%20saber%20quando%20sairá%20a%20nova%20remessa' target='_blank'>Falar no WhatsApp</a>",
-    "cat": "",
-    "p_p": 0.0,
-    "p_g": 0.0,
-    "codigo_estoque_p": "",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "PANELADA",
+        "desc": "Panelada, Arroz, Cuscus temperado e Cheiro verde",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Peixe Frito",
+        "desc": "Atum frito ,Baião, Farofa de gengibre  e Salada",
+        "cat": "Peixe",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Coca Cola LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Laranja LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Uva LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P1786965915 - FANTA UVA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "CORONA 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 15.0,
+        "p_g": 15.0,
+        "codigo_estoque_p": "P1786834293 - CORONA 330ML",
+        "codigo_estoque_g": "P1786834293 - CORONA 330ML"
+    },
+    {
+        "nome": "HEINEKEN 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 12.0,
+        "p_g": 12.0,
+        "codigo_estoque_p": "P1786834147 - HEINEKEN 330ML",
+        "codigo_estoque_g": "P1786834147 - HEINEKEN 330ML"
+    },
+    {
+        "nome": "BUDWEISER 330ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 10.0,
+        "p_g": 10.0,
+        "codigo_estoque_p": "P1786834189 - BUDWEISER 330ML",
+        "codigo_estoque_g": "P1786834189 - BUDWEISER 330ML"
+    },
+    {
+        "nome": "Guaraná Antartica 1L",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 10.0,
+        "p_g": 0.0,
+        "codigo_estoque_p": "P20260902180251007172GU - GUARANA ANTARTICA 1LT",
+        "codigo_estoque_g": ""
+    }
 ]
