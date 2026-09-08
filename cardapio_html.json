@@ -1,14 +1,5 @@
 [
     {
-        "nome": "Strogonoff de Carne",
-        "desc": "Carne de gado, Arroz, Batata palha, Salada",
-        "cat": "Carne",
-        "p_p": 14.0,
-        "p_g": 17.0,
-        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-    },
-    {
         "nome": "Calabresa Acebolada",
         "desc": "Calabresa com cebola refogada, Arroz, Feijão, farofa e Salada",
         "cat": "Carne",
