@@ -1,74 +1,65 @@
 [
-  {
-    "nome": "Churrasco Suíno",
-    "desc": "Carne de Porco na Brasa, Baião, Farofa e Salada de Maionese ",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Galinha Caipira",
-    "desc": "Galinha Cozida, Arroz, Feijão, Macarrão, Pirão e Salada",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Peixe Frito",
-    "desc": "Atum frito ,Baião, Farofa e Salada",
-    "cat": "Peixe",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Camarão Alho e Oleo",
-    "desc": "Arroz, Farofa, Limão e Salada",
-    "cat": "Peixe",
-    "p_p": 20.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Fanta Uva LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786965915 - FANTA UVA LATA",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Fanta Laranja LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Churrasco Suíno",
+        "desc": "Carne de Porco na Brasa, Baião, Farofa e Salada de Maionese ",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Peixe Frito",
+        "desc": "Atum frito ,Baião, Farofa e Salada",
+        "cat": "Peixe",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Camarão Alho e Oleo",
+        "desc": "Arroz, Farofa, Limão e Salada",
+        "cat": "Peixe",
+        "p_p": 20.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Uva LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786965915 - FANTA UVA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Laranja LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    }
 ]
