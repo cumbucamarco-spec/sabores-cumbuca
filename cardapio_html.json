@@ -1,5 +1,14 @@
 [
     {
+        "nome": "Churrasco de Gado",
+        "desc": "Carne de Gado na Brasa, Baião, Salada e Farofa ",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
         "nome": "Galinha Caipira",
         "desc": "Galinha Cozida, Arroz, Feijão, Macarrão, Pirão e Salada",
         "cat": "Carne",
@@ -22,7 +31,7 @@
         "desc": "Filé de Camarão, Arroz, Batata Palha e Salada",
         "cat": "Peixe",
         "p_p": 20.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
         "codigo_estoque_g": ""
     },
@@ -31,7 +40,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 5.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
         "codigo_estoque_g": ""
     },
@@ -40,7 +49,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 5.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
         "codigo_estoque_g": ""
     },
@@ -49,7 +58,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 5.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
         "codigo_estoque_g": ""
     },
@@ -58,7 +67,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 5.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1786965915 - FANTA UVA LATA",
         "codigo_estoque_g": ""
     },
@@ -67,7 +76,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 5.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
         "codigo_estoque_g": ""
     },
@@ -76,7 +85,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 10.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P20260902180251007172GU - GUARANA ANTARTICA 1LT",
         "codigo_estoque_g": ""
     },
@@ -85,7 +94,7 @@
         "desc": "",
         "cat": "Bebidas",
         "p_p": 2.0,
-        "p_g": null,
+        "p_g": 0.0,
         "codigo_estoque_p": "P1786967092 - AGUA AZUL 510ML",
         "codigo_estoque_g": ""
     }
