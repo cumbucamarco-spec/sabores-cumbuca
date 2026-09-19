@@ -18,24 +18,6 @@
         "codigo_estoque_g": ""
     },
     {
-        "nome": "CARANGUEIJO UNI",
-        "desc": "",
-        "cat": "Peixe",
-        "p_p": 10.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1787863896 - CARANGUEIJO UNID",
-        "codigo_estoque_g": ""
-    },
-    {
-        "nome": "PRATO FEITO",
-        "desc": "",
-        "cat": "Carne",
-        "p_p": 15.0,
-        "p_g": 0.0,
-        "codigo_estoque_p": "P1786966213 - PRATO FEITO",
-        "codigo_estoque_g": ""
-    },
-    {
         "nome": "Coca Cola Zero LATA",
         "desc": "",
         "cat": "Bebidas",
