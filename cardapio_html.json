@@ -1,8 +1,8 @@
 [
     {
-        "nome": "Sopa de Carne",
-        "desc": "Pote 500ml",
-        "cat": "",
+        "nome": "Sopa de Feijão",
+        "desc": "Carne moida, arroz, feijão, tempero, Pote 500ml",
+        "cat": "Caldos",
         "p_p": 10.0,
         "p_g": null,
         "codigo_estoque_p": "P1770065318 - SOPA",
