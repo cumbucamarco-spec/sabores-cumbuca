@@ -821,6 +821,28 @@ function abrirOpcoes(nome, precoP, precoG, codP, codG) {
       ">
       </div>
 
+      <p style="
+        text-align:center;
+        font-size:12px;
+        color:#666;
+        margin-top:20px;
+        margin-bottom:5px;
+      ">
+        Observação (opcional)
+      </p>
+
+      <textarea id="obsItem" placeholder="Ex: sem salada, sem farofa" style="
+        width:100%;
+        min-height:50px;
+        padding:10px;
+        border-radius:10px;
+        border:1px solid #ccc;
+        box-sizing:border-box;
+        font-family:inherit;
+        font-size:13px;
+        resize:none;
+      "></textarea>
+
       <div style="
         display:flex;
         justify-content:center;
@@ -976,12 +998,15 @@ function abrirOpcoes(nome, precoP, precoG, codP, codG) {
 
   document.getElementById("btnConfirmar").onclick = () => {
 
+    const obsDigitada = document.getElementById("obsItem").value.trim();
+
     adicionarCarrinho(
       nome,
       preco,
       tamanho,
       qtd,
-      codigo
+      codigo,
+      obsDigitada
     );
 
     modal.remove();
@@ -989,9 +1014,9 @@ function abrirOpcoes(nome, precoP, precoG, codP, codG) {
 }
 
 
-function adicionarCarrinho(nome, preco, tamanho, qtd, codigo) {
+function adicionarCarrinho(nome, preco, tamanho, qtd, codigo, obs) {
   if (!nome || !tamanho || !qtd || !codigo) { alert("Erro ao adicionar item!"); return; }
-  carrinho.push({ nome: nome.trim(), preco: preco, tamanho: tamanho, qtd: qtd, codigo: codigo });
+  carrinho.push({ nome: nome.trim(), preco: preco, tamanho: tamanho, qtd: qtd, codigo: codigo, obs: (obs || "").trim() });
   atualizarCarrinho();
 }
 
@@ -1070,6 +1095,7 @@ function atualizarCarrinho() {
     html += `
       <div style="background:#f9f9f9; padding:8px; border-radius:8px; margin-bottom:5px; font-size:12px;">
         <strong>${item.nome} (${item.tamanho})</strong><br>
+        ${item.obs ? `<strong style="color:#a44a24;">Obs: ${item.obs}</strong><br>` : ""}
         Qtd: ${item.qtd} - Total: R$ ${subtotal.toFixed(2)}<br>
         <button onclick="removerItem('${item.nome}', '${item.tamanho}')" style="background:#999; border:none; color:white; padding:2px 6px; border-radius:4px; margin-top:3px; cursor:pointer; font-size:11px;">Remover</button>
       </div>
@@ -1364,7 +1390,7 @@ async function finalizarPedido() {
 
   ITENS:
   ${itensPedido.map(i =>
-  `${i.nome.toUpperCase()} (${i.tamanho}) x${i.qtd}`
+  `${i.nome.toUpperCase()} (${i.tamanho})${i.obs ? " - OBS: " + i.obs.toUpperCase() : ""} x${i.qtd}`
   ).join("\n")}
 
   Pagamento escolhido: ${pagamentoTexto} (confirmar com cliente)

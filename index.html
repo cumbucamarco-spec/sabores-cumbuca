@@ -21,6 +21,7 @@
   let codigoOrigemWebEnvioAtual = null;
   let cancelarMonitoramentoStatusEntrega = null;
   let inicializacaoFirestoreStatus = null;
+  let pixCache = { id: null, texto: null, buscando: false, erro: null };
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1478,6 +1479,7 @@ async function finalizarPedido() {
     atualizarCarrinho();
     dispararConfetesPedido();
 
+    iniciarBuscaPix(dadosPedido);
     mostrarStatusPedido();
 
   } catch (erro) {
@@ -1506,6 +1508,7 @@ async function finalizarPedido() {
         carrinho=[];
         atualizarCarrinho();
         dispararConfetesPedido();
+        iniciarBuscaPix(dadosPedido);
         mostrarStatusPedido();
         return;
       }
@@ -1708,6 +1711,32 @@ async function buscarPixDoPedido(pedido, tentativas = 12, intervaloMs = 2500) {
   return "";
 }
 
+function iniciarBuscaPix(pedido) {
+  const idPedido = pedido && (pedido.id_unico_pedido || pedido.id);
+  if (!idPedido) return;
+
+  // já tem o Pix pronto pra esse pedido, ou já está buscando: não duplica
+  if (pixCache.id === idPedido && (pixCache.texto || pixCache.buscando)) return;
+
+  pixCache = { id: idPedido, texto: null, buscando: true, erro: null };
+
+  buscarPixDoPedido(pedido)
+    .then(pix => {
+      if (pixCache.id !== idPedido) return; // o pedido mudou nesse meio tempo
+      pixCache.buscando = false;
+      if (pix) {
+        pixCache.texto = pix;
+      } else {
+        pixCache.erro = "Não foi possível gerar o Pix a tempo.";
+      }
+    })
+    .catch(erro => {
+      if (pixCache.id !== idPedido) return;
+      pixCache.buscando = false;
+      pixCache.erro = (erro && erro.message) || "Erro ao gerar o Pix";
+    });
+}
+
 function encerrarMonitoramentoStatusEntrega() {
   if (typeof cancelarMonitoramentoStatusEntrega === "function") {
     cancelarMonitoramentoStatusEntrega();
@@ -1828,6 +1857,8 @@ async function iniciarMonitoramentoStatusEntrega(pedidoConfirmado) {
 function mostrarStatusPedido() {
 
   if (!pedidoAtual) return;
+
+  iniciarBuscaPix(pedidoAtual);
 
   const resumoFinanceiro = obterResumoFinanceiroPedido(pedidoAtual);
 
@@ -2235,26 +2266,38 @@ async function mostrarPix() {
     return;
   }
 
+  const idPedido = pedidoAtual.id_unico_pedido || pedidoAtual.id;
   const resumo = obterResumoFinanceiroPedido(pedidoAtual);
 
-  try {
-    const pixCopiaECola = await buscarPixDoPedido(pedidoAtual);
-
-    if (!pixCopiaECola) {
-      alert("Aguarde... criando chave Pix antes de copiar. Tente novamente em instantes.");
-      return;
-    }
-
-    await copiarTexto(pixCopiaECola);
-    alert(
+  // O Pix já foi buscado em segundo plano e está pronto: copia
+  // IMEDIATAMENTE, sem esperar nada. Isso é essencial -- se ficar
+  // esperando rede antes de chamar o clipboard, o navegador (Safari/iOS
+  // principalmente) entende que o clique "expirou" e recusa a cópia.
+  if (pixCache.id === idPedido && pixCache.texto) {
+    try {
+      await copiarTexto(pixCache.texto);
+      alert(
 `✅ PIX Copia e Cola copiado!
 
 Valor: ${formatarMoeda(resumo.total)}
 
 Cole o código no aplicativo do banco. Após o pagamento, envie o comprovante pelo WhatsApp.`
-    );
-  } catch (erro) {
-    alert("Não consegui gerar o código Pix agora. Tente novamente em instantes.");
+      );
+    } catch (erro) {
+      alert("Não consegui copiar automaticamente. Copie manualmente ou peça o código pelo WhatsApp.");
+    }
+    return;
+  }
+
+  // Ainda não tem o Pix pronto: garante que a busca em segundo plano
+  // está rodando e avisa o cliente. No próximo toque, se já estiver
+  // pronto, cai no bloco acima e copia na hora.
+  iniciarBuscaPix(pedidoAtual);
+
+  if (pixCache.erro) {
+    alert("Não consegui gerar o código Pix agora. Tente novamente em instantes ou peça pelo WhatsApp.");
+  } else {
+    alert('Estamos gerando seu Pix... toque em "Copiar PIX" de novo em alguns segundos.');
   }
 }
 
