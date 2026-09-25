@@ -335,3 +335,8 @@
 [23/09/2026 11:11:13,06] Push rejeitado por divergencia. Sincronizado com origin/main, tentando push novamente (1x). 
 [23/09/2026 11:11:13,08] Push concluido com sucesso. 
 [23/09/2026 11:11:13,59] SUCESSO: cardapio enviado ao GitHub. 
+[25/09/2026 10:55:13,40] ========================================== 
+[25/09/2026 10:55:13,41] INICIANDO atualizar_alteracao.bat 
+[25/09/2026 10:55:21,21] Push rejeitado por divergencia. Sincronizado com origin/main, tentando push novamente (1x). 
+[25/09/2026 10:55:21,23] Push concluido com sucesso. 
+[25/09/2026 10:55:22,25] SUCESSO: cardapio enviado ao GitHub. 
