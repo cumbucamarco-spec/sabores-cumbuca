@@ -1,74 +1,74 @@
 [
-  {
-    "nome": "Filé com Fritas",
-    "desc": "File de gado trinchado 500g(in natura), batata frita e salada ",
-    "cat": "Carne",
-    "p_p": 40.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1790369350 - Filé com fritas",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Massa de Camarão",
-    "desc": "Filé de Camarão, Macarrão, Queijo e Molho da casa ",
-    "cat": "Peixe",
-    "p_p": 20.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1781010951 - CAMARÃO NO VAPOR ",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Cajuina São Geraldo 1L",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 10.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786965949 - CAJUINA S GERALDO",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Zero Cafeina Lata",
-    "desc": "Lata ",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P20260921090656576698CO - COCA Z CAFEINA",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Fanta Laranja Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Filé com Fritas",
+        "desc": "File de gado trinchado 500g(in natura), batata frita e salada ",
+        "cat": "Carne",
+        "p_p": 40.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1790369350 - Filé com fritas",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Massa de Camarão",
+        "desc": "Filé de Camarão, Macarrão, Queijo e Molho da casa ",
+        "cat": "Peixe",
+        "p_p": 20.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Cajuina São Geraldo 1L",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 10.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786965949 - CAJUINA S GERALDO",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Zero Cafeina Lata",
+        "desc": "Lata ",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P20260921090656576698CO - COCA Z CAFEINA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Fanta Laranja Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1785151331 - FANTA LARANJA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    }
 ]
