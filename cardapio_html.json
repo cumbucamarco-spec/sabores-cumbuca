@@ -1,7 +1,7 @@
 [
   {
     "nome": "Filé trinchado",
-    "desc": "Carne de Gado, Arroz, Feijão, Macarrão e Salada",
+    "desc": "Carne de Gado, Arroz, Feijão, Macarrão e Purê de Batara",
     "cat": "Carne",
     "p_p": 14.0,
     "p_g": 17.0,
@@ -10,7 +10,7 @@
   },
   {
     "nome": "Porco ao Molho Barbecue",
-    "desc": "Lombo Suino, Arroz, Feijão, Macarrão e Salada",
+    "desc": "Lombo Suino, Arroz, Feijão, Macarrão e Purê de Batata",
     "cat": "Carne",
     "p_p": 14.0,
     "p_g": 17.0,
@@ -19,7 +19,7 @@
   },
   {
     "nome": "Galinha ao molho",
-    "desc": "Frango abatido, Arroz, Feijão, Macarrão e Salada",
+    "desc": "Frango abatido, Arroz, Feijão, Macarrão e Purê de Batata",
     "cat": "Carne",
     "p_p": 14.0,
     "p_g": 17.0,
@@ -28,7 +28,7 @@
   },
   {
     "nome": "Camarão Alho e Oleo",
-    "desc": "Camarão, Arroz, Farofa, Limão e Salada",
+    "desc": "Camarão Refogado, Arroz, Farofa, Limão e Salada",
     "cat": "Peixe",
     "p_p": 20.0,
     "p_g": null,
