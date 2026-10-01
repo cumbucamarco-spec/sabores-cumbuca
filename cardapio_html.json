@@ -1,14 +1,5 @@
 [
   {
-    "nome": "Camarão Alho e Oleo",
-    "desc": "Camarão Refogado, Arroz, Farofa, Limão e Salada",
-    "cat": "Peixe",
-    "p_p": 20.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
-    "codigo_estoque_g": ""
-  },
-  {
     "nome": "Escondidinho de Carne do Sol",
     "desc": "Carne do sol desfiada, Macaxeira, Arroz, e Batata palha",
     "cat": "Carne",
@@ -24,6 +15,15 @@
     "p_p": 10.0,
     "p_g": null,
     "codigo_estoque_p": "P1770150999 - MUCUNZA",
+    "codigo_estoque_g": ""
+  },
+  {
+    "nome": "Sopa de Carne",
+    "desc": "Pote 500ml",
+    "cat": "",
+    "p_p": 10.0,
+    "p_g": null,
+    "codigo_estoque_p": "P1770065318 - SOPA",
     "codigo_estoque_g": ""
   },
   {
