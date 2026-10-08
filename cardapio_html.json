@@ -1,14 +1,5 @@
 [
   {
-    "nome": "Arroz de Carne do Sol",
-    "desc": "Arroz, Carne do sol, Queijo, Brocoles, Cenoura, milho, creme especial",
-    "cat": "Carne",
-    "p_p": 20.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1791454358 - Arroz carne do sol",
-    "codigo_estoque_g": ""
-  },
-  {
     "nome": "Porco ao Molho Barbecue",
     "desc": "Lombo Suino, Arroz, Feijão, Macarrão e Purê de Batata",
     "cat": "Carne",
