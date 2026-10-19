@@ -9,21 +9,21 @@
     "codigo_estoque_g": ""
   },
   {
-    "nome": "Creme de Camarão ",
-    "desc": "Filé de Camarão, Arroz, Batata Palha e Salada",
-    "cat": "Peixe",
-    "p_p": 20.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1773831441 - STROGONOFF DE CAMARÃO ",
-    "codigo_estoque_g": ""
-  },
-  {
     "nome": "Sopa de Feijão",
     "desc": "Carne moida, arroz, feijão, tempero, Pote 500ml",
     "cat": "Caldos",
     "p_p": 10.0,
     "p_g": null,
     "codigo_estoque_p": "P1770065318 - SOPA",
+    "codigo_estoque_g": ""
+  },
+  {
+    "nome": "Camarão ao molho Branco",
+    "desc": "Filé de Camarão, Arroz, Batata palha e Salada",
+    "cat": "Peixe",
+    "p_p": 20.0,
+    "p_g": null,
+    "codigo_estoque_p": "P1792442845 - CAMARÃO AO MOLHO BRANCO",
     "codigo_estoque_g": ""
   },
   {
