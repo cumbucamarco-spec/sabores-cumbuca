@@ -1,5 +1,14 @@
 [
   {
+    "nome": "ATUM RALADO",
+    "desc": "ATUM RALADO E REFOGADO COM ARROZ E BATATA",
+    "cat": "Peixe",
+    "p_p": 14.0,
+    "p_g": 17.0,
+    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+  },
+  {
     "nome": "Coca Cola Lata",
     "desc": "Lata",
     "cat": "Bebidas",
@@ -33,15 +42,6 @@
     "p_p": 5.0,
     "p_g": null,
     "codigo_estoque_p": "P1793958064 - SPRIT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "AGUA AZUL",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 2.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786967092 - AGUA AZUL 510ML",
     "codigo_estoque_g": ""
   }
 ]
