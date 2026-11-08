@@ -1,65 +1,56 @@
 [
-  {
-    "nome": "ATUM RALADO",
-    "desc": "ATUM RALADO E REFOGADO COM ARROZ E BATATA",
-    "cat": "Peixe",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "PÃO CHEIO",
-    "desc": "PÃO COM CARNE ",
-    "cat": "Carne",
-    "p_p": 5.0,
-    "p_g": 5.0,
-    "codigo_estoque_p": "P1786866699 - PÃO CHEIO",
-    "codigo_estoque_g": "P1786866699 - PÃO CHEIO"
-  },
-  {
-    "nome": "Coca Cola Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "SPRITE LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1793958064 - SPRIT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "AGUA AZUL",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 2.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786967092 - AGUA AZUL 510ML",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "ATUM RALADO",
+        "desc": "ATUM RALADO E REFOGADO COM ARROZ E BATATA",
+        "cat": "Peixe",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Coca Cola Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "SPRITE LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1793958064 - SPRIT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "AGUA AZUL",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 2.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786967092 - AGUA AZUL 510ML",
+        "codigo_estoque_g": ""
+    }
 ]
