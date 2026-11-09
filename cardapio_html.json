@@ -1,74 +1,65 @@
 [
-  {
-    "nome": "Picadinho de Gado(cozido)",
-    "desc": "Carne de Gado sem osso cozida, Arroz, Feijão, Macarrão ,Salada ",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Porco na Farofa",
-    "desc": "Porco Caipira, Baião de dois, Farofa e Salada ",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Frango ao Molho Xadrez",
-    "desc": "Filé de Frango, Arroz e Macarrão ",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Calabresa Acebolada",
-    "desc": "Calabresa, Arroz, Feijão, Macarrão, farofa e Salada",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
-  },
-  {
-    "nome": "Coca Cola Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "SPRITE LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_g": null,
-    "codigo_estoque_p": "P1793958064 - SPRIT",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Porco na Farofa",
+        "desc": "Porco Caipira, Baião de dois, Farofa e Salada ",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Frango ao Molho Xadrez",
+        "desc": "Filé de Frango, Arroz e Macarrão ",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Calabresa Acebolada",
+        "desc": "Calabresa, Arroz, Feijão, Macarrão, farofa e Salada",
+        "cat": "Carne",
+        "p_p": 14.0,
+        "p_g": 17.0,
+        "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+    },
+    {
+        "nome": "Coca Cola Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "SPRITE LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_g": null,
+        "codigo_estoque_p": "P1793958064 - SPRIT",
+        "codigo_estoque_g": ""
+    }
 ]
