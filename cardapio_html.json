@@ -1,112 +1,11 @@
 [
   {
-    "nome": "Frango ao Molho Xadrez",
-    "desc": "Filé de Frango, Arroz e Macarrão ",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Bisteca Suína",
-    "desc": "Bisteca de Porco, Arroz, Feijão, Macarrão e Salada ",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Fígado Acebolado",
-    "desc": "Fígado bovino, Arroz, Feijão, Macarrão e Salada",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Arroz de Camarão ",
-    "desc": "Internacional",
-    "cat": "Peixe",
-    "p_p": 20.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1781010951 - CAMARÃO NO VAPOR ",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "OVO FRITO",
-    "desc": "",
-    "cat": "Carne",
-    "p_p": 2.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1786982849 - OVO FRITO",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "CARANGUEIJO",
-    "desc": "Pote com 3 unidades +pote de Caldo",
-    "cat": "Peixe",
-    "p_p": 30.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1769866765 - CARANGUEIJO",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "SPRITE LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1793958064 - SPRIT",
-    "codigo_estoque_m": "",
+    "nome": "🍲 Estamos preparando uma nova remessa",
+    "desc": "Nossos pratos do momento já saíram rapidinho 😋<br><br>Estamos preparando novas refeições fresquinhas para você, em breve atualizaremos o cardápio<br><br>📲 <a href='https://wa.me/5585992425223?text=Olá,%20quero%20saber%20quando%20sairá%20a%20nova%20remessa' target='_blank'>Falar no WhatsApp</a>",
+    "cat": "",
+    "p_p": 0.0,
+    "p_g": 0.0,
+    "codigo_estoque_p": "",
     "codigo_estoque_g": ""
   }
 ]
