@@ -1,7 +1,7 @@
 [
   {
     "nome": "Frango a Passarinho",
-    "desc": "Frango Frito, Arroz a grega e Purê de Batata",
+    "desc": "Frango Frito, Arroz a grega e Salada",
     "cat": "Carne",
     "p_p": 14.0,
     "p_g": 17.0,
@@ -18,8 +18,17 @@
     "codigo_estoque_g": "P1770037099 - ALMOÇO M"
   },
   {
+    "nome": "Fígado Acebolado",
+    "desc": "Fígado bovino, Arroz, Feijão, Macarrão e Salada",
+    "cat": "Carne",
+    "p_p": 14.0,
+    "p_g": 17.0,
+    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
+    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
+  },
+  {
     "nome": "Escondidinho de Carne do Sol",
-    "desc": "Carne do sol desfiada, Macaxeira, Arroz, e Batata palha",
+    "desc": "Carne do sol desfiada, Macaxeira, Queijo, Arroz, e Batata palha",
     "cat": "Carne",
     "p_p": 20.0,
     "p_g": null,
@@ -28,21 +37,12 @@
   },
   {
     "nome": "Camarão Alho e Oleo",
-    "desc": "Camarão, Arroz, Farofa de gengibre, Limão e Salada",
+    "desc": "Camarão, Arroz, Farofa, Limão e Salada",
     "cat": "Peixe",
     "p_p": 25.0,
     "p_g": null,
     "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
     "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Fígado Acebolado",
-    "desc": "Fígado bovino, Arroz, Feijão, Macarrão e Salada",
-    "cat": "Carne",
-    "p_p": 14.0,
-    "p_g": 17.0,
-    "codigo_estoque_p": "P1770025146 - ALMOÇO P",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO M"
   },
   {
     "nome": "Coca Cola Lata",
