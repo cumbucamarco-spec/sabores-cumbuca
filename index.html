@@ -710,6 +710,44 @@ function carregarImagemInteligente(imgElement, nome) {
   tentar();
 }
 
+// ─── TAMANHOS (P / M / G) ───────────────────────────────────────────────────
+window.itensCardapio = {};
+
+// Converte o item do cardapio_html.json numa lista [{tamanho, preco, codigo}].
+// Formatos aceitos:
+//  1) NOVO:   p_p, p_m, p_g + codigo_estoque_p / _m / _g  (P, M, G)
+//  2) ARRAY:  item.tamanhos = [{tamanho:"P", preco:10, codigo:"123"}, ...]
+//  3) ANTIGO: so p_p e p_g (p_g era exibido como M)
+function normalizarTamanhos(item) {
+  const lista = [];
+  const add = (tam, preco, cod) => {
+    preco = Number(preco);
+    if (Number.isFinite(preco) && preco > 0) {
+      lista.push({ tamanho: tam, preco: preco, codigo: String(cod === undefined || cod === null ? "" : cod) });
+    }
+  };
+
+  if (Array.isArray(item.tamanhos)) {
+    item.tamanhos.forEach(t => add(
+      String(t.tamanho || t.tam || t.nome || "").toUpperCase(),
+      t.preco ?? t.valor,
+      t.codigo ?? t.codigo_estoque
+    ));
+    return lista;
+  }
+
+  const temM = item.p_m !== undefined || item.codigo_estoque_m !== undefined;
+  if (temM) {
+    add("P", item.p_p, item.codigo_estoque_p);
+    add("M", item.p_m, item.codigo_estoque_m);
+    add("G", item.p_g, item.codigo_estoque_g);
+  } else {
+    add("P", item.p_p, item.codigo_estoque_p);
+    add("M", item.p_g, item.codigo_estoque_g);
+  }
+  return lista;
+}
+
 function carregarCardapio(tentativa = 1) {
   fetch('cardapio_html.json?t=' + new Date().getTime(), { cache: "no-store" })
     .then(res => {
@@ -723,7 +761,10 @@ function carregarCardapio(tentativa = 1) {
         return;
       }
       let html = "";
-      data.forEach(item => {
+      window.itensCardapio = {};
+      data.forEach((item, idx) => {
+        const tamanhos = normalizarTamanhos(item);
+        window.itensCardapio[idx] = { nome: item.nome, tamanhos: tamanhos };
         html += `
           <div class="produto-card">
             <img id="img-${item.nome.replace(/\s/g, '')}" class="img-prod-card">
@@ -731,12 +772,11 @@ function carregarCardapio(tentativa = 1) {
               <strong style="font-size:15px; color:#4b2e2e;">${item.nome}</strong><br>
               <small style="color:#666; font-size:12px;">${item.desc}</small><br>
               <div class="preco">
-                ${item.p_p > 0 ? `P: R$ ${item.p_p}` : ""}
-                ${item.p_g > 0 ? ` | M: R$ ${item.p_g}` : ""}
+                ${tamanhos.map(t => `${t.tamanho}: R$ ${t.preco}`).join(" | ")}
               </div>
-              <button class="btn-add" onclick="clicarAdicionar(this, \`${item.nome}\`, ${item.p_p || 0}, ${item.p_g || 0}, \`${item.codigo_estoque_p}\`, \`${item.codigo_estoque_g}\`)">
+              ${tamanhos.length ? `<button class="btn-add" onclick="clicarAdicionar(this, ${idx})">
                 Adicionar
-              </button>
+              </button>` : ""}
             </div>
           </div>
         `;
@@ -762,7 +802,7 @@ function carregarCardapio(tentativa = 1) {
     });
 }
 
-function abrirOpcoes(nome, precoP, precoG, codP, codG) {
+function abrirOpcoes(nome, tamanhos) {
 
   // remove modal antigo
   const antigo = document.getElementById("modalOpcoes");
@@ -925,8 +965,9 @@ function abrirOpcoes(nome, precoP, precoG, codP, codG) {
 
     btn.style.cssText = `
       flex:1;
+      min-width:0;
       border:none;
-      padding:14px;
+      padding:14px 6px;
       border-radius:14px;
       background:#f3f3f3;
       font-weight:bold;
@@ -963,17 +1004,10 @@ function abrirOpcoes(nome, precoP, precoG, codP, codG) {
 
   let primeiroBotao = null;
 
-  if (precoP > 0) {
-    primeiroBotao = criarBotao("P", precoP, codP, "P");
-  }
-
-  if (precoG > 0) {
-    if (!primeiroBotao) {
-      primeiroBotao = criarBotao("M", precoG, codG, "M");
-    } else {
-      criarBotao("M", precoG, codG, "M");
-    }
-  }
+  (tamanhos || []).forEach(t => {
+    const b = criarBotao(t.tamanho, t.preco, t.codigo, t.tamanho);
+    if (!primeiroBotao) primeiroBotao = b;
+  });
 
   // seleciona automático
   if (primeiroBotao) {
@@ -1401,6 +1435,7 @@ async function finalizarPedido() {
           nome_id: `${i.codigo}`,
           codigo: `${i.codigo}`,
           produto: `${i.nome.toUpperCase()} - ALMOÇO ${i.tamanho}`,
+          tamanho: i.tamanho,
           qtd: i.qtd
       }))
   };
@@ -2079,7 +2114,10 @@ function animarCarrinho(botaoClicado) {
   setTimeout(() => { bolinha.remove(); }, 700);
 }
 
-function clicarAdicionar(botao, nome, precoP, precoG, codP, codG) {
+function clicarAdicionar(botao, idx) {
+  const itemCardapio = window.itensCardapio[idx];
+  if (!itemCardapio) return;
+
 
   // se já existe pedido ativo
   if (pedidoAtual) {
@@ -2092,13 +2130,7 @@ function clicarAdicionar(botao, nome, precoP, precoG, codP, codG) {
   animarCarrinho(botao);
 
   // abre modal imediatamente
-  abrirOpcoes(
-    nome,
-    precoP,
-    precoG,
-    codP,
-    codG
-  );
+  abrirOpcoes(itemCardapio.nome, itemCardapio.tamanhos);
 }
 
 function verificarPedidoExpirado() {
