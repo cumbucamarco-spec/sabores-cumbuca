@@ -1,90 +1,79 @@
 [
-  {
-    "nome": "Peixe a Milanesa",
-    "desc": "Filé de Agulhão, Arroz a grega e Purê de batata",
-    "cat": "Peixe",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Vatapá",
-    "desc": "Vatapa de frango, Arroz, Calabresa Acebolada e Farofa",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Galinha ao molho",
-    "desc": "Frango cozido, Arroz, Feijão, Macarrão e Salada",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Bife ao molho madeira",
-    "desc": "Carne de gado, Champignon, Arroz a grega e Purê de batata (marmita 600g)",
-    "cat": "Carne",
-    "p_p": 20.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1793958441 - Bife ao molho madeira",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "SPRITE LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1793958064 - SPRIT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Vatapá",
+        "desc": "Vatapa de frango, Arroz, Calabresa Acebolada e Farofa",
+        "cat": "Carne",
+        "p_p": 12.0,
+        "p_m": 15.0,
+        "p_g": 18.0,
+        "codigo_estoque_p": "P1794331400 - ALMOÇO P",
+        "codigo_estoque_m": "P1770025146 - ALMOÇO M",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO G"
+    },
+    {
+        "nome": "Galinha ao molho",
+        "desc": "Frango cozido, Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 12.0,
+        "p_m": 15.0,
+        "p_g": 18.0,
+        "codigo_estoque_p": "P1794331400 - ALMOÇO P",
+        "codigo_estoque_m": "P1770025146 - ALMOÇO M",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO G"
+    },
+    {
+        "nome": "Bife ao molho madeira",
+        "desc": "Carne de gado, Champignon, Arroz a grega e Purê de batata (marmita 600g)",
+        "cat": "Carne",
+        "p_p": 20.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1793958441 - Bife ao molho madeira",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "SPRITE LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1793958064 - SPRIT",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    }
 ]
