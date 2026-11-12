@@ -22,17 +22,6 @@
         "codigo_estoque_g": "P1770037099 - ALMOÇO G"
     },
     {
-        "nome": "Cozido de Gado",
-        "desc": "Arroz, Feijão , Macarrão, Pirão e Salada doce",
-        "cat": "Carne",
-        "p_p": 12.0,
-        "p_m": 15.0,
-        "p_g": 18.0,
-        "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-        "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-        "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-    },
-    {
         "nome": "Porco na Farofa",
         "desc": "Porco Caipira, Baião de dois, Farofa e Salada ",
         "cat": "Carne",
