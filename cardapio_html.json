@@ -1,8 +1,30 @@
 [
     {
-        "nome": "Peixada a Cumbuca",
-        "desc": "Filé de Agulhão, Arroz, Pirão e Salada ",
-        "cat": "Peixe",
+        "nome": "Bife ao molho madeira",
+        "desc": "Carne de gado, Champignon, Arroz a grega e Purê de batata (marmita 600g)",
+        "cat": "Carne",
+        "p_p": 20.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1793958441 - Bife ao molho madeira",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Strogonoff de Frando",
+        "desc": "Filé de Peito, Arroz , Batata palha, Salada",
+        "cat": "Carne",
+        "p_p": 12.0,
+        "p_m": 15.0,
+        "p_g": 18.0,
+        "codigo_estoque_p": "P1794331400 - ALMOÇO P",
+        "codigo_estoque_m": "P1770025146 - ALMOÇO M",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO G"
+    },
+    {
+        "nome": "Fígado Acebolado",
+        "desc": "Fígado bovino, Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
         "p_p": 12.0,
         "p_m": 15.0,
         "p_g": 18.0,
@@ -20,6 +42,17 @@
         "codigo_estoque_p": "P1794331400 - ALMOÇO P",
         "codigo_estoque_m": "P1770025146 - ALMOÇO M",
         "codigo_estoque_g": "P1770037099 - ALMOÇO G"
+    },
+    {
+        "nome": "Camarão Alho e Oleo",
+        "desc": "Camarão, Arroz, Farofa, Limão e Salada",
+        "cat": "Peixe",
+        "p_p": 20.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
     },
     {
         "nome": "Coca Cola Lata",
