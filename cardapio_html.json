@@ -1,16 +1,5 @@
 [
     {
-        "nome": "Bife ao molho madeira",
-        "desc": "Carne de gado, Champignon, Arroz a grega e Purê de batata (marmita 600g)",
-        "cat": "Carne",
-        "p_p": 20.0,
-        "p_m": null,
-        "p_g": null,
-        "codigo_estoque_p": "P1793958441 - Bife ao molho madeira",
-        "codigo_estoque_m": "",
-        "codigo_estoque_g": ""
-    },
-    {
         "nome": "Strogonoff de Frando",
         "desc": "Filé de Peito, Arroz , Batata palha, Salada",
         "cat": "Carne",
