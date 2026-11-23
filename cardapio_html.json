@@ -1,112 +1,101 @@
 [
-  {
-    "nome": "Cozido de Gado",
-    "desc": "Carne de gado, Arroz, Feijão , Macarrão, Pirão e Salada",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Galinha ao molho",
-    "desc": "Frango cozido, Arroz, Feijão, Macarrão e Salada",
-    "cat": "Carne",
-    "p_p": 12.0,
-    "p_m": 15.0,
-    "p_g": 18.0,
-    "codigo_estoque_p": "P1794331400 - ALMOÇO P",
-    "codigo_estoque_m": "P1770025146 - ALMOÇO M",
-    "codigo_estoque_g": "P1770037099 - ALMOÇO G"
-  },
-  {
-    "nome": "Camarão Alho e Oleo",
-    "desc": "Camarão, Arroz, Farofa, Limão e Salada",
-    "cat": "Peixe",
-    "p_p": 20.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Lombo ao molho oriental",
-    "desc": "Lombo suino frito com legumes, Molho oriental, Arroz e Macarrão (650g)",
-    "cat": "Carne",
-    "p_p": 20.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1795432486 - Lombo oriental",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "SPRITE LATA",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1793958064 - SPRIT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola Zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Coca Cola 600ML",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 8.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1790423095 - COCA COLA 600ML",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Cajuina São Geraldo 1L",
-    "desc": "",
-    "cat": "Bebidas",
-    "p_p": 10.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1786965949 - CAJUINA S GERALDO",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  },
-  {
-    "nome": "Guaraná Antartica zero Lata",
-    "desc": "Lata",
-    "cat": "Bebidas",
-    "p_p": 5.0,
-    "p_m": null,
-    "p_g": null,
-    "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
-    "codigo_estoque_m": "",
-    "codigo_estoque_g": ""
-  }
+    {
+        "nome": "Galinha ao molho",
+        "desc": "Frango cozido, Arroz, Feijão, Macarrão e Salada",
+        "cat": "Carne",
+        "p_p": 12.0,
+        "p_m": 15.0,
+        "p_g": 18.0,
+        "codigo_estoque_p": "P1794331400 - ALMOÇO P",
+        "codigo_estoque_m": "P1770025146 - ALMOÇO M",
+        "codigo_estoque_g": "P1770037099 - ALMOÇO G"
+    },
+    {
+        "nome": "Camarão Alho e Oleo",
+        "desc": "Camarão, Arroz, Farofa, Limão e Salada",
+        "cat": "Peixe",
+        "p_p": 20.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1781696735 - CAMARÃO ALHO E OLEO ",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Lombo ao molho oriental",
+        "desc": "Lombo suino frito com legumes, Molho oriental, Arroz e Macarrão (650g)",
+        "cat": "Carne",
+        "p_p": 20.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1795432486 - Lombo oriental",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1786699441 - COCA COLA LATA",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "SPRITE LATA",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1793958064 - SPRIT",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola Zero Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1770894274 - COCA ZERO LT",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Coca Cola 600ML",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 8.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1790423095 - COCA COLA 600ML",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Cajuina São Geraldo 1L",
+        "desc": "",
+        "cat": "Bebidas",
+        "p_p": 10.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1786965949 - CAJUINA S GERALDO",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    },
+    {
+        "nome": "Guaraná Antartica zero Lata",
+        "desc": "Lata",
+        "cat": "Bebidas",
+        "p_p": 5.0,
+        "p_m": null,
+        "p_g": null,
+        "codigo_estoque_p": "P1774960034 - GUARANA ANTARTICA LT",
+        "codigo_estoque_m": "",
+        "codigo_estoque_g": ""
+    }
 ]
