@@ -44,17 +44,6 @@
         "codigo_estoque_g": ""
     },
     {
-        "nome": "Peixe a Delicia",
-        "desc": "Filé de Agulhão, Arroz, Banana frita, Molho especial, batata palha e Salada ",
-        "cat": "Peixe",
-        "p_p": 20.0,
-        "p_m": null,
-        "p_g": null,
-        "codigo_estoque_p": "P1795772424 - Peixe a delicia",
-        "codigo_estoque_m": "",
-        "codigo_estoque_g": ""
-    },
-    {
         "nome": "Coca Cola Lata",
         "desc": "Lata",
         "cat": "Bebidas",
